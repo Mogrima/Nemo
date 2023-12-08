@@ -18,7 +18,7 @@ export class UI {
         // очки
         context.fillText('Score: ' + this.game.score, 20, 40);
         // жизни
-        context.fillText('Lives: ', 20, 100);
+        context.fillText('Psyche: ', 20, 100);
          // таймер
          const formattedTime = (this.game.gameTime * 0.001).toFixed(1);
          context.fillText('Timer: ' + formattedTime, 20, 160);

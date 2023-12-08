@@ -36,7 +36,7 @@ export class Game {
 
         this.direction = [];
 
-        this.health = 1;
+        this.health = 20;
 
         this.speed = 1;
         this.background = new Background(this);
