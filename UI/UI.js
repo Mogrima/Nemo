@@ -2,8 +2,10 @@ export class UI {
     constructor(game) {
         this.game = game;
         this.fontSize = 25;
-        this.fontFamily = 'Helvetica';
-        this.color = 'white';
+        this.fontFamily = 'Silkscreen';
+        this.color = '#0000ff';
+        this.colorWin = '#008000';
+        this.colorLose = '#ffff00';
     }
 
     draw(context) {
@@ -15,27 +17,31 @@ export class UI {
         context.font = this.fontSize + 'px ' + this.fontFamily;
         // очки
         context.fillText('Score: ' + this.game.score, 20, 40);
-        // очки
+        // жизни
         context.fillText('Lives: ', 20, 100);
          // таймер
          const formattedTime = (this.game.gameTime * 0.001).toFixed(1);
          context.fillText('Timer: ' + formattedTime, 20, 160);
         // сообщения о победе или проигрыше
         if (this.game.gameOver) {
+            context.save();
             context.textAlign = 'center';
             let message1;
             let message2;
             if (this.game.isWin()) {
-                message1 = 'Победа!';
-                message2 = 'Отличная работа!';
+                context.fillStyle = this.colorWin;
+                message1 = 'Liberty!';
+                message2 = 'You have overcome the Darkness!';
             } else {
-                message1 = 'Попробуй еще раз!';
-                message2 = 'В следующий раз все получится!';
+                context.fillStyle = this.colorLose;
+                message1 = 'This is the end!';
+                message2 = 'Mental breakdown!';
             }
             context.font = '70px ' + this.fontFamily;
             context.fillText(message1, this.game.width * 0.5, this.game.height * 0.5 - 20);
             context.font = '25px ' + this.fontFamily;
             context.fillText(message2, this.game.width * 0.5, this.game.height * 0.5 + 20);
+            context.restore();
         }
 
 
