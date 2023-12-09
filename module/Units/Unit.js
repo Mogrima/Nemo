@@ -45,10 +45,9 @@ export class Unit {
     draw(context) {
         // hitbox player
         context.strokeStyle = "yellow";
-       
         if (this.game.debug) context.strokeRect(this.x, this.y, this.width, this.height);
-        context.drawImage(this.image, this.frameX * this.sWidth + this.shiftX, this.frameY * this.sWheight + this.shiftY, this.sWidth, this.sWheight, this.x, this.y, this.dWidth, this.dHeight);
         this.projectiles.forEach(pr => { pr.draw(context); });
+        context.drawImage(this.image, this.frameX * this.sWidth + this.shiftX, this.frameY * this.sWheight + this.shiftY, this.sWidth, this.sWheight, this.x, this.y, this.dWidth, this.dHeight);
 
         this.healths.forEach(hl => { hl.draw(context); });
 
