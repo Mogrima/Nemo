@@ -5,7 +5,8 @@ export class Unit {
         this.game = game;
         this.speedX = 0;
         this.maxSpeed = 5;
-
+        this.shiftX = 0;
+        this.shiftY = 0;
 
         this.projectiles = [];
         this.healths = [];
@@ -46,7 +47,7 @@ export class Unit {
         context.strokeStyle = "yellow";
        
         if (this.game.debug) context.strokeRect(this.x, this.y, this.width, this.height);
-        context.drawImage(this.image, this.frameX * this.sWidth, this.frameY * this.sWheight, this.sWidth, this.sWheight, this.x, this.y, this.dWidth, this.dHeight);
+        context.drawImage(this.image, this.frameX * this.sWidth + this.shiftX, this.frameY * this.sWheight + this.shiftY, this.sWidth, this.sWheight, this.x, this.y, this.dWidth, this.dHeight);
         this.projectiles.forEach(pr => { pr.draw(context); });
 
         this.healths.forEach(hl => { hl.draw(context); });

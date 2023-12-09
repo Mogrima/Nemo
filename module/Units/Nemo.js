@@ -26,6 +26,9 @@ export class Nemo extends Unit {
         this.frameX = 0;
         this.frameY = 1;
         this.maxFrame = 0;
+
+        this.shiftX = 1;
+        this.shiftY = 1;
     }
     
 }

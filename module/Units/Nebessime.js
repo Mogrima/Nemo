@@ -13,6 +13,7 @@ export class Nebessime extends Unit {
 
         this.dWidth = 64 * 1.5;
         this.dHeight = 67 * 1.5;
+        this.shiftX = 3;
 
         this.color = "#18171c";
         this.maxXRight = this.width + 10;
