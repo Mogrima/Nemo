@@ -11,6 +11,7 @@ export class Unit {
         this.projectiles = [];
         this.healths = [];
         
+        this.warning = false;
 
     }
     update() {

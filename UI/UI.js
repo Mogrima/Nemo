@@ -17,8 +17,6 @@ export class UI {
         context.font = this.fontSize + 'px ' + this.fontFamily;
         // очки
         context.fillText('Score: ' + this.game.score, 20, 40);
-        // жизни
-        context.fillText('Psyche: ', 20, 100);
          // таймер
          const formattedTime = (this.game.gameTime * 0.001).toFixed(1);
          context.fillText('Timer: ' + formattedTime, 20, 160);
@@ -44,9 +42,13 @@ export class UI {
             context.restore();
         }
 
-
         for (let i = 0; i < this.game.ammo; i++) {
             context.fillRect(5 * i + 20, 50, 3, 20);
+        }
+        // жизни
+        context.fillText('Psyche: ', 20, 100);
+        if(this.game.player.warning) {
+            context.fillStyle = this.colorLose;
         }
         for (let i = 0; i < this.game.health; i++) {
             context.fillRect(5 * i + 20, 110, 3, 20);
