@@ -43,7 +43,10 @@ export class Enemy {
         context.drawImage(this.image, this.frameX * this.sWidth, this.frameY * this.sWheight, this.sWidth, this.sWheight, this.x, this.y, this.dWidth, this.dHeight);
 
         // отобразим у каждого врага его жизни
-        context.font = '20px Helvetica';
-        context.fillText(this.lives, this.x, this.y - 5);
+        if (this.game.debug) {
+            context.fillStyle = '#ffff00';
+            context.font = '20px Helvetica';
+            context.fillText(this.lives, this.x, this.y - 5);
+        }
     }
 }
