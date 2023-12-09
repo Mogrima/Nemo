@@ -27,7 +27,7 @@ export class Game {
         this.enemies = [];
         this.enemyTimer = 0;
         this.enemyInterval = 5000;
-        this.gameOver = false;
+        this.gameOver = true;
         this.score = 0;
         this.winningScore = 30;
 

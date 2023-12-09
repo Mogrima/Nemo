@@ -4,13 +4,9 @@ export class InputHandler {
         window.addEventListener('keydown', (e) => {
             if (((e.key === 'ArrowRight') || (e.key === 'ArrowLeft')) && this.game.keys.indexOf(e.key) === -1) {
                 this.game.keys.push(e.key);
-                this.game.direction.length = 0;
-                this.game.direction.push( this.game.keys[0]); 
-                // this.game.direction.push(e.key); 
             }
             else if (e.key === ' ') { 
   
-                         
                 if((this.game.direction.lastIndexOf('ArrowLeft') === this.game.direction.length - 1) && (this.game.direction.length > 0)) {
                     this.game.player.shootTop(this.game.player.x, this.game.player.y + 30, "left");
                     
@@ -46,6 +42,8 @@ export class InputHandler {
             this.game.player.maxFrame = 8;
             this.game.player.frameY = 7;
             this.game.player2.frameY = 1;
+            this.game.direction.length = 0;
+            this.game.direction.push( 'ArrowLeft'); 
             
         } else if (this.game.keys.length === 0) {
             this.game.player.maxFrame = 0;
@@ -54,6 +52,8 @@ export class InputHandler {
             this.game.player.maxFrame = 8;
             this.game.player.frameY = 1;
             this.game.player2.frameY = 3;
+            this.game.direction.length = 0;
+            this.game.direction.push( 'ArrowRight'); 
         }
     }
 }
