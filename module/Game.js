@@ -5,6 +5,7 @@ import {Nemo} from './Units/Nemo.js';
 import {Nebessime} from './Units/Nebessime.js';
 import {Monster1} from './Enemies/monster1.js';
 import {Monster2} from './Enemies/monster2.js';
+import {Particle} from './Particle.js';
 
 export class Game {
     constructor(width, height) {
@@ -27,7 +28,7 @@ export class Game {
         this.enemies = [];
         this.enemyTimer = 0;
         this.enemyInterval = 5000;
-        this.gameOver = true;
+        this.gameOver = false;
         this.score = 0;
         this.winningScore = 30;
 
@@ -40,6 +41,8 @@ export class Game {
 
         this.speed = 1;
         this.background = new Background(this);
+
+        this.particles = [];
 
         this.debug = true;
         
@@ -60,6 +63,9 @@ export class Game {
         } else {
             this.ammoTimer += deltaTime;
         }
+        
+        this.particles.forEach(particle => particle.update());
+        this.particles = this.particles.filter(particle => !particle.markedForDeletion);
 
         this.enemies.forEach(enemy => {
             enemy.update();
@@ -67,6 +73,9 @@ export class Game {
             if (this.checkCollision(this.player, enemy)) {
                 // если столкновение произошло, помечаем врага как удаленного
                 enemy.markedForDeletion = true;
+                for(let i = 0; i < 10; i++) {
+                    this.particles.push(new Particle(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
+                }  
                 this.health--;
                 if(this.health <= 0) {
                     this.gameOver = true;
@@ -79,9 +88,13 @@ export class Game {
                 if (this.checkCollision(projectile, enemy)) {
                     enemy.lives--; // уменьшаем жизни врага на единицу
                     // если столкновение произошло, помечаем снаряд как удаленный
+                    this.particles.push(new Particle(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
                     projectile.markedForDeletion = true;
                     if (enemy.lives <= 0) {        
-                        enemy.markedForDeletion = true; // удаляем врага        
+                        enemy.markedForDeletion = true; // удаляем врага  
+                        for(let i = 0; i < 10; i++) {
+                            this.particles.push(new Particle(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
+                        }       
                         if (!this.gameOver) this.score += enemy.score; // увеличиваем количество очков главного игрока       
                         if (this.isWin()) this.gameOver = true;  // проверяем условие победы
                     }
@@ -121,6 +134,7 @@ export class Game {
         this.background.draw(context);
         this.ui.draw(context);
         // context.fillStyle = "#fde910";
+        this.particles.forEach(particle => particle.draw(context));
         context.fillStyle = "rgba(255,0,0,0)";
         this.player.draw(context);
         context.fillStyle = "#18171c";
