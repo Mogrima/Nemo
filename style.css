@@ -42,6 +42,7 @@ body {
 #projectile3,
 #enemy1,
 #enemy2,
-#enemy3 {
+#enemy3,
+#particle {
     display: none;
 }
