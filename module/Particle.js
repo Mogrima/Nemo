@@ -9,6 +9,8 @@ export class Particle {
         this.spriteSize = 64;
         this.sizeModifer = (Math.random() * 0.5 + 0.5).toFixed(1);
         this.size = this.spriteSize * this.sizeModifer;
+        this.width = this.size;
+        this.height = this.size;
         // разбор деталей от игрока по горизонтали
         this.speedX = Math.random() * 6 - 3;
         // движение частиц по вертикали случайное число от 0 до - 15, поэтому частицы всегда будут двигаться вверх
@@ -23,6 +25,7 @@ export class Particle {
         // кол-во отскоков
         this.bounced = 0;
         this.bottomBounceBoundary = Math.random() * 100 + 60;
+        this.isHit = false;
     }
 
     update() {
@@ -39,6 +42,15 @@ export class Particle {
         if (this.y > this.game.height - this.bottomBounceBoundary && this.bounced < 2) {
             this.bounced++;
             this.speedY *= -0.5;
+        }
+        if (this.game.checkCollision(this, this.game.player)) {
+            if(!this.isHit) {
+                this.game.health--;
+                this.isHit = true;
+                if(this.game.health <= 0) {
+                    this.game.gameOver = true;
+                }
+            }
         }
     }
     draw(context) {
