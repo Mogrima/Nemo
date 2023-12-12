@@ -13,12 +13,38 @@ export class Unit {
         
         this.warning = false;
 
+        this.speedY = 0;
+        this.gravity = 0.5;
+        this.jump = true;
+      
+
     }
     update() {
         this.x += this.speedX;
+        // гравитация
+        this.y += this.speedY;
+        // тело всегда падает
+        this.speedY += this.gravity;
+
+        // чтобы тело не падало ниже земли
+        if (this.y + this.height >= this.game.height - 50) {
+            this.y = this.game.height - this.height - 50;
+            this.speedY = 0;
+            }
+        // ограничение вертикального ускорения
+        if (this.speedY > 25) this.speedY = 25;
+
+        if (this.y == this.game.height - this.height - 50) {
+            this.jump = true;
+        }
+
 
         if (this.game.keys.includes('ArrowLeft')) this.speedX = -this.maxSpeed;
         else if (this.game.keys.includes('ArrowRight')) this.speedX = this.maxSpeed;
+        else if(this.game.keys.includes('ArrowUp') && this.jump) {
+            this.speedY = -10;
+            this.jump = false;
+        }
         else this.speedX = 0;
 
         // чтобы не выходил за границы холста

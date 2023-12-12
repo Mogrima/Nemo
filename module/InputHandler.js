@@ -5,6 +5,9 @@ export class InputHandler {
             if (((e.key === 'ArrowRight') || (e.key === 'ArrowLeft')) && this.game.keys.indexOf(e.key) === -1) {
                 this.game.keys.push(e.key);
             }
+            else if (e.key === 'ArrowUp' && this.game.keys.indexOf(e.key) === -1) {
+                this.game.keys.push(e.key);
+            }
             else if (e.key === ' ') { 
   
                 if((this.game.direction.lastIndexOf('ArrowLeft') === this.game.direction.length - 1) && (this.game.direction.length > 0)) {
