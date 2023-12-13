@@ -34,17 +34,16 @@ export class Unit {
         // ограничение вертикального ускорения
         if (this.speedY > 25) this.speedY = 25;
 
+        if (this.game.keys.includes('ArrowLeft')) this.speedX = -this.maxSpeed;
+        else if (this.game.keys.includes('ArrowRight')) this.speedX = this.maxSpeed;
+        else this.speedX = 0;
+        
         if (this.y == this.game.height - this.height - 50) {
             this.jump = true;
         }
 
-
-        if (this.game.keys.includes('ArrowLeft')) this.speedX = -this.maxSpeed;
-        else if (this.game.keys.includes('ArrowRight')) this.speedX = this.maxSpeed;
-        else this.speedX = 0;
-
         if(this.game.handlerJump && this.jump) {
-            this.speedY = -10;
+            this.speedY = -11;
             this.jump = false;
         }
 
