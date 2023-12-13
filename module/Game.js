@@ -44,6 +44,8 @@ export class Game {
 
         this.particles = [];
 
+        this.handlerJump = false;
+
         this.debug = true;
         
     }

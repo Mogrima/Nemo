@@ -5,8 +5,8 @@ export class InputHandler {
             if (((e.key === 'ArrowRight') || (e.key === 'ArrowLeft')) && this.game.keys.indexOf(e.key) === -1) {
                 this.game.keys.push(e.key);
             }
-            else if (e.key === 'ArrowUp' && this.game.keys.indexOf(e.key) === -1) {
-                this.game.keys.push(e.key);
+            else if (e.key === 'ArrowUp') {
+                this.game.handlerJump = true;
             }
             else if (e.key === ' ') { 
   
@@ -26,6 +26,9 @@ export class InputHandler {
 
         });
         window.addEventListener('keyup', (e) => {
+            if (this.game.handlerJump) {
+                this.game.handlerJump = false;
+            }
             if (this.game.keys.indexOf(e.key) > -1) {
                 this.game.keys.splice(this.game.keys.indexOf(e.key), 1);
 

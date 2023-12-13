@@ -41,11 +41,12 @@ export class Unit {
 
         if (this.game.keys.includes('ArrowLeft')) this.speedX = -this.maxSpeed;
         else if (this.game.keys.includes('ArrowRight')) this.speedX = this.maxSpeed;
-        else if(this.game.keys.includes('ArrowUp') && this.jump) {
+        else this.speedX = 0;
+
+        if(this.game.handlerJump && this.jump) {
             this.speedY = -10;
             this.jump = false;
         }
-        else this.speedX = 0;
 
         // чтобы не выходил за границы холста
         if (this.x > this.game.width - this.maxXRight) {
