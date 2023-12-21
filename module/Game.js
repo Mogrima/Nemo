@@ -118,7 +118,7 @@ export class Game {
             this.enemyTimer += deltaTime;
         }
 
-        if (this.slidingLayerTimer > this.slidingLayerInterval) {
+        if (this.slidingLayerTimer > this.slidingLayerInterval && !this.gameOver) {
             this.slidingLayer();
             this.slidingLayerTimer = 0;
         } else {
