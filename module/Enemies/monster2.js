@@ -12,7 +12,7 @@ export class Monster2 extends Enemy {
         this.dWidth = 80 * 1.5;
         this.dHeight = 70 * 1.5;
 
-        this.y = game.height - this.height - 90;
+        this.y = game.height - this.height - 80;
         this.image = document.getElementById('enemy2');
         this.frameY = 4;
         this.maxFrame = 3; 
