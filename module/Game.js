@@ -1,5 +1,6 @@
 import {InputHandler} from './InputHandler.js';
 import {Background} from '../UI/Background.js';
+import {SlidingLayer} from '../UI/SlidingLayer.js';
 import {UI} from '../UI/UI.js';
 import {Nemo} from './Units/Nemo.js';
 import {Nebessime} from './Units/Nebessime.js';
@@ -45,6 +46,10 @@ export class Game {
         this.particles = [];
 
         this.handlerJump = false;
+
+        this.slidingLayers = [];
+        this.slidingLayerTimer = 0;
+        this.slidingLayerInterval = 1000;
 
         this.debug = true;
         
@@ -112,12 +117,29 @@ export class Game {
         } else {
             this.enemyTimer += deltaTime;
         }
+
+        if (this.slidingLayerTimer > this.slidingLayerInterval) {
+            this.slidingLayer();
+            this.slidingLayerTimer = 0;
+        } else {
+            this.slidingLayerTimer += deltaTime;
+        }
+
+        this.slidingLayers.forEach(layer => {
+            layer.update();
+        });
+
+        this.slidingLayers = this.slidingLayers.filter(layer => !layer.markedForDeletion);
     }
 
     addEnemy() {
         const randomize = Math.random();
         if (randomize < 0.5) this.enemies.push(new Monster1(this))
         else this.enemies.push(new Monster2(this));
+    }
+
+    slidingLayer() {
+        this.slidingLayers.push(new SlidingLayer(this));
     }
 
     checkCollision(rect1, rect2) {
@@ -139,5 +161,6 @@ export class Game {
         this.player2.draw(context);
         this.particles.forEach(particle => particle.draw(context));
         this.enemies.forEach(enemy => enemy.draw(context));
+        this.slidingLayers.forEach(layer => layer.draw(context));
     }
 }
