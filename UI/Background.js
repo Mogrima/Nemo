@@ -33,7 +33,9 @@ export class Background {
         this.layer12 = new Layer(this.game, this.image12, 1);
         this.layer13 = new Layer(this.game, this.image13, 1);
 
-        this.layers = [this.layer13, this.layer12, this.layer11, this.layer10, this.layer9, this.layer8, this.layer7, this.layer6,  this.layer5, this.layer4, this.layer3,  this.layer2, ];
+        this.layers = [this.layer13, this.layer12, this.layer11, this.layer10, 
+            this.layer9, this.layer8, this.layer7, this.layer6,  this.layer5, 
+            this.layer4, this.layer3,  this.layer2, ];
 
     }
     update() {
