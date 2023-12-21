@@ -74,6 +74,11 @@ export class Game {
         this.particles.forEach(particle => particle.update());
         this.particles = this.particles.filter(particle => !particle.markedForDeletion);
 
+        this.slidingLayers.forEach(layer => {
+            layer.update();
+        });
+        this.slidingLayers = this.slidingLayers.filter(layer => !layer.markedForDeletion);
+
         this.enemies.forEach(enemy => {
             enemy.update();
             // Проверим, не столкнолся ли враг с главным игроком (player)
@@ -119,17 +124,12 @@ export class Game {
         }
 
         if (this.slidingLayerTimer > this.slidingLayerInterval && !this.gameOver) {
-            this.slidingLayer();
+            this.addSlidingLayer();
             this.slidingLayerTimer = 0;
         } else {
             this.slidingLayerTimer += deltaTime;
         }
 
-        this.slidingLayers.forEach(layer => {
-            layer.update();
-        });
-
-        this.slidingLayers = this.slidingLayers.filter(layer => !layer.markedForDeletion);
     }
 
     addEnemy() {
@@ -138,7 +138,7 @@ export class Game {
         else this.enemies.push(new Monster2(this));
     }
 
-    slidingLayer() {
+    addSlidingLayer() {
         this.slidingLayers.push(new SlidingLayer(this));
     }
 
