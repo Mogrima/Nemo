@@ -23,14 +23,15 @@ export class SlidingLayer {
     update() {
         this.x -= this.speedX;
         if (this.x > this.game.width) this.markedForDeletion = true;
-        if(this.frameX < this.maxFrame) {
+        if (this.frameX < this.maxFrame) {
             this.frameX++;
-        }  else {
+        } else {
             this.frameX = 0;
         }
     }
 
     draw(context) {
-        context.drawImage(this.image, this.frameX * this.sWidth, this.frameY * this.sWheight, this.sWidth, this.sWheight, this.x, this.y, this.dWidth, this.dHeight);
+        context.drawImage(this.image, this.frameX * this.sWidth, this.frameY * this.sWheight,
+            this.sWidth, this.sWheight, this.x, this.y, this.dWidth, this.dHeight);
     }
 }
