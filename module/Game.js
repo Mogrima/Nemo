@@ -1,12 +1,12 @@
-import {InputHandler} from './InputHandler.js';
-import {Background} from '../UI/Background.js';
-import {SlidingLayer} from '../UI/SlidingLayer.js';
-import {UI} from '../UI/UI.js';
-import {Nemo} from './Units/Nemo.js';
-import {Nebessime} from './Units/Nebessime.js';
-import {Monster1} from './Enemies/monster1.js';
-import {Monster2} from './Enemies/monster2.js';
-import {Particle} from './Particle.js';
+import { InputHandler } from './InputHandler.js';
+import { Background } from '../UI/Background.js';
+import { SlidingLayer } from '../UI/SlidingLayer.js';
+import { UI } from '../UI/UI.js';
+import { Nemo } from './Units/Nemo.js';
+import { Nebessime } from './Units/Nebessime.js';
+import { Monster1 } from './Enemies/monster1.js';
+import { Monster2 } from './Enemies/monster2.js';
+import { Particle } from './Particle.js';
 
 export class Game {
     constructor(width, height) {
@@ -52,7 +52,7 @@ export class Game {
         this.slidingLayerInterval = 1000;
 
         this.debug = true;
-        
+
     }
 
     update(deltaTime) {
@@ -70,7 +70,7 @@ export class Game {
         } else {
             this.ammoTimer += deltaTime;
         }
-        
+
         this.particles.forEach(particle => particle.update());
         this.particles = this.particles.filter(particle => !particle.markedForDeletion);
 
@@ -85,30 +85,34 @@ export class Game {
             if (this.checkCollision(this.player, enemy)) {
                 // если столкновение произошло, помечаем врага как удаленного
                 enemy.markedForDeletion = true;
-                for(let i = 0; i < 10; i++) {
-                    this.particles.push(new Particle(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
-                }  
+                for (let i = 0; i < 10; i++) {
+                    this.particles.push(new Particle(this, enemy.x + enemy.width * 0.5,
+                        enemy.y + enemy.height * 0.5));
+                }
                 this.health--;
-                if(this.health <= 0) {
+                if (this.health <= 0) {
                     this.gameOver = true;
                 }
-                if(this.health < 10) this.player.warning = true;
+                if (this.health < 10) this.player.warning = true;
             }
             // для всех активных пуль (projectiles) также проверим условие столкновения
-            // пули с врагом. 
+            // пули с врагом.
             this.player.projectiles.forEach(projectile => {
                 if (this.checkCollision(projectile, enemy)) {
                     enemy.lives--; // уменьшаем жизни врага на единицу
                     // если столкновение произошло, помечаем снаряд как удаленный
-                    this.particles.push(new Particle(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
+                    this.particles.push(new Particle(this, enemy.x + enemy.width * 0.5,
+                        enemy.y + enemy.height * 0.5));
                     projectile.markedForDeletion = true;
-                    if (enemy.lives <= 0) {        
-                        enemy.markedForDeletion = true; // удаляем врага  
-                        for(let i = 0; i < 10; i++) {
-                            this.particles.push(new Particle(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
-                        }       
-                        if (!this.gameOver) this.score += enemy.score; // увеличиваем количество очков главного игрока       
-                        if (this.isWin()) this.gameOver = true;  // проверяем условие победы
+                    if (enemy.lives <= 0) {
+                        enemy.markedForDeletion = true; // удаляем врага
+                        for (let i = 0; i < 10; i++) {
+                            this.particles.push(new Particle(this, enemy.x + enemy.width * 0.5,
+                                enemy.y + enemy.height * 0.5));
+                        }
+                        // увеличиваем количество очков главного игрока
+                        if (!this.gameOver) this.score += enemy.score;
+                        if (this.isWin()) this.gameOver = true; // проверяем условие победы
                     }
                 }
             });
@@ -134,7 +138,7 @@ export class Game {
 
     addEnemy() {
         const randomize = Math.random();
-        if (randomize < 0.5) this.enemies.push(new Monster1(this))
+        if (randomize < 0.5) this.enemies.push(new Monster1(this));
         else this.enemies.push(new Monster2(this));
     }
 
@@ -147,14 +151,14 @@ export class Game {
             rect1.x < rect2.x + rect2.width &&
             rect2.x < rect1.x + rect1.width &&
             rect1.y < rect2.y + rect2.height &&
-            rect2.y < rect1.y + rect1.height)
+            rect2.y < rect1.y + rect1.height);
     }
 
     isWin() {
         return this.score >= this.winningScore;
     }
 
-    draw(context) {   
+    draw(context) {
         this.background.draw(context);
         this.ui.draw(context);
         this.player.draw(context);
