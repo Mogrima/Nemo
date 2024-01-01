@@ -15,7 +15,7 @@
     "space-in-parens": "error",
     "prefer-const": "error",
     "no-use-before-define": "error",
-    "linebreak-style": ["error", "unix"], // символ(ы) конца строки
+    // "linebreak-style": ["error", "unix"], // символ(ы) конца строки
     "quotes": ["error", "single"], // использовать одинарные кавычки
     "indent": ["error", 4, { "SwitchCase": 1 }], // отступы в коде из 4 пробелов с учетом switch...case
     "arrow-parens": ["error", "as-needed"], // скобки вокруг единственного параметра стрелочной функции
