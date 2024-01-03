@@ -2,6 +2,8 @@ export class Props {
     constructor(game) {
         this.game = game;
         this.image = document.getElementById('layer14');
+        this.collisionX = Math.random() * this.game.width;
+        this.collisionY = this.game.height * 0.76;
         this.spriteWidth = 25;
         this.spriteHeight = 87;
         this.width = this.spriteWidth;
@@ -9,8 +11,8 @@ export class Props {
         this.frameX = 0;
         this.frameY = 0;
         this.maxFrame = 20;
-        this.spriteX = this.game.width * 0.5;
-        this.spriteY = this.game.height * 0.5;
+        this.spriteX = this.collisionX - this.width * 0.5;
+        this.spriteY = this.collisionY;
         this.fps = 30;
         this.timer = 0;
         this.interval = 1000/this.fps;
