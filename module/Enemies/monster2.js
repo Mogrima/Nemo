@@ -18,6 +18,7 @@ export class Monster2 extends Enemy {
         this.maxFrame = 3; 
         this.lives = 5;
         this.score = this.lives;
+        this.type = 'shadow';
 
         
         if (this.randomDirect() === "right") {

@@ -18,6 +18,7 @@ export class Monster1 extends Enemy {
         this.maxFrame = 7;
         this.lives = 2;
         this.score = this.lives;
+        this.type = 'gorgona'
 
         if (this.randomDirect() === "right") {
             this.x = this.game.width;
