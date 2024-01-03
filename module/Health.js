@@ -7,7 +7,7 @@ export class Health {
         this.height = 13;
         this.markedForDeletion = false;
     }
-    
+
     draw(context) {
         context.fillStyle = '#120a8f';
         context.fillRect(this.x, this.y, this.width, this.height);

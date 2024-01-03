@@ -44,10 +44,10 @@ export class Particle {
             this.speedY *= -0.5;
         }
         if (this.game.checkCollision(this, this.game.player)) {
-            if(!this.isHit) {
+            if (!this.isHit) {
                 this.game.health--;
                 this.isHit = true;
-                if(this.game.health <= 0) {
+                if (this.game.health <= 0) {
                     this.game.gameOver = true;
                 }
             }
@@ -57,7 +57,7 @@ export class Particle {
         context.save();
         context.translate(this.x, this.y);
         context.rotate(this.angle);
-        context.drawImage(this.image, this.frameX * this.spriteSize, this.frameY * this.spriteSize, 
+        context.drawImage(this.image, this.frameX * this.spriteSize, this.frameY * this.spriteSize,
             this.spriteSize, this.spriteSize, this.size * -0.5, this.size * -0.5, this.size, this.size);
         context.restore();
     }
