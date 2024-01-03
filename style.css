@@ -46,6 +46,8 @@ body {
 #enemy2,
 #enemy3,
 #particle,
-#particle2 {
+#particle2,
+#explosion1,
+#explosion2 {
     display: none;
 }
