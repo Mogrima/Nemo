@@ -1,6 +1,5 @@
 import { InputHandler } from './InputHandler.js';
 import { Background } from '../UI/Background.js';
-// import { SlidingLayer } from '../UI/SlidingLayer.js';
 import { UI } from '../UI/UI.js';
 import { Nemo } from './Units/Nemo.js';
 import { Nebessime } from './Units/Nebessime.js';
@@ -49,9 +48,6 @@ export class Game {
 
         this.handlerJump = false;
 
-        // this.slidingLayers = [];
-        // this.slidingLayerTimer = 0;
-        // this.slidingLayerInterval = 1000;
 
         this.explosions = [];
 
@@ -81,10 +77,6 @@ export class Game {
         this.explosions.forEach(explosion => explosion.update(deltaTime));
         this.explosions = this.explosions.filter(explosion => !explosion.markedForDeletion);
 
-        // this.slidingLayers.forEach(layer => {
-        //     layer.update(deltaTime);
-        // });
-        // this.slidingLayers = this.slidingLayers.filter(layer => !layer.markedForDeletion);
 
         this.enemies.forEach(enemy => {
             enemy.update();
@@ -148,13 +140,6 @@ export class Game {
             this.enemyTimer += deltaTime;
         }
 
-        // if (this.slidingLayerTimer > this.slidingLayerInterval && !this.gameOver) {
-        //     this.addSlidingLayer();
-        //     this.slidingLayerTimer = 0;
-        // } else {
-        //     this.slidingLayerTimer += deltaTime;
-        // }
-
     }
 
     addEnemy() {
@@ -162,10 +147,6 @@ export class Game {
         if (randomize < 0.5) this.enemies.push(new Monster1(this));
         else this.enemies.push(new Monster2(this));
     }
-
-    // addSlidingLayer() {
-    //     this.slidingLayers.push(new SlidingLayer(this));
-    // }
 
     checkCollision(rect1, rect2) {
         return (
