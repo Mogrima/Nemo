@@ -34,7 +34,6 @@ body {
 #layer11,
 #layer12,
 #layer13,
-#layer14,
 #layer15,
 #player,
 #player2,
@@ -48,6 +47,7 @@ body {
 #particle,
 #particle2,
 #explosion1,
-#explosion2 {
+#explosion2,
+#tentacles {
     display: none;
 }

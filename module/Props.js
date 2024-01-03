@@ -1,7 +1,7 @@
 export class Props {
     constructor(game) {
         this.game = game;
-        this.image = document.getElementById('layer14');
+        this.image = document.getElementById('tentacles');
         this.collisionX = Math.random() * this.game.width;
         this.collisionY = this.game.height * 0.76;
         this.spriteWidth = 25;
