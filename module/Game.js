@@ -52,7 +52,8 @@ export class Game {
 
         this.explosions = [];
 
-        this.prop = new Props(this);
+        this.numberOfProps = 10;
+        this.props = [];
 
         this.debug = true;
 
@@ -65,7 +66,7 @@ export class Game {
         this.player.update();
         this.player2.update();
         this.background.update();
-        this.prop.update(deltaTime);
+        this.props.forEach(prop => prop.update(deltaTime));
         this.input.update();
 
         if (this.ammoTimer > this.ammoInterval) {
@@ -152,6 +153,31 @@ export class Game {
         else this.enemies.push(new Monster2(this));
     }
 
+    addProps() {
+        let attempts = 0;
+        while(this.props.length < this.
+            numberOfProps && attempts < 100) {
+                let testProp = new Props(this);
+                let overlap = false;
+
+                this.props.forEach(prop => {
+                    const dx = testProp.collisionX - prop.collisionX;
+                    const distanceBuffer = 80;
+                    if (testProp.collisionX < prop.collisionX + prop.width + distanceBuffer &&
+                        prop.collisionX < testProp.collisionX + testProp.width + distanceBuffer) {
+                        overlap = true;
+                    }
+                });
+
+                if (!overlap && testProp.spriteX > 0 &&
+                    testProp.spriteX < this.width - testProp.width) {
+                    this.props.push(testProp);
+                }
+                attempts++;
+            }
+       
+    }
+
     checkCollision(rect1, rect2) {
         return (
             rect1.x < rect2.x + rect2.width &&
@@ -172,6 +198,6 @@ export class Game {
         this.particles.forEach(particle => particle.draw(context));
         this.enemies.forEach(enemy => enemy.draw(context));
         this.explosions.forEach(explosion => explosion.draw(context));
-        this.prop.draw(context);
+        this.props.forEach(prop => prop.draw(context));
     }
 }

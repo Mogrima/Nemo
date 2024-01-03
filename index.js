@@ -9,6 +9,7 @@ window.addEventListener('load', function () {
     canvas.height = 600; 
 
     const game = new Game(canvas.width, canvas.height);
+    game.addProps();
     let lastTime = 0;
 
     // animation loop
