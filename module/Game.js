@@ -90,11 +90,11 @@ export class Game {
                 // если столкновение произошло, помечаем врага как удаленного
                 enemy.markedForDeletion = true;
                 if (enemy.type === 'shadow') {
-                    this.explosions.push(new 
-                        ShadowExplosion(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
+                    this.explosions.push(new
+                    ShadowExplosion(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
                 } else {
-                    this.explosions.push(new 
-                        GorgonExplosion(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
+                    this.explosions.push(new
+                    GorgonExplosion(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
                 }
                 for (let i = 0; i < enemy.score; i++) {
                     this.particles.push(new Particle(this, enemy.x + enemy.width * 0.5,
@@ -118,11 +118,11 @@ export class Game {
                     if (enemy.lives <= 0) {
                         enemy.markedForDeletion = true; // удаляем врага
                         if (enemy.type === 'shadow') {
-                            this.explosions.push(new 
-                                ShadowExplosion(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
+                            this.explosions.push(new
+                            ShadowExplosion(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
                         } else {
-                            this.explosions.push(new 
-                                GorgonExplosion(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
+                            this.explosions.push(new
+                            GorgonExplosion(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
                         }
                         for (let i = 0; i < enemy.score; i++) {
                             this.particles.push(new Particle(this, enemy.x + enemy.width * 0.5,
@@ -155,27 +155,26 @@ export class Game {
 
     addProps() {
         let attempts = 0;
-        while(this.props.length < this.
+        while (this.props.length < this.
             numberOfProps && attempts < 100) {
-                let testProp = new Props(this);
-                let overlap = false;
+            const testProp = new Props(this);
+            let overlap = false;
 
-                this.props.forEach(prop => {
-                    const dx = testProp.collisionX - prop.collisionX;
-                    const distanceBuffer = 80;
-                    if (testProp.collisionX < prop.collisionX + prop.width + distanceBuffer &&
+            this.props.forEach(prop => {
+                const distanceBuffer = 80;
+                if (testProp.collisionX < prop.collisionX + prop.width + distanceBuffer &&
                         prop.collisionX < testProp.collisionX + testProp.width + distanceBuffer) {
-                        overlap = true;
-                    }
-                });
-
-                if (!overlap && testProp.spriteX > 0 &&
-                    testProp.spriteX < this.width - testProp.width) {
-                    this.props.push(testProp);
+                    overlap = true;
                 }
-                attempts++;
+            });
+
+            if (!overlap && testProp.spriteX > 0 &&
+                    testProp.spriteX < this.width - testProp.width) {
+                this.props.push(testProp);
             }
-       
+            attempts++;
+        }
+
     }
 
     checkCollision(rect1, rect2) {
