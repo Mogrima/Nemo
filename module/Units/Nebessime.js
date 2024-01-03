@@ -1,4 +1,4 @@
-import {Unit} from './Unit.js';
+import { Unit } from './Unit.js';
 
 export class Nebessime extends Unit {
     constructor(game) {
@@ -15,7 +15,7 @@ export class Nebessime extends Unit {
         this.dHeight = 67 * 1.5;
         this.shiftX = 3;
 
-        this.color = "#18171c";
+        this.color = '#18171c';
         this.maxXRight = this.width + 10;
         this.maxXLeft = this.width - 10;
 
@@ -25,5 +25,5 @@ export class Nebessime extends Unit {
         this.frameY = 2;
         this.maxFrame = 5;
     }
-    
+
 }

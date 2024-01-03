@@ -1,4 +1,4 @@
-import {Unit} from './Unit.js';
+import { Unit } from './Unit.js';
 
 
 export class Nemo extends Unit {
@@ -17,7 +17,7 @@ export class Nemo extends Unit {
         this.dWidth = 23 * 3;
         this.dHeight = 36 * 3;
 
-        this.color = "#fde910";
+        this.color = '#fde910';
         this.maxXRight = this.width + this.width * 2 - 15;
         this.maxXLeft = 0;
 
@@ -30,5 +30,5 @@ export class Nemo extends Unit {
         this.shiftX = 1;
         this.shiftY = 1;
     }
-    
+
 }

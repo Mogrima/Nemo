@@ -16,18 +16,18 @@ export class Explosion {
     }
     update(deltaTime) {
         this.x -= this.game.speed;
-        if(this.timer > this.interval) {
+        if (this.timer > this.interval) {
             this.frameX++;
             this.timer = 0;
         } else {
             this.timer += deltaTime;
         }
-        
-        if(this.frameX > this.maxFrame) this.markedForDeletion = true;
+
+        if (this.frameX > this.maxFrame) this.markedForDeletion = true;
     }
     draw(context) {
         context.drawImage(this.image, this.frameX * this.spriteWidth, 0,
-                        this.spriteWidth, this.spriteHeight, this.x, this.y,
-                        this.width, this.height);
+            this.spriteWidth, this.spriteHeight, this.x, this.y,
+            this.width, this.height);
     }
 }
