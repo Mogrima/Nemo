@@ -5,6 +5,7 @@ import { Nemo } from './Units/Nemo.js';
 import { Nebessime } from './Units/Nebessime.js';
 import { Monster1 } from './Enemies/monster1.js';
 import { Monster2 } from './Enemies/monster2.js';
+import { Props } from './Props.js';
 import { Particle } from './Particle.js';
 import { ShadowExplosion } from './Explosions/ShadowExplosion.js';
 import { GorgonExplosion } from './Explosions/GorgonExplosion.js';
@@ -51,6 +52,8 @@ export class Game {
 
         this.explosions = [];
 
+        this.prop = new Props(this);
+
         this.debug = true;
 
     }
@@ -62,6 +65,7 @@ export class Game {
         this.player.update();
         this.player2.update();
         this.background.update();
+        this.prop.update(deltaTime);
         this.input.update();
 
         if (this.ammoTimer > this.ammoInterval) {
@@ -168,6 +172,6 @@ export class Game {
         this.particles.forEach(particle => particle.draw(context));
         this.enemies.forEach(enemy => enemy.draw(context));
         this.explosions.forEach(explosion => explosion.draw(context));
-        // this.slidingLayers.forEach(layer => layer.draw(context));
+        this.prop.draw(context);
     }
 }
