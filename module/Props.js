@@ -8,7 +8,7 @@ export class Props {
         this.height = this.spriteHeight;
         this.frameX = 0;
         this.frameY = 0;
-        this.maxFrame = 7;
+        this.maxFrame = 20;
         this.spriteX = this.game.width * 0.5;
         this.spriteY = this.game.height * 0.5;
         this.fps = 30;
@@ -17,7 +17,7 @@ export class Props {
     }
 
     update(deltaTime) {
-        if (this.frameX > this.maxFrame) this.frameX = 0;
+        if (this.frameX > this.maxFrame) this.frameX = 13;
         if(this.timer > this.interval) {
             this.frameX++;
             this.timer = 0;
