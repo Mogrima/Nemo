@@ -1,4 +1,4 @@
-import {Enemy} from './Enemy.js';
+import { Enemy } from './Enemy.js';
 
 export class Monster1 extends Enemy {
     constructor(game) {
@@ -18,9 +18,9 @@ export class Monster1 extends Enemy {
         this.maxFrame = 7;
         this.lives = 2;
         this.score = this.lives;
-        this.type = 'gorgona'
+        this.type = 'gorgona';
 
-        if (this.randomDirect() === "right") {
+        if (this.randomDirect() === 'right') {
             this.x = this.game.width;
             this.frameY = 4;
         } else {

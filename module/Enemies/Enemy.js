@@ -11,15 +11,15 @@ export class Enemy {
 
     randomDirect() {
         const randomize = Math.random();
-        if (randomize < 0.5) this.direct = "right";
-        else this.direct = "left";
+        if (randomize < 0.5) this.direct = 'right';
+        else this.direct = 'left';
         return this.direct;
     }
 
     update() {
         // console.log(this.speedX);
 
-        if (this.direct === "right") {
+        if (this.direct === 'right') {
             // Обновляем x-координату врага (уменьшаем ее на величину speedX)
             this.x += this.speedX;
             // Помечаем врага как удаленного, если он полностью пересечет левую границу игрового поля
@@ -27,12 +27,12 @@ export class Enemy {
         } else {
             this.x -= this.speedX;
             if (this.x + this.game.width < this.game.width) this.markedForDeletion = true;
-            
+
         }
 
-        if(this.frameX < this.maxFrame) {
+        if (this.frameX < this.maxFrame) {
             this.frameX++;
-        }  else {
+        } else {
             this.frameX = 0;
         }
 
@@ -40,7 +40,8 @@ export class Enemy {
 
     draw(context) {
         if (this.game.debug) context.strokeRect(this.x, this.y, this.width, this.height);
-        context.drawImage(this.image, this.frameX * this.sWidth, this.frameY * this.sWheight, this.sWidth, this.sWheight, this.x, this.y, this.dWidth, this.dHeight);
+        context.drawImage(this.image, this.frameX * this.sWidth, this.frameY * this.sWheight,
+            this.sWidth, this.sWheight, this.x, this.y, this.dWidth, this.dHeight);
 
         // отобразим у каждого врага его жизни
         if (this.game.debug) {
