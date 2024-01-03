@@ -7,6 +7,8 @@ import { Nebessime } from './Units/Nebessime.js';
 import { Monster1 } from './Enemies/monster1.js';
 import { Monster2 } from './Enemies/monster2.js';
 import { Particle } from './Particle.js';
+import { ShadowExplosion } from './Explosions/ShadowExplosion.js';
+import { GorgonExplosion } from './Explosions/GorgonExplosion.js';
 
 export class Game {
     constructor(width, height) {
@@ -51,6 +53,8 @@ export class Game {
         this.slidingLayerTimer = 0;
         this.slidingLayerInterval = 1000;
 
+        this.explosions = [];
+
         this.debug = true;
 
     }
@@ -74,6 +78,9 @@ export class Game {
         this.particles.forEach(particle => particle.update());
         this.particles = this.particles.filter(particle => !particle.markedForDeletion);
 
+        this.explosions.forEach(explosion => explosion.update(deltaTime));
+        this.explosions = this.explosions.filter(explosion => !explosion.markedForDeletion);
+
         this.slidingLayers.forEach(layer => {
             layer.update();
         });
@@ -85,7 +92,14 @@ export class Game {
             if (this.checkCollision(this.player, enemy)) {
                 // если столкновение произошло, помечаем врага как удаленного
                 enemy.markedForDeletion = true;
-                for (let i = 0; i < 10; i++) {
+                if (enemy.type === 'shadow') {
+                    this.explosions.push(new 
+                        ShadowExplosion(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
+                } else {
+                    this.explosions.push(new 
+                        GorgonExplosion(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
+                }
+                for (let i = 0; i < enemy.score; i++) {
                     this.particles.push(new Particle(this, enemy.x + enemy.width * 0.5,
                         enemy.y + enemy.height * 0.5));
                 }
@@ -106,7 +120,14 @@ export class Game {
                     projectile.markedForDeletion = true;
                     if (enemy.lives <= 0) {
                         enemy.markedForDeletion = true; // удаляем врага
-                        for (let i = 0; i < 10; i++) {
+                        if (enemy.type === 'shadow') {
+                            this.explosions.push(new 
+                                ShadowExplosion(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
+                        } else {
+                            this.explosions.push(new 
+                                GorgonExplosion(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
+                        }
+                        for (let i = 0; i < enemy.score; i++) {
                             this.particles.push(new Particle(this, enemy.x + enemy.width * 0.5,
                                 enemy.y + enemy.height * 0.5));
                         }
@@ -165,6 +186,7 @@ export class Game {
         this.player2.draw(context);
         this.particles.forEach(particle => particle.draw(context));
         this.enemies.forEach(enemy => enemy.draw(context));
+        this.explosions.forEach(explosion => explosion.draw(context));
         this.slidingLayers.forEach(layer => layer.draw(context));
     }
 }
