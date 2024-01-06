@@ -53,6 +53,9 @@ export class UI {
         for (let i = 0; i < this.game.health; i++) {
             context.fillRect(5 * i + 20, 110, 3, 20);
         }
+        // FPS
+        context.fillStyle = this.colorLose;
+        context.fillText('FPS: ' + this.game.fpsCount, 20, 200);
         context.restore();
     }
 }

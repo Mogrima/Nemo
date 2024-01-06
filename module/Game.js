@@ -9,11 +9,14 @@ import { Props } from './Props.js';
 import { Particle } from './Particle.js';
 import { ShadowExplosion } from './Explosions/ShadowExplosion.js';
 import { GorgonExplosion } from './Explosions/GorgonExplosion.js';
+import { FPS } from './FPS.js';
 
 export class Game {
     constructor(width, height) {
         this.width = width;
         this.height = height;
+        this.fps = new FPS(this);
+        this.fpsCount = 0;
         this.player = new Nemo(this);
         this.player2 = new Nebessime(this);
 
@@ -57,11 +60,24 @@ export class Game {
 
         this.debug = true;
 
+        this.intervalFpsDisplay = 3000;
+        this.timerFpsDisplay = 0;
+
     }
 
     update(deltaTime) {
         if (!this.gameOver) this.gameTime += deltaTime;
         if (this.gameTime > this.timeLimit) this.gameOver = true;
+
+        if (this.fpsCount === 0 && deltaTime !== 0) {
+            this.fpsCount = this.fps.render(deltaTime);
+        }
+        if (this.timerFpsDisplay > this.intervalFpsDisplay) {
+            this.fpsCount = this.fps.render(deltaTime);
+            this.timerFpsDisplay = 0;
+        } else {
+            this.timerFpsDisplay += deltaTime;
+        }
 
         this.player.update();
         this.player2.update();
