@@ -5,7 +5,7 @@ export class Cloud {
         this.canvasHeight = this.canvas.height * 0.5;
         this.width = 100;
         this.height = 53;
-        this.speedX = Math.random() * 2 + 0.5;
+        this.speedX = Math.random() * + 0.5;
         this.cloudColor = '#ffffe0';
         this.cloudImage = document.getElementById('cloud');
         this.x = Math.random() * this.canvasWidth;
@@ -13,7 +13,6 @@ export class Cloud {
     }
 
     update() {
-        console.log(this.y)
         this.x -= this.speedX;
         if (this.x + this.width < 0) {
             this.x = this.canvasWidth + this.width +
