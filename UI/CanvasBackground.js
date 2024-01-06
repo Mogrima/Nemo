@@ -1,4 +1,5 @@
 import { Sky } from './Sky.js';
+import { Forest } from './Forest.js';
 
 export class CanvasBackground {
     constructor(canvas) {
@@ -12,9 +13,11 @@ export class CanvasBackground {
         this.sky = new Sky(0, 0, canvas);
 
         // forest
-        this.forestHeight = this.canvasHeight * 0.3;
+        // this.forestHeight = this.canvasHeight * 0.3;
+        // this.forestColor = "#228b22";
         this.forestYstart = this.canvasHeight * 0.2;
-        this.forestColor = "#228b22";
+        this.forest = new Forest(0, this.forestYstart, canvas);
+        
 
         // game field
         this.gameFieldHeight = this.canvasHeight * 0.5;
@@ -31,16 +34,16 @@ export class CanvasBackground {
         // sky
         // context.fillStyle = this.skyColor;
         // context.fillRect(0, 0, this.canvasWidth, this.skyHeight);
+        this.sky.draw(context);
 
         // forest
-        context.fillStyle = this.forestColor;
-        context.fillRect(0, this.forestYstart, this.canvasWidth, this.forestHeight);
+        // context.fillStyle = this.forestColor;
+        // context.fillRect(0, this.forestYstart, this.canvasWidth, this.forestHeight);
+        this.forest.draw(context);
 
         // game field
         context.fillStyle = this.gameFieldColor;
         context.fillRect(0, this.gameFieldYstart, this.canvasWidth, this.gameFieldHeight);
-
-        this.sky.draw(context);
 
         context.restore();
     }
