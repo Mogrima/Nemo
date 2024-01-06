@@ -107,14 +107,16 @@ export class Game {
                 enemy.markedForDeletion = true;
                 if (enemy.type === 'shadow') {
                     this.explosions.push(new
-                    ShadowExplosion(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
+                    ShadowExplosion(this, enemy.collisionX + enemy.width * 0.5,
+                        enemy.collisionY + enemy.height * 0.5));
                 } else {
                     this.explosions.push(new
-                    GorgonExplosion(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
+                    GorgonExplosion(this, enemy.collisionX + enemy.width * 0.5,
+                        enemy.collisionY + enemy.height * 0.5));
                 }
                 for (let i = 0; i < enemy.score; i++) {
-                    this.particles.push(new Particle(this, enemy.x + enemy.width * 0.5,
-                        enemy.y + enemy.height * 0.5));
+                    this.particles.push(new Particle(this, enemy.collisionX + enemy.width * 0.5,
+                        enemy.collisionY + enemy.height * 0.5));
                 }
                 this.health--;
                 if (this.health <= 0) {
@@ -128,21 +130,23 @@ export class Game {
                 if (this.checkCollision(projectile, enemy)) {
                     enemy.lives--; // уменьшаем жизни врага на единицу
                     // если столкновение произошло, помечаем снаряд как удаленный
-                    this.particles.push(new Particle(this, enemy.x + enemy.width * 0.5,
-                        enemy.y + enemy.height * 0.5));
+                    this.particles.push(new Particle(this, enemy.collisionX + enemy.width * 0.5,
+                        enemy.collisionY + enemy.height * 0.5));
                     projectile.markedForDeletion = true;
                     if (enemy.lives <= 0) {
                         enemy.markedForDeletion = true; // удаляем врага
                         if (enemy.type === 'shadow') {
                             this.explosions.push(new
-                            ShadowExplosion(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
+                            ShadowExplosion(this, enemy.collisionX + enemy.width * 0.5,
+                                enemy.collisionY + enemy.height * 0.5));
                         } else {
                             this.explosions.push(new
-                            GorgonExplosion(this, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
+                            GorgonExplosion(this, enemy.collisionX + enemy.width * 0.5,
+                                enemy.collisionY + enemy.height * 0.5));
                         }
                         for (let i = 0; i < enemy.score; i++) {
-                            this.particles.push(new Particle(this, enemy.x + enemy.width * 0.5,
-                                enemy.y + enemy.height * 0.5));
+                            this.particles.push(new Particle(this, enemy.collisionX + enemy.width * 0.5,
+                                enemy.collisionY + enemy.height * 0.5));
                         }
                         // увеличиваем количество очков главного игрока
                         if (!this.gameOver) this.score += enemy.score;
