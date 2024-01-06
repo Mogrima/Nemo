@@ -1,11 +1,17 @@
 export class Projectile {
     constructor(game, x, y, direct) {
         this.game = game;
+        this.spriteWidth = 16;
+        this.spriteHeight = 16;
+        this.width = this.spriteWidth + 10;
+        this.height = this.spriteHeight + 10;
+
         this.collisionX = x;
         this.collisionY = y;
+        this.spriteX = this.collisionX;
+        this.spriteY = this.collisionY;
+
         this.direct = direct;
-        this.width = 16;
-        this.height = 16;
         this.speed = 8;
         this.markedForDeletion = false;
         this.image = document.getElementById('projectile3');
@@ -24,6 +30,9 @@ export class Projectile {
             this.collisionX -= this.speed;
             if (this.collisionX < this.game.width * 0.1) this.markedForDeletion = true;
         }
+        this.spriteX = this.collisionX;
+        this.spriteY = this.collisionY;
+
         if(this.frameX < this.maxFrame) {
             this.frameX++;
         } else {
@@ -33,10 +42,12 @@ export class Projectile {
     }
   
     draw(context) {
+        console.log(this.width, this.height)
         // context.fillStyle = '#120a8f';
         // context.fillRect(this.x, this.y, this.width, this.height);
         context.drawImage(this.image,
-            16 * this.frameX, this.height * this.frameY,
-            16, 16, this.collisionX, this.collisionY,  26, 26);
+            this.spriteWidth * this.frameX, this.spriteHeight * this.frameY,
+            this.spriteWidth, this.spriteHeight, this.spriteX, this.spriteY,
+            this.width, this.height);
     }
 }
