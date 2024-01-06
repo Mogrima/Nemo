@@ -1,9 +1,8 @@
 import { Cloud } from './Cloud.js';
+import { Star } from './Star.js';
 
 export class Sky {
     constructor(x, y, canvas) {
-        // this.width = width;
-        // this.height = height * 0.5;
         this.canvas = canvas;
         this.canvasWidth = this.canvas.width;
         this.canvasHeight = this.canvas.height * 0.5;
@@ -21,10 +20,17 @@ export class Sky {
         this.MaxClouds = 15;
         this.clouds = [];
 
+        // stars
+        this.MaxStars = 30;
+        this.stars = [];
+
     }
     init() {
         for (let i = 0; i < this.MaxClouds; i++) {
             this.clouds.push(new Cloud(this.canvas));
+        }
+        for (let i = 0; i < this.MaxStars; i++) {
+            this.stars.push(new Star(this.canvas));
         }
     }
 
@@ -34,6 +40,10 @@ export class Sky {
         
         context.fillStyle = this.skyColor;
         context.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
+        // stars
+        this.stars.forEach(star => {
+            star.draw(context);
+        });
         // moon
         context.beginPath();
         context.fillStyle = this.moonColor;
@@ -44,9 +54,7 @@ export class Sky {
         this.clouds.forEach(cloud => {
             cloud.draw(context);
             cloud.update();
-        })
-        
-        
+        });
         context.restore();
     }
 }
