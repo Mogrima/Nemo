@@ -1,5 +1,5 @@
 import { Projectile } from '../Projectile.js';
-import { Health } from '../Health.js';
+
 export class Unit {
     constructor(game) {
         this.game = game;
@@ -13,7 +13,6 @@ export class Unit {
         this.shiftY = 0;
 
         this.projectiles = [];
-        this.healths = [];
 
         this.warning = false;
 
@@ -65,11 +64,6 @@ export class Unit {
         });
         this.projectiles = this.projectiles.filter(pr => !pr.markedForDeletion);
 
-        this.healths.forEach(hl => {
-            hl.update();
-        });
-        this.healths = this.healths.filter(hl => !hl.markedForDeletion);
-
         // sprite animation
         if (this.frameX < this.maxFrame) {
             this.frameX++;
@@ -90,23 +84,12 @@ export class Unit {
             this.spriteWidth, this.spriteHeight,
             this.spriteX, this.spriteY, this.width, this.height);
 
-        this.healths.forEach(hl => {
-            hl.draw(context);
-        });
-
     }
 
     shootTop(x, y, direct) {
         if (this.game.ammo > 0) {
             this.projectiles.push(new Projectile(this.game, x, y, direct));
             this.game.ammo--;
-        }
-    }
-
-    healthTop(x, y) {
-        if (this.game.health > 0) {
-            this.healths.push(new Health(this.game, x, y));
-            this.game.health--;
         }
     }
 }
