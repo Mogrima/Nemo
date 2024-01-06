@@ -1,8 +1,8 @@
 export class Projectile {
     constructor(game, x, y, direct) {
         this.game = game;
-        this.x = x;
-        this.y = y;
+        this.collisionX = x;
+        this.collisionY = y;
         this.direct = direct;
         this.width = 16;
         this.height = 16;
@@ -16,13 +16,13 @@ export class Projectile {
   
     update() {
         if (this.direct === "right") {
-            this.x += this.speed;
-            if (this.x > this.game.width * 0.9) this.markedForDeletion = true;
+            this.collisionX += this.speed;
+            if (this.collisionX > this.game.width * 0.9) this.markedForDeletion = true;
            
         } else if (this.direct === "left") {
             this.frameY = 1;
-            this.x -= this.speed;
-            if (this.x < this.game.width * 0.1) this.markedForDeletion = true;
+            this.collisionX -= this.speed;
+            if (this.collisionX < this.game.width * 0.1) this.markedForDeletion = true;
         }
         if(this.frameX < this.maxFrame) {
             this.frameX++;
@@ -35,6 +35,8 @@ export class Projectile {
     draw(context) {
         // context.fillStyle = '#120a8f';
         // context.fillRect(this.x, this.y, this.width, this.height);
-        context.drawImage(this.image, 16 * this.frameX, this.height * this.frameY, 16, 16, this.x, this.y,  26, 26);
+        context.drawImage(this.image,
+            16 * this.frameX, this.height * this.frameY,
+            16, 16, this.collisionX, this.collisionY,  26, 26);
     }
 }
