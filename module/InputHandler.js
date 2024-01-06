@@ -10,11 +10,12 @@ export class InputHandler {
 
                 if ((this.game.direction.lastIndexOf('ArrowLeft') === this.game.direction.length - 1)
                 && (this.game.direction.length > 0)) {
-                    this.game.player.shootTop(this.game.player.x, this.game.player.y + 30, 'left');
+                    this.game.player.shootTop(this.game.player.collisionX,
+                        this.game.player.collisionY + 30, 'left');
 
                 } else {
-                    this.game.player.shootTop(this.game.player.x + this.game.player.width,
-                        this.game.player.y + 30, 'right');
+                    this.game.player.shootTop(this.game.player.collisionX + this.game.player.width,
+                        this.game.player.collisionY + 30, 'right');
                 }
 
             } else if (e.key === 'd') {
