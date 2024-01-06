@@ -1,8 +1,8 @@
 export class Particle {
     constructor(game, x, y) {
         this.game = game;
-        this.x = x;
-        this.y = y;
+        this.collisionX = x;
+        this.collisionY = y;
         this.image = document.getElementById('particle');
         this.frameX = Math.floor(Math.random() * 4);
         this.frameY = Math.floor(Math.random() * 3);
@@ -33,13 +33,13 @@ export class Particle {
         this.angle += this.va;
         // вертикальная скорость уменьшается под гравитацией
         this.speedY += this.gravity;
-        this.x -= this.speedX + this.game.speed;
-        this.y += this.speedY;
-        if (this.y > this.game.height + this.size || this.x < 0 - this.size) {
+        this.collisionX -= this.speedX + this.game.speed;
+        this.collisionY += this.speedY;
+        if (this.collisionY > this.game.height + this.size || this.collisionX < 0 - this.size) {
             this.markedForDeletion = true;
         }
         // подпрыгивание частиц
-        if (this.y > this.game.height - this.bottomBounceBoundary && this.bounced < 2) {
+        if (this.collisionY > this.game.height - this.bottomBounceBoundary && this.bounced < 2) {
             this.bounced++;
             this.speedY *= -0.5;
         }
@@ -55,7 +55,7 @@ export class Particle {
     }
     draw(context) {
         context.save();
-        context.translate(this.x, this.y);
+        context.translate(this.collisionX, this.collisionY);
         context.rotate(this.angle);
         context.drawImage(this.image, this.frameX * this.spriteSize, this.frameY * this.spriteSize,
             this.spriteSize, this.spriteSize, this.size * -0.5, this.size * -0.5, this.size, this.size);
