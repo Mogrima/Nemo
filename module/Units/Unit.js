@@ -3,6 +3,10 @@ import { Health } from '../Health.js';
 export class Unit {
     constructor(game) {
         this.game = game;
+        this.collisionX = 0;
+        this.collisionY;
+        this.spriteX;
+        this.spriteY;
         this.speedX = 0;
         this.maxSpeed = 5;
         this.shiftX = 0;
@@ -20,15 +24,17 @@ export class Unit {
 
     }
     update() {
-        this.x += this.speedX;
+        this.collisionX += this.speedX;
+        this.spriteX = this.collisionX;
+        this.spriteY = this.collisionY;
         // гравитация
-        this.y += this.speedY;
+        this.collisionY += this.speedY;
         // тело всегда падает
         this.speedY += this.gravity;
 
         // чтобы тело не падало ниже земли
-        if (this.y + this.height >= this.game.height - 50) {
-            this.y = this.game.height - this.height - 50;
+        if (this.collisionY + this.height >= this.game.height - 50) {
+            this.collisionY = this.game.height - this.height - 50;
             this.speedY = 0;
         }
         // ограничение вертикального ускорения
@@ -38,7 +44,7 @@ export class Unit {
         else if (this.game.keys.includes('ArrowRight')) this.speedX = this.maxSpeed;
         else this.speedX = 0;
 
-        if (this.y === this.game.height - this.height - 50) {
+        if (this.collisionY === this.game.height - this.height - 50) {
             this.jump = true;
         }
 
@@ -48,10 +54,10 @@ export class Unit {
         }
 
         // чтобы не выходил за границы холста
-        if (this.x > this.game.width - this.maxXRight) {
-            this.x = this.game.width - this.maxXRight;
-        } else if (this.x < this.maxXLeft) {
-            this.x = this.maxXLeft;
+        if (this.collisionX > this.game.width - this.maxXRight) {
+            this.collisionX = this.game.width - this.maxXRight;
+        } else if (this.collisionX < this.maxXLeft) {
+            this.collisionX = this.maxXLeft;
         }
 
         this.projectiles.forEach(pr => {
@@ -75,13 +81,14 @@ export class Unit {
     draw(context) {
         // hitbox player
         context.strokeStyle = 'yellow';
-        if (this.game.debug) context.strokeRect(this.x, this.y, this.width, this.height);
+        if (this.game.debug) context.strokeRect(this.collisionX, this.collisionY, this.width, this.height);
         this.projectiles.forEach(pr => {
             pr.draw(context);
         });
-        context.drawImage(this.image, this.frameX * this.sWidth + this.shiftX,
-            this.frameY * this.sWheight + this.shiftY, this.sWidth, this.sWheight,
-            this.x, this.y, this.dWidth, this.dHeight);
+        context.drawImage(this.image,
+            this.frameX * this.spriteWidth  + this.shiftX, this.frameY * this.spriteHeight  + this.shiftY,
+            this.spriteWidth, this.spriteHeight,
+            this.spriteX, this.spriteY, this.width, this.height);
 
         this.healths.forEach(hl => {
             hl.draw(context);

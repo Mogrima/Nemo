@@ -3,17 +3,13 @@ import { Unit } from './Unit.js';
 export class Nebessime extends Unit {
     constructor(game) {
         super(game);
-        this.width = 64 * 1.5;
-        this.height = 67 * 1.5;
-        this.x = (game.width / 2 - (this.width / 2)) + 100;
-        this.y = game.height - this.height - 43;
+        this.spriteWidth = 64;
+        this.spriteHeight = 67;
+        this.width = this.spriteWidth * 1.5;
+        this.height = this.spriteHeight * 1.5;
 
-        this.sWidth = 64;
-        this.sWheight = 67;
-
-        this.dWidth = 64 * 1.5;
-        this.dHeight = 67 * 1.5;
-        this.shiftX = 3;
+        this.collisionX = (game.width / 2 - (this.width / 2)) + 100;
+        this.collisionY = game.height - this.height - 43;
 
         this.color = '#18171c';
         this.maxXRight = this.width + 10;
@@ -24,6 +20,8 @@ export class Nebessime extends Unit {
         this.frameX = 0;
         this.frameY = 2;
         this.maxFrame = 5;
+        // смещение спрайта, чтобы не было видно куска другого кадра
+        this.shiftX = 3;
     }
 
 }

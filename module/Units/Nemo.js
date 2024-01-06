@@ -4,18 +4,13 @@ import { Unit } from './Unit.js';
 export class Nemo extends Unit {
     constructor(game) {
         super(game);
-        this.width = 23 * 3;
-        this.height = 36 * 3;
-        this.x = game.width / 2 - (this.width / 2);
-        this.y = game.height - this.height - 50;
+        this.spriteWidth = 23;
+        this.spriteHeight = 36;
+        this.width = this.spriteWidth  * 3;
+        this.height = this.spriteHeight  * 3;
 
-        this.sWidth = 23;
-        this.sWheight = 36;
-        this.sX = 3;
-        this.sY = 150;
-
-        this.dWidth = 23 * 3;
-        this.dHeight = 36 * 3;
+        this.collisionX = game.width / 2 - (this.width / 2);
+        this.collisionY = game.height - this.height - 50;
 
         this.color = '#fde910';
         this.maxXRight = this.width + this.width * 2 - 15;
@@ -27,6 +22,7 @@ export class Nemo extends Unit {
         this.frameY = 1;
         this.maxFrame = 0;
 
+        // смещение спрайта, чтобы не было видно куска другого кадра
         this.shiftX = 1;
         this.shiftY = 1;
     }
