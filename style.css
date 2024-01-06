@@ -48,6 +48,7 @@ body {
 #particle2,
 #explosion1,
 #explosion2,
-#tentacles {
+#tentacles,
+#cloud {
     display: none;
 }
