@@ -25,6 +25,9 @@ export class Forest {
         context.fillStyle = this.color;
         context.fillRect(this.x, this.y, this.canvasWidth, this.canvasHeight);
         context.restore();
+        this.trees.sort((a, b) =>{
+            return a.y - b.y;
+        });
         this.trees.forEach(tree => {
             tree.draw(context);
         });
