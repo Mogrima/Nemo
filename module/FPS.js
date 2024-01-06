@@ -5,6 +5,6 @@ export class FPS {
 
     render(deltatime) {
         return Math.floor(1000 / deltatime);
-       
+
     }
 }

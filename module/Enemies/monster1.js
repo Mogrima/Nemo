@@ -16,7 +16,7 @@ export class Monster1 extends Enemy {
         this.score = this.lives;
         this.type = 'gorgona';
 
-        if (this.directX === 'right') this.frameY = 4; 
+        if (this.directX === 'right') this.frameY = 4;
     }
 
 

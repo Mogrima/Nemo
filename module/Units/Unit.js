@@ -80,7 +80,7 @@ export class Unit {
             pr.draw(context);
         });
         context.drawImage(this.image,
-            this.frameX * this.spriteWidth  + this.shiftX, this.frameY * this.spriteHeight  + this.shiftY,
+            this.frameX * this.spriteWidth + this.shiftX, this.frameY * this.spriteHeight + this.shiftY,
             this.spriteWidth, this.spriteHeight,
             this.spriteX, this.spriteY, this.width, this.height);
 

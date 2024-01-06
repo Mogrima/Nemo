@@ -19,13 +19,13 @@ export class Projectile {
         this.frameY = 0;
         this.maxFrame = 14;
     }
-  
+
     update() {
-        if (this.direct === "right") {
+        if (this.direct === 'right') {
             this.collisionX += this.speed;
             if (this.collisionX > this.game.width * 0.9) this.markedForDeletion = true;
-           
-        } else if (this.direct === "left") {
+
+        } else if (this.direct === 'left') {
             this.frameY = 1;
             this.collisionX -= this.speed;
             if (this.collisionX < this.game.width * 0.1) this.markedForDeletion = true;
@@ -33,16 +33,15 @@ export class Projectile {
         this.spriteX = this.collisionX;
         this.spriteY = this.collisionY;
 
-        if(this.frameX < this.maxFrame) {
+        if (this.frameX < this.maxFrame) {
             this.frameX++;
         } else {
             this.frameX = 0;
         }
-        
+
     }
-  
+
     draw(context) {
-        console.log(this.width, this.height)
         // context.fillStyle = '#120a8f';
         // context.fillRect(this.x, this.y, this.width, this.height);
         context.drawImage(this.image,

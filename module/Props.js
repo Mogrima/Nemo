@@ -20,7 +20,7 @@ export class Props {
 
     update(deltaTime) {
         if (this.frameX > this.maxFrame) this.frameX = 13;
-        if(this.timer > this.interval) {
+        if (this.timer > this.interval) {
             this.frameX++;
             this.timer = 0;
         } else {

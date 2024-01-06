@@ -10,25 +10,24 @@ export class Enemy {
 
         this.frameX = 0;
         this.frameY = 0;
- 
+
 
         this.direct = () => {
             const randomize = Math.random();
             if (randomize < 0.5) {
                 this.directX = 'right';
                 this.collisionX = this.game.width;
-            } 
-            else {
+            } else {
                 this.directX = 'left';
                 this.collisionX = 0;
             }
-        }
+        };
         this.direct();
-    
+
     }
 
     update() {
-        
+
         if (this.directX === 'right') {
             // Обновляем x-координату врага (уменьшаем ее на величину speedX)
             this.collisionX += this.speedX;
@@ -50,7 +49,6 @@ export class Enemy {
     }
 
     draw(context) {
-        console.log(this.spriteX)
         if (this.game.debug) context.strokeRect(this.spriteX, this.spriteY, this.width, this.height);
         context.drawImage(this.image,
             this.frameX * this.spriteWidth, this.frameY * this.spriteHeight,

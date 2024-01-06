@@ -6,8 +6,8 @@ export class Nemo extends Unit {
         super(game);
         this.spriteWidth = 23;
         this.spriteHeight = 36;
-        this.width = this.spriteWidth  * 3;
-        this.height = this.spriteHeight  * 3;
+        this.width = this.spriteWidth * 3;
+        this.height = this.spriteHeight * 3;
 
         this.collisionX = game.width / 2 - (this.width / 2);
         this.collisionY = game.height - this.height - 50;
