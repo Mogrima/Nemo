@@ -27,6 +27,7 @@ export class CanvasBackground {
     }
     init() {
         this.sky.init();
+        this.forest.init();
     }
     
     draw(context) {
