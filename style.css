@@ -49,6 +49,7 @@ body {
 #explosion1,
 #explosion2,
 #tentacles,
-#cloud {
+#cloud,
+#tree1 {
     display: none;
 }
