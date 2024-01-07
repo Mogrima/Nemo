@@ -8,10 +8,9 @@ export class Tree {
         this.width = this.spriteWidth;
         this.height = this.spriteHeight;
         this.x = Math.random() * this.canvasWidth;
-        this.y = (Math.random() * this.canvasHeight * 0.5);
+        this.y = (Math.random() * (this.canvasHeight * 0.5 - 50) + 50);
         this.spriteX = this.x;
         this.spriteY = this.y;
-        this.image = document.getElementById('tree1');
     }
 
     update() {
