@@ -24,6 +24,8 @@ export class CanvasBackground {
         this.gameFieldYstart = this.canvasHeight * 0.5 + 100;
         this.gameFieldColor = "#228b22";
 
+        this.imageCity = document.getElementById('city');
+
     }
     init() {
         this.sky.init();
