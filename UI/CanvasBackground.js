@@ -15,14 +15,14 @@ export class CanvasBackground {
         // forest
         // this.forestHeight = this.canvasHeight * 0.3;
         // this.forestColor = "#228b22";
-        this.forestYstart = this.canvasHeight * 0.2;
+        this.forestYstart = this.canvasHeight * 0.2 + 100;
         this.forest = new Forest(0, this.forestYstart, canvas);
         
 
         // game field
         this.gameFieldHeight = this.canvasHeight * 0.5;
-        this.gameFieldYstart = this.canvasHeight * 0.5;
-        this.gameFieldColor = "#9acd32";
+        this.gameFieldYstart = this.canvasHeight * 0.5 + 100;
+        this.gameFieldColor = "#228b22";
 
     }
     init() {
@@ -36,6 +36,7 @@ export class CanvasBackground {
         // context.fillStyle = this.skyColor;
         // context.fillRect(0, 0, this.canvasWidth, this.skyHeight);
         this.sky.draw(context);
+        context.drawImage(this.imageCity, this.canvas.height, 175);
 
         // forest
         // context.fillStyle = this.forestColor;
