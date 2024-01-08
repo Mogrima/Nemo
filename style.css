@@ -21,6 +21,14 @@ body {
     font-weight: 400;
 }
 
+#bush_overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
 #layer1,
 #layer2,
 #layer3,
@@ -57,6 +65,7 @@ body {
 #tree5,
 #tree6,
 #tree7,
-#city {
+#city,
+#plansBackground {
     display: none;
 }
