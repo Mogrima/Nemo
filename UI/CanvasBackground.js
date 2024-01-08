@@ -23,6 +23,7 @@ export class CanvasBackground {
         this.gameFieldHeight = this.canvasHeight * 0.5;
         this.gameFieldYstart = this.canvasHeight * 0.5 + 100;
         this.gameFieldColor = "#228b22";
+        this.imagePlansBackground = document.getElementById('plansBackground');
 
         this.imageCity = document.getElementById('city');
 
@@ -43,11 +44,13 @@ export class CanvasBackground {
         // forest
         // context.fillStyle = this.forestColor;
         // context.fillRect(0, this.forestYstart, this.canvasWidth, this.forestHeight);
-        this.forest.draw(context);
+        
 
         // game field
         context.fillStyle = this.gameFieldColor;
         context.fillRect(0, this.gameFieldYstart, this.canvasWidth, this.gameFieldHeight);
+        context.drawImage(this.imagePlansBackground, 0, this.gameFieldYstart - 180);
+        this.forest.draw(context);
 
         context.restore();
     }
