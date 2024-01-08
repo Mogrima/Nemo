@@ -22,11 +22,12 @@ export class Forest {
 
     draw(context) {
         context.save();
-        context.fillStyle = this.color;
-        context.fillRect(this.x, this.y, this.canvasWidth, this.canvasHeight);
+        // context.fillStyle = this.color;
+        // context.fillRect(this.x, this.y, this.canvasWidth, this.canvasHeight);
         context.restore();
+       
         this.trees.sort((a, b) =>{
-            return a.y - b.y;
+            return (a.y + a.image.height) - (b.y + b.image.height);
         });
         this.trees.forEach(tree => {
             tree.draw(context);
