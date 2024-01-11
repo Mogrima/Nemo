@@ -64,9 +64,12 @@ export class Game {
         this.intervalFpsDisplay = 3000;
         this.timerFpsDisplay = 0;
 
+        this.gameObjects = [];
+
     }
 
     update(deltaTime) {
+        this.gameObjects = [this.player, this.player2, ...this.props];
         if (!this.gameOver) this.gameTime += deltaTime;
         if (this.gameTime > this.timeLimit) this.gameOver = true;
 
@@ -213,11 +216,14 @@ export class Game {
     draw(context) {
         // this.background.draw(context);
         this.ui.draw(context);
-        this.player.draw(context);
-        this.player2.draw(context);
+        this.gameObjects.sort((a, b) =>{
+            return a.collisionY - b.collisionY;
+        });
+        this.gameObjects.forEach(object => {
+            object.draw(context);
+        });
         this.particles.forEach(particle => particle.draw(context));
         this.enemies.forEach(enemy => enemy.draw(context));
         this.explosions.forEach(explosion => explosion.draw(context));
-        this.props.forEach(prop => prop.draw(context));
     }
 }
