@@ -1,5 +1,5 @@
 'use strict';
-import { CanvasBackground } from './UI/CanvasBackground.js';
+import { CanvasBackground } from './module/Background/CanvasBackground.js';
 import { Game } from './module/Game.js';
 
 window.addEventListener('load', function () {
