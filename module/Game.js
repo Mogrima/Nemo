@@ -1,3 +1,4 @@
+import { CanvasBackground } from './Background/CanvasBackground.js';
 import { InputHandler } from './InputHandler.js';
 import { Background } from '../UI/Background.js';
 import { UI } from '../UI/UI.js';
@@ -13,10 +14,12 @@ import { FPS } from './FPS.js';
 
 export class Game {
     constructor(canvas) {
+        this.canvas = canvas
         this.width = canvas.width;
         this.height = canvas.height;
         this.fps = new FPS(this);
         this.fpsCount = 0;
+        this.canvasBackground = new CanvasBackground(this.canvas);
         this.player = new Nemo(this);
         this.player2 = new Nebessime(this);
 
@@ -172,7 +175,9 @@ export class Game {
 
     }
 
-    init() {}
+    init() {
+        this.canvasBackground.init(); 
+    }
 
     addEnemy() {
         const randomize = Math.random();
@@ -218,6 +223,7 @@ export class Game {
 
     draw(context) {
         // this.background.draw(context);
+        this.canvasBackground.draw(context);
         this.ui.draw(context);
         this.gameObjects.sort((a, b) =>{
             return a.collisionY - b.collisionY;
