@@ -14,7 +14,6 @@ export class Forest {
         this.trees = [];
         this.maxBushes = 30;
         this.bushes = [];
-        // this.tree = new Tree(canvas);
 
     }
     init() {
@@ -24,26 +23,16 @@ export class Forest {
         for (let i = 0; i < this.maxBushes; i++) {
             this.bushes.push(new Bush(this.canvasWidth, this.canvasHeight));
         }
-        console.log(this.bushes)
     }
 
     draw(context) {
-        context.save();
-        // context.fillStyle = this.color;
-        // context.fillRect(this.x, this.y, this.canvasWidth, this.canvasHeight);
-        context.restore();
-       
-        this.trees.sort((a, b) =>{
-            return (a.y + a.image.height) - (b.y + b.image.height);
-        });
-        this.trees.forEach(tree => {
-            tree.draw(context);
-        });
-        this.bushes.sort((a, b) =>{
+        this.objects = [...this.trees, ...this.bushes];
+
+        this.objects.sort((a, b) =>{
             return (a.y + a.height) - (b.y + b.height);
         });
-        this.bushes.forEach(bush => {
-            bush.draw(context);
+        this.objects.forEach(object => {
+            object.draw(context);
         });
     }
 }
