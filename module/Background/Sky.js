@@ -6,7 +6,7 @@ export class Sky {
         this.canvas = canvas;
         this.canvasWidth = this.canvas.width;
         this.canvasHeight = this.canvas.height * 0.5;
-        this.skyColor = "#00416a";
+        this.skyColor = '#00416a';
 
         // moon
         this.moonColor = '#eae6ca';
@@ -32,9 +32,9 @@ export class Sky {
     }
 
     draw(context) {
-        
+
         context.save();
-        
+
         context.fillStyle = this.skyColor;
         context.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
         // stars

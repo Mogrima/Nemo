@@ -12,7 +12,7 @@ export class Tree {
         this.y = (Math.random() * (350 - 250) + 250) - this.image.height;
         this.spriteX = this.x;
         this.spriteY = this.y;
-        console.log(this.fieldHeight)
+        console.log(this.fieldHeight);
     }
 
     update() {
