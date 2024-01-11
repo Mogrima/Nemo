@@ -4,10 +4,11 @@ export class Unit {
     constructor(game) {
         this.game = game;
         this.collisionX = 0;
-        this.collisionY;
+        this.collisionY = 0;
         this.spriteX;
         this.spriteY;
         this.speedX = 0;
+        this.speedY = 0;
         this.maxSpeed = 5;
         this.shiftX = 0;
         this.shiftY = 0;
@@ -24,39 +25,62 @@ export class Unit {
     }
     update() {
         this.collisionX += this.speedX;
+        this.collisionY += this.speedY;
         this.spriteX = this.collisionX;
         this.spriteY = this.collisionY;
         // гравитация
-        this.collisionY += this.speedJump;
+        // this.collisionY += this.speedJump;
         // тело всегда падает
-        this.speedJump += this.gravity;
+        // this.speedJump += this.gravity;
 
         // чтобы тело не падало ниже земли
-        if (this.collisionY + this.height >= this.game.height - 50) {
-            this.collisionY = this.game.height - this.height - 50;
-            this.speedJump = 0;
-        }
-        // ограничение вертикального ускорения
-        if (this.speedJump > 25) this.speedJump = 25;
+        // if (this.collisionY + this.height >= this.game.height - 50) {
+        //     this.collisionY = this.game.height - this.height - 50;
+        //     this.speedJump = 0;
+        // }
+        // // ограничение вертикального ускорения
+        // if (this.speedJump > 25) this.speedJump = 25;
 
-        if (this.game.keys.includes('ArrowLeft')) this.speedX = -this.maxSpeed;
-        else if (this.game.keys.includes('ArrowRight')) this.speedX = this.maxSpeed;
-        else this.speedX = 0;
-
-        if (this.collisionY === this.game.height - this.height - 50) {
-            this.jump = true;
+        if (this.game.keys.includes('ArrowLeft')) {
+            this.speedX = -this.maxSpeed;
+            this.speedY = 0;
+        }
+        else if (this.game.keys.includes('ArrowRight')) {
+            this.speedX = this.maxSpeed;
+            this.speedY = 0;
+        }
+        else if (this.game.keys.includes('ArrowUp')) {
+            this.speedY = -this.maxSpeed;
+            this.speedX = 0;
+        }
+        else if (this.game.keys.includes('ArrowDown')) {
+            this.speedY = this.maxSpeed;
+            this.speedX = 0;
+        }
+        else {
+            this.speedX = 0;
+            this.speedY = 0;
         }
 
-        if (this.game.handlerJump && this.jump) {
-            this.speedJump = -11;
-            this.jump = false;
-        }
+        // if (this.collisionY === this.game.height - this.height - 50) {
+        //     this.jump = true;
+        // }
+
+        // if (this.game.handlerJump && this.jump) {
+        //     this.speedJump = -11;
+        //     this.jump = false;
+        // }
 
         // чтобы не выходил за границы холста
         if (this.collisionX > this.game.width - this.maxXRight) {
             this.collisionX = this.game.width - this.maxXRight;
         } else if (this.collisionX < this.maxXLeft) {
             this.collisionX = this.maxXLeft;
+        }
+        if (this.collisionY < this.maxTop) {
+            this.collisionY = this.maxTop;
+        } else if (this.collisionY > this.game.height - this.height) {
+            this.collisionY = this.game.height - this.height;
         }
 
         this.projectiles.forEach(pr => {

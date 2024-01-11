@@ -14,6 +14,7 @@ export class Nebessime extends Unit {
         this.color = '#18171c';
         this.maxXRight = this.width + 10;
         this.maxXLeft = this.width - 10;
+        this.maxTop = 232;
 
         // image and animation player
         this.image = document.getElementById('player2');

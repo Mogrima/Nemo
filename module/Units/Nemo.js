@@ -15,6 +15,7 @@ export class Nemo extends Unit {
         this.color = '#fde910';
         this.maxXRight = this.width + this.width * 2 - 15;
         this.maxXLeft = 0;
+        this.maxTop = 242;
 
         // image and animation player
         this.image = document.getElementById('player');
