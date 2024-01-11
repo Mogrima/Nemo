@@ -69,7 +69,9 @@ export class Game {
     }
 
     update(deltaTime) {
-        this.gameObjects = [this.player, this.player2, ...this.enemies, ...this.props];
+        this.gameObjects = [this.player, this.player2,  
+                            ...this.props, ...this.enemies, ...this.particles];
+        console.log(this.gameObjects)
         if (!this.gameOver) this.gameTime += deltaTime;
         if (this.gameTime > this.timeLimit) this.gameOver = true;
 
@@ -222,7 +224,6 @@ export class Game {
         this.gameObjects.forEach(object => {
             object.draw(context);
         });
-        this.particles.forEach(particle => particle.draw(context));
         this.explosions.forEach(explosion => explosion.draw(context));
     }
 }
