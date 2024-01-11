@@ -21,6 +21,14 @@ body {
     font-weight: 400;
 }
 
+#bush_overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
 #layer1,
 #layer2,
 #layer3,
@@ -48,6 +56,17 @@ body {
 #particle2,
 #explosion1,
 #explosion2,
-#tentacles {
+#tentacles,
+#cloud,
+#tree1,
+#tree2,
+#tree3,
+#tree4,
+#tree5,
+#tree6,
+#tree7,
+#city,
+#plansBackground,
+#bushes {
     display: none;
 }

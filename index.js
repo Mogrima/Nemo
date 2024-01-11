@@ -1,4 +1,5 @@
 'use strict';
+import { CanvasBackground } from './module/Background/CanvasBackground.js';
 import { Game } from './module/Game.js';
 
 window.addEventListener('load', function () {
@@ -8,6 +9,8 @@ window.addEventListener('load', function () {
     canvas.width = 1500;
     canvas.height = 600;
 
+    const canvasBackground = new CanvasBackground(canvas);
+    canvasBackground.init(); 
     const game = new Game(canvas.width, canvas.height);
     game.addProps();
     let lastTime = 0;
@@ -16,6 +19,7 @@ window.addEventListener('load', function () {
     function animate(currentTime) {
         const deltaTime = currentTime - lastTime;
         ctx.clearRect(0, 0, canvas.width, canvas.height); // Очищаем игровое поле перед следующей анимацией
+        canvasBackground.draw(ctx);
         game.draw(ctx);
         game.update(deltaTime);
         lastTime = currentTime;
