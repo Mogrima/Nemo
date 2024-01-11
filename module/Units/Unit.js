@@ -16,7 +16,7 @@ export class Unit {
 
         this.warning = false;
 
-        this.speedY = 0;
+        this.speedJump = 0;
         this.gravity = 0.5;
         this.jump = true;
 
@@ -27,17 +27,17 @@ export class Unit {
         this.spriteX = this.collisionX;
         this.spriteY = this.collisionY;
         // гравитация
-        this.collisionY += this.speedY;
+        this.collisionY += this.speedJump;
         // тело всегда падает
-        this.speedY += this.gravity;
+        this.speedJump += this.gravity;
 
         // чтобы тело не падало ниже земли
         if (this.collisionY + this.height >= this.game.height - 50) {
             this.collisionY = this.game.height - this.height - 50;
-            this.speedY = 0;
+            this.speedJump = 0;
         }
         // ограничение вертикального ускорения
-        if (this.speedY > 25) this.speedY = 25;
+        if (this.speedJump > 25) this.speedJump = 25;
 
         if (this.game.keys.includes('ArrowLeft')) this.speedX = -this.maxSpeed;
         else if (this.game.keys.includes('ArrowRight')) this.speedX = this.maxSpeed;
@@ -48,7 +48,7 @@ export class Unit {
         }
 
         if (this.game.handlerJump && this.jump) {
-            this.speedY = -11;
+            this.speedJump = -11;
             this.jump = false;
         }
 
