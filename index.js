@@ -11,7 +11,7 @@ window.addEventListener('load', function () {
 
     const canvasBackground = new CanvasBackground(canvas);
     canvasBackground.init(); 
-    const game = new Game(canvas.width, canvas.height);
+    const game = new Game(canvas);
     game.addProps();
     let lastTime = 0;
 

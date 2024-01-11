@@ -12,9 +12,9 @@ import { GorgonExplosion } from './Explosions/GorgonExplosion.js';
 import { FPS } from './FPS.js';
 
 export class Game {
-    constructor(width, height) {
-        this.width = width;
-        this.height = height;
+    constructor(canvas) {
+        this.width = canvas.width;
+        this.height = canvas.height;
         this.fps = new FPS(this);
         this.fpsCount = 0;
         this.player = new Nemo(this);
@@ -71,7 +71,6 @@ export class Game {
     update(deltaTime) {
         this.gameObjects = [this.player, this.player2,  
                             ...this.props, ...this.enemies, ...this.particles];
-        console.log(this.gameObjects)
         if (!this.gameOver) this.gameTime += deltaTime;
         if (this.gameTime > this.timeLimit) this.gameOver = true;
 
@@ -172,6 +171,8 @@ export class Game {
         }
 
     }
+
+    init() {}
 
     addEnemy() {
         const randomize = Math.random();
