@@ -19,10 +19,10 @@ export class Forest {
     }
     init() {
         for (let i = 0; i < this.maxTrees; i++) {
-            this.trees.push(new Tree(canvas));
+            this.trees.push(new Tree(this.canvasWidth, this.canvasHeight));
         }
         for (let i = 0; i < this.maxBushes; i++) {
-            this.bushes.push(new Bush(canvas));
+            this.bushes.push(new Bush(this.canvasWidth, this.canvasHeight));
         }
         console.log(this.bushes)
     }
