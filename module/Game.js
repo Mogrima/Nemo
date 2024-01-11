@@ -22,6 +22,7 @@ export class Game {
 
         this.keys = [];
         this.input = new InputHandler(this);
+        this.topMargin = 232;
 
         this.ammo = 20;
 
