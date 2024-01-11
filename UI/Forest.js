@@ -1,4 +1,5 @@
 import { Tree } from './Tree.js';
+import { Bush } from './Bush.js';
 
 export class Forest {
     constructor(x, y, canvas) {
@@ -11,6 +12,8 @@ export class Forest {
         this.color = "#228b22";
         this.maxTrees = 30;
         this.trees = [];
+        this.maxBushes = 30;
+        this.bushes = [];
         // this.tree = new Tree(canvas);
 
     }
@@ -18,6 +21,10 @@ export class Forest {
         for (let i = 0; i < this.maxTrees; i++) {
             this.trees.push(new Tree(canvas));
         }
+        for (let i = 0; i < this.maxBushes; i++) {
+            this.bushes.push(new Bush(canvas));
+        }
+        console.log(this.bushes)
     }
 
     draw(context) {
@@ -31,6 +38,12 @@ export class Forest {
         });
         this.trees.forEach(tree => {
             tree.draw(context);
+        });
+        this.bushes.sort((a, b) =>{
+            return (a.y + a.height) - (b.y + b.height);
+        });
+        this.bushes.forEach(bush => {
+            bush.draw(context);
         });
     }
 }
