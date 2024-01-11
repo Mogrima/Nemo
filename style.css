@@ -66,6 +66,7 @@ body {
 #tree6,
 #tree7,
 #city,
-#plansBackground {
+#plansBackground,
+#bushes {
     display: none;
 }
