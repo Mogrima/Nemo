@@ -2,13 +2,10 @@ import { Cloud } from './Cloud.js';
 import { Star } from './Star.js';
 
 export class Sky {
-    constructor(x, y, canvas) {
+    constructor(canvas) {
         this.canvas = canvas;
         this.canvasWidth = this.canvas.width;
         this.canvasHeight = this.canvas.height * 0.5;
-        this.x = x;
-        this.y = y;
-        this.marginTop = 100;
         this.skyColor = "#00416a";
 
         // moon

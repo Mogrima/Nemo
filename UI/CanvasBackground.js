@@ -10,7 +10,7 @@ export class CanvasBackground {
         // sky
         // this.skyHeight = this.canvasHeight * 0.5;
         // this.skyColor = "#00416a";
-        this.sky = new Sky(0, 0, canvas);
+        this.sky = new Sky(canvas);
 
         // forest
         // this.forestHeight = this.canvasHeight * 0.3;
