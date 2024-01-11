@@ -1,12 +1,11 @@
 export class Star {
-    constructor(canvas) {
-        this.canvas = canvas;
-        this.canvasWidth = this.canvas.width;
-        this.canvasHeight = this.canvas.height * 0.5;
+    constructor(fieldWidth, fieldHeight) {
+        this.fieldWidth = fieldWidth;
+        this.fieldHeight = fieldHeight * 0.5;
         this.size = 1.5;
         this.color = '#ffff66';
-        this.x = Math.random() * this.canvasWidth;
-        this.y = (Math.random() * this.canvasHeight * 0.5);
+        this.x = Math.random() * this.fieldWidth;
+        this.y = (Math.random() * this.fieldHeight * 0.5);
     }
 
     update() {

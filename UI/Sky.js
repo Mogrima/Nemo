@@ -27,10 +27,10 @@ export class Sky {
     }
     init() {
         for (let i = 0; i < this.MaxClouds; i++) {
-            this.clouds.push(new Cloud(this.canvas));
+            this.clouds.push(new Cloud(this.canvasWidth, this.canvasHeight));
         }
         for (let i = 0; i < this.MaxStars; i++) {
-            this.stars.push(new Star(this.canvas));
+            this.stars.push(new Star(this.canvasWidth, this.canvasHeight));
         }
     }
 
