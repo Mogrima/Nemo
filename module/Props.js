@@ -3,7 +3,8 @@ export class Props {
         this.game = game;
         this.image = document.getElementById('tentacles');
         this.collisionX = Math.random() * this.game.width;
-        this.collisionY = this.game.height * 0.76;
+        this.collisionY = (Math.random() * (this.game.topMargin - this.game.height * 0.82) +
+                            this.game.height * 0.82);
         this.spriteWidth = 25;
         this.spriteHeight = 87;
         this.width = this.spriteWidth;
