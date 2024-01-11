@@ -16,7 +16,7 @@ export class CanvasBackground {
         // this.forestHeight = this.canvasHeight * 0.3;
         // this.forestColor = "#228b22";
         this.forestYstart = this.canvasHeight * 0.2 + 100;
-        this.forest = new Forest(0, this.forestYstart, canvas);
+        this.forest = new Forest(canvas);
         
 
         // game field
