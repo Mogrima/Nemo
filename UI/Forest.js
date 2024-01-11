@@ -5,7 +5,7 @@ export class Forest {
     constructor(canvas) {
         this.canvas = canvas;
         this.canvasWidth = this.canvas.width;
-        this.canvasHeight = this.canvas.height * 0.3;
+        this.canvasHeight = this.canvas.height;
         this.maxTrees = 30;
         this.trees = [];
         this.maxBushes = 30;

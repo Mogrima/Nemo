@@ -210,7 +210,7 @@ export class Game {
     }
 
     draw(context) {
-        this.background.draw(context);
+        // this.background.draw(context);
         this.ui.draw(context);
         this.player.draw(context);
         this.player2.draw(context);

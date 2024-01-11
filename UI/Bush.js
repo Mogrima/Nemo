@@ -1,7 +1,7 @@
 export class Bush {
     constructor(fieldWidth, fieldHeight) {
         this.fieldWidth = fieldWidth;
-        this.fieldHeight = fieldHeight * 0.5;
+        this.fieldHeight = fieldHeight;
         this.image = document.getElementById('bushes');
         this.spriteWidth = 80;
         this.spriteHeight = 70;
