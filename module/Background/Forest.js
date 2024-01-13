@@ -19,16 +19,15 @@ export class Forest {
         for (let i = 0; i < this.maxBushes; i++) {
             this.bushes.push(new Bush(this.canvasWidth, this.canvasHeight));
         }
+        this.objects = [...this.trees, ...this.bushes];
     }
 
     draw(context) {
-        this.objects = [...this.trees, ...this.bushes];
-
-        this.objects.sort((a, b) =>{
-            return (a.y + a.height) - (b.y + b.height);
-        });
-        this.objects.forEach(object => {
-            object.draw(context);
-        });
+        // this.objects.sort((a, b) =>{
+        //     return (a.y + a.height) - (b.y + b.height);
+        // });
+        // this.objects.forEach(object => {
+        //     object.draw(context);
+        // });
     }
 }

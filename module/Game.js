@@ -20,6 +20,7 @@ export class Game {
         this.fps = new FPS(this);
         this.fpsCount = 0;
         this.canvasBackground = new CanvasBackground(this.canvas);
+        this.canvasObjects = [];
         this.player = new Nemo(this);
         this.player2 = new Nebessime(this);
 
@@ -72,8 +73,11 @@ export class Game {
     }
 
     update(deltaTime) {
+        this.canvasObjects = [...this.canvasBackground.forest.objects];
         this.gameObjects = [this.player, this.player2,  
-                            ...this.props, ...this.enemies, ...this.particles];
+                            ...this.props, ...this.canvasObjects,
+                            ...this.enemies, ...this.particles];
+       
         if (!this.gameOver) this.gameTime += deltaTime;
         if (this.gameTime > this.timeLimit) this.gameOver = true;
 
@@ -223,14 +227,16 @@ export class Game {
 
     draw(context) {
         // this.background.draw(context);
+        
         this.canvasBackground.draw(context);
-        this.ui.draw(context);
         this.gameObjects.sort((a, b) =>{
-            return a.collisionY - b.collisionY;
+            return (a.collisionY + a.height) - (b.collisionY + b.height);
+            
         });
         this.gameObjects.forEach(object => {
             object.draw(context);
         });
+        this.ui.draw(context);
         this.explosions.forEach(explosion => explosion.draw(context));
     }
 }
