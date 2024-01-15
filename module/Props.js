@@ -59,6 +59,8 @@ export class Props {
 
     escape() {
         console.log('The escape!');
+        this.game.win = true;
+        this.game.gameOver = true;
     }
 
     reboot() {
