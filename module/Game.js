@@ -99,7 +99,7 @@ export class Game {
         this.props.forEach(prop => {
             prop.update(deltaTime);
             if (this.checkCollision(this.player, prop)
-                && prop.feature !== null) {
+                && (prop.feature !== null) && (!this.gameOver)) {
                 prop.feature();
                 prop.markedForDeletion = true;
             }
