@@ -17,6 +17,9 @@ export class Props {
         this.fps = 30;
         this.timer = 0;
         this.interval = 1000/this.fps;
+
+        this.feature = null;
+        this.markedForDeletion = false;
     }
 
     update(deltaTime) {
@@ -35,5 +38,30 @@ export class Props {
             this.frameX * this.spriteWidth, this.frameY * this.spriteHeight,
             this.spriteWidth, this.spriteHeight,
             this.spriteX, this.spriteY, this.width, this.height);
+    }
+
+    strangeMessage() {
+        console.log('Your soul is main');
+    }
+
+    lossOfHealth() {
+        this.game.health = Math.trunc(this.game.health / 2);
+        console.log('Lose health');
+        if (this.game.health <= 0) {
+            this.game.gameOver = true;
+        }
+    }
+
+    upHealth() {
+        this.game.health = this.game.maxHealth;
+        console.log('Up health');
+    }
+
+    escape() {
+        console.log('The escape!');
+    }
+
+    reboot() {
+        this.game.addProps();
     }
 }
