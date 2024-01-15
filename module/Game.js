@@ -44,8 +44,7 @@ export class Game {
         this.winningScore = 30;
         this.win = false;
 
-        this.gameTime = 0;
-        this.timeLimit = 1000 * 1000;
+        this.gameTime = 90000;
 
         this.direction = [];
 
@@ -75,13 +74,12 @@ export class Game {
     }
 
     update(deltaTime) {
+        this.trackGameOver(deltaTime);
+
         this.canvasObjects = [...this.canvasBackground.forest.objects];
         this.gameObjects = [this.player, this.player2,  
                             ...this.props, ...this.canvasObjects,
                             ...this.enemies, ...this.particles];
-       
-        if (!this.gameOver) this.gameTime += deltaTime;
-        if (this.gameTime > this.timeLimit) this.gameOver = true;
 
         if (this.fpsCount === 0 && deltaTime !== 0) {
             this.fpsCount = this.fps.render(deltaTime);
@@ -106,8 +104,6 @@ export class Game {
         });
         this.props = this.props.filter(prop => !prop.markedForDeletion);
         this.input.update();
-
-        if (this.health < 10) this.player.warning = true;
 
         if (this.ammoTimer > this.ammoInterval) {
             if (this.ammo < this.maxAmmo) this.ammo++;
@@ -143,9 +139,6 @@ export class Game {
                         enemy.collisionY + enemy.height * 0.5));
                 }
                 this.health--;
-                if (this.health <= 0) {
-                    this.gameOver = true;
-                }
             }
             // для всех активных пуль (projectiles) также проверим условие столкновения
             // пули с врагом.
@@ -250,6 +243,20 @@ export class Game {
     isWin() {
         return ((this.win || (this.score >= this.winningScore))
                 && this.health > 0)
+    }
+    
+    trackGameOver(deltaTime) {
+        if (!this.gameOver) this.gameTime -= deltaTime;
+        if (this.gameTime < 0) {
+            this.gameOver = true;
+            this.gameTime = 0;
+        }
+
+        if (this.health <= 10 ) this.player.warning = true;
+        else this.player.warning = false;
+        if (this.health <= 0) {
+            this.gameOver = true;
+        }
     }
 
     draw(context) {
