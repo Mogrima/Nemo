@@ -49,6 +49,7 @@ export class Game {
         this.direction = [];
 
         this.health = 20;
+        this.maxHealth = 20;
 
         this.speed = 1;
         this.background = new Background(this);
@@ -94,7 +95,15 @@ export class Game {
         this.player.update();
         this.player2.update();
         this.background.update();
-        this.props.forEach(prop => prop.update(deltaTime));
+        this.props.forEach(prop => {
+            prop.update(deltaTime);
+            if (this.checkCollision(this.player, prop)
+                && prop.feature !== null) {
+                prop.feature();
+                prop.markedForDeletion = true;
+            }
+        });
+        this.props = this.props.filter(prop => !prop.markedForDeletion);
         this.input.update();
 
         if (this.ammoTimer > this.ammoInterval) {
@@ -210,6 +219,21 @@ export class Game {
             }
             attempts++;
         }
+        this.props.forEach((item, index) => {
+            if (index < 3) {
+                item.feature = item.strangeMessage;
+            } else if (index < 5) {
+                item.feature = item.lossOfHealth;
+            } else if (index < 8) {
+                item.feature = item.upHealth;
+            }
+            else if (index < 9) {
+                item.feature = item.reboot;
+            } 
+            else if (index === 9)  {
+                item.feature = item.escape;
+            }
+        });
 
     }
 
