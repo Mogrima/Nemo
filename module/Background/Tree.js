@@ -14,7 +14,6 @@ export class Tree {
         this.collisionY = this.y;
         this.spriteX = this.x;
         this.spriteY = this.y;
-        console.log(this.fieldHeight);
     }
 
     update() {
