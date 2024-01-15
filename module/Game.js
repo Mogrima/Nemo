@@ -42,6 +42,7 @@ export class Game {
         this.gameOver = false;
         this.score = 0;
         this.winningScore = 30;
+        this.win = false;
 
         this.gameTime = 0;
         this.timeLimit = 1000 * 1000;
@@ -247,7 +248,8 @@ export class Game {
     }
 
     isWin() {
-        return this.score >= this.winningScore;
+        return ((this.win || (this.score >= this.winningScore))
+                && this.health > 0)
     }
 
     draw(context) {
