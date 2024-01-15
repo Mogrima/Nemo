@@ -106,6 +106,8 @@ export class Game {
         this.props = this.props.filter(prop => !prop.markedForDeletion);
         this.input.update();
 
+        if (this.health < 10) this.player.warning = true;
+
         if (this.ammoTimer > this.ammoInterval) {
             if (this.ammo < this.maxAmmo) this.ammo++;
             this.ammoTimer = 0;
@@ -143,7 +145,6 @@ export class Game {
                 if (this.health <= 0) {
                     this.gameOver = true;
                 }
-                if (this.health < 10) this.player.warning = true;
             }
             // для всех активных пуль (projectiles) также проверим условие столкновения
             // пули с врагом.
