@@ -73,8 +73,8 @@ export class Game {
 
     }
 
-    update(deltaTime) {
-        this.trackGameOver(deltaTime);
+    update(deltaTime, context) {
+        this.trackGameOver(deltaTime); 
 
         this.canvasObjects = [...this.canvasBackground.forest.objects];
         this.gameObjects = [this.player, this.player2,  

@@ -19,7 +19,7 @@ window.addEventListener('load', function () {
         const deltaTime = currentTime - lastTime;
         ctx.clearRect(0, 0, canvas.width, canvas.height); // Очищаем игровое поле перед следующей анимацией
         game.draw(ctx);
-        game.update(deltaTime);
+        game.update(deltaTime, ctx);
         lastTime = currentTime;
         requestAnimationFrame(animate);
         // console.log(deltaTime);
