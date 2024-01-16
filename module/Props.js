@@ -41,6 +41,13 @@ export class Props {
     }
 
     draw(context) {
+        if (this.game.debug) {
+            context.save();
+            context.fillStyle = 'yellow';
+            context.fillText(this.featureName, this.spriteX, this.spriteY);
+            context.strokeRect(this.collisionX, this.collisionY, this.width, this.height);
+            context.restore();
+        }
         context.drawImage(this.image,
             this.frameX * this.spriteWidth, this.frameY * this.spriteHeight,
             this.spriteWidth, this.spriteHeight,
