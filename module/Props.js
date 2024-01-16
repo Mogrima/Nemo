@@ -55,8 +55,12 @@ export class Props {
             this.spriteX, this.spriteY, this.width, this.height);
     }
 
-    strangeMessage() {
-        console.log('Your soul is main');
+    strangeMessage(context) {
+        context.fillStyle = 'black';
+        context.fillRect(this.game.width * 0.5, this.game.height * 0.5, 200, 200);
+        context.fillStyle = 'white';
+        context.fillText(this.text, this.game.width * 0.5, this.game.height * 0.5);
+       
     }
 
     lossOfHealth() {
