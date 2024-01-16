@@ -63,6 +63,7 @@ export class Game {
 
         this.numberOfProps = 10;
         this.props = [];
+        this.propIndex = null;
 
         this.debug = true;
 
@@ -75,7 +76,6 @@ export class Game {
 
     update(deltaTime, context) {
         this.trackGameOver(deltaTime); 
-
         this.canvasObjects = [...this.canvasBackground.forest.objects];
         this.gameObjects = [this.player, this.player2,  
                             ...this.props, ...this.canvasObjects,
@@ -94,14 +94,36 @@ export class Game {
         this.player.update();
         this.player2.update();
         this.background.update();
-        this.props.forEach(prop => {
+        
+        this.props.forEach((prop, index) => {
             prop.update(deltaTime);
+
+           if (this.propIndex === null) {
             if (this.checkCollision(this.player, prop)
-                && (prop.feature !== null) && (!this.gameOver)) {
-                prop.feature();
-                prop.markedForDeletion = true;
+            && (prop.feature !== null) && (!this.gameOver)) {
+            this.propIndex = index;
+        }
+           }
+           if (this.propIndex !== null) {
+            if (this.props[this.propIndex].featureName === 'strangeMessage') {
+                if (!this.keys.includes('x')) {
+                    this.props[this.propIndex].feature(context);
+                } else if (this.keys.includes('x')) {
+                    this.props[this.propIndex].feature(context);
+                    this.props[this.propIndex].markedForDeletion = true;
+                    this.propIndex = null;
+                    
+                } 
+            } 
+            else {
+                this.props[this.propIndex].feature(context);
+                this.props[this.propIndex].markedForDeletion = true;
+                this.propIndex = null;
             }
+    }
+
         });
+
         this.props = this.props.filter(prop => !prop.markedForDeletion);
         this.input.update();
 
@@ -253,7 +275,7 @@ export class Game {
         return ((this.win || (this.score >= this.winningScore))
                 && this.health > 0)
     }
-    
+
     trackGameOver(deltaTime) {
         if (!this.gameOver) this.gameTime -= deltaTime;
         if (this.gameTime < 0) {
