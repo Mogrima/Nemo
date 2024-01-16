@@ -20,6 +20,13 @@ export class Props {
 
         this.feature = null;
         this.markedForDeletion = false;
+
+        this.uncannyText = ['You have been chosen. They will come soon.',
+                'The end is near. Make preparations.',
+                'The drop off has been made. You`ve been warned.',
+                'The flashing light was just a test. You`ll have plenty of warning next time.',
+                'They`re coming soon. Maybe you should think twice about opening the fear.'];
+        
     }
 
     update(deltaTime) {
