@@ -19,6 +19,7 @@ export class Props {
         this.interval = 1000/this.fps;
 
         this.feature = null;
+        this.featureName = null;
         this.markedForDeletion = false;
 
         this.uncannyText = ['You have been chosen. They will come soon.',
