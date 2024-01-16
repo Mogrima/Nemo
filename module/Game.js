@@ -220,16 +220,22 @@ export class Game {
         this.props.forEach((item, index) => {
             if (index < 3) {
                 item.feature = item.strangeMessage;
-            } else if (index < 5) {
+                item.featureName = 'strangeMessage';
+            } 
+            else if (index < 5) {
                 item.feature = item.lossOfHealth;
+                item.featureName = 'Lose health';
             } else if (index < 8) {
                 item.feature = item.upHealth;
+                item.featureName = 'Up health';
             }
             else if (index < 9) {
                 item.feature = item.reboot;
+                item.featureName = 'Reboot!';
             } 
             else if (index === 9)  {
                 item.feature = item.escape;
+                item.featureName = 'The escape!';
             }
         });
 
