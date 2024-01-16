@@ -27,9 +27,9 @@ export class Props {
                 'The drop off has been made. You`ve been warned.',
                 'The flashing light was just a test. You`ll have plenty of warning next time.',
                 'They`re coming soon. Maybe you should think twice about opening the fear.'];
-        
+        this.text = this.uncannyText[Math.floor(Math.random() * 5)];
     }
-
+    
     update(deltaTime) {
         if (this.frameX > this.maxFrame) this.frameX = 13;
         if (this.timer > this.interval) {
