@@ -12,7 +12,7 @@ export class Props {
         this.frameX = 0;
         this.frameY = 0;
         this.maxFrame = 20;
-        this.spriteX = this.collisionX - this.width * 0.5;
+        this.spriteX = this.collisionX;
         this.spriteY = this.collisionY;
         this.fps = 30;
         this.timer = 0;
