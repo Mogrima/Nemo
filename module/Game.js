@@ -210,7 +210,10 @@ export class Game {
 
             if (!overlap && testProp.spriteX > 0 &&
                     testProp.spriteX < this.width - testProp.width) {
-                this.props.push(testProp);
+                if (!this.checkCollision(this.player, testProp)) {
+                    this.props.push(testProp);
+                }
+                
             }
             attempts++;
         }
