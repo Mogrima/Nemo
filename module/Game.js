@@ -139,7 +139,7 @@ export class Game {
             }
             // для всех активных пуль (projectiles) также проверим условие столкновения
             // пули с врагом.
-            this.player.projectiles.forEach(projectile => {
+            this.player.ammunition.forEach(projectile => {
                 if (this.checkCollision(projectile, enemy)) {
                     enemy.lives--; // уменьшаем жизни врага на единицу
                     // если столкновение произошло, помечаем снаряд как удаленный

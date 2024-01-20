@@ -1,4 +1,4 @@
-import { Projectile } from '../Projectles/Projectile.js';
+import { Ammunition } from '../Projectles/Ammunition.js';
 
 export class Unit {
     constructor(game) {
@@ -13,7 +13,7 @@ export class Unit {
         this.shiftX = 0;
         this.shiftY = 0;
 
-        this.projectiles = [];
+        this.ammunition = [];
 
         this.warning = false;
 
@@ -83,10 +83,10 @@ export class Unit {
             this.collisionY = this.game.height - this.height;
         }
 
-        this.projectiles.forEach(pr => {
-            pr.update();
+        this.ammunition.forEach(ammo => {
+            ammo.update();
         });
-        this.projectiles = this.projectiles.filter(pr => !pr.markedForDeletion);
+        this.ammunition = this.ammunition.filter(ammo => !ammo.markedForDeletion);
 
         // sprite animation
         if (this.frameX < this.maxFrame) {
@@ -100,8 +100,8 @@ export class Unit {
         // hitbox player
         context.strokeStyle = 'yellow';
         if (this.game.debug) context.strokeRect(this.collisionX, this.collisionY, this.width, this.height);
-        this.projectiles.forEach(pr => {
-            pr.draw(context);
+        this.ammunition.forEach(ammo => {
+            ammo.draw(context);
         });
         context.drawImage(this.image,
             this.frameX * this.spriteWidth + this.shiftX, this.frameY * this.spriteHeight + this.shiftY,
@@ -112,7 +112,7 @@ export class Unit {
 
     shootTop(x, y, direct) {
         if (this.game.ammo > 0) {
-            this.projectiles.push(new Projectile(this.game, x, y, direct));
+            this.ammunition.push(new Ammunition(this.game, x, y, direct));
             this.game.ammo--;
         }
     }

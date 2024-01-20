@@ -14,7 +14,6 @@ export class Projectile {
         this.direct = direct;
         this.speed = 8;
         this.markedForDeletion = false;
-        this.image = document.getElementById('projectile3');
         this.frameX = 0;
         this.frameY = 0;
         this.maxFrame = 14;
