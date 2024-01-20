@@ -58,6 +58,27 @@ export class Enemy {
             }
             this.game.health--;
         }
+        // для всех активных пуль (ammo) также проверим условие столкновения
+        // пули с врагом.
+        this.game.player.ammunition.forEach(ammo => {
+            if (this.game.checkCollision(ammo, this)) {
+                this.lives--; // уменьшаем жизни врага на единицу
+                // если столкновение произошло, помечаем снаряд как удаленный
+                this.game.particles.push(new Particle(this.game, this.collisionX + this.width * 0.5,
+                    this.collisionY + this.height * 0.5));
+                    ammo.markedForDeletion = true;
+                if (this.lives <= 0) {
+                    this.markedForDeletion = true; // удаляем врага
+                    for (let i = 0; i < this.score; i++) {
+                        this.game.particles.push(new Particle(this.game, this.collisionX + this.width * 0.5,
+                            this.collisionY + this.height * 0.5));
+                    }
+                    // увеличиваем количество очков главного игрока
+                    if (!this.game.gameOver) this.game.score += this.score;
+                    if (this.game.isWin()) this.game.gameOver = true; // проверяем условие победы
+                }
+            }
+        });
 
     }
 

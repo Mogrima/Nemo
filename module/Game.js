@@ -116,27 +116,7 @@ export class Game {
 
         this.enemies.forEach(enemy => {
             enemy.update();
-            // для всех активных пуль (ammo) также проверим условие столкновения
-            // пули с врагом.
-            this.player.ammunition.forEach(ammo => {
-                if (this.checkCollision(ammo, enemy)) {
-                    enemy.lives--; // уменьшаем жизни врага на единицу
-                    // если столкновение произошло, помечаем снаряд как удаленный
-                    this.particles.push(new Particle(this, enemy.collisionX + enemy.width * 0.5,
-                        enemy.collisionY + enemy.height * 0.5));
-                        ammo.markedForDeletion = true;
-                    if (enemy.lives <= 0) {
-                        enemy.markedForDeletion = true; // удаляем врага
-                        for (let i = 0; i < enemy.score; i++) {
-                            this.particles.push(new Particle(this, enemy.collisionX + enemy.width * 0.5,
-                                enemy.collisionY + enemy.height * 0.5));
-                        }
-                        // увеличиваем количество очков главного игрока
-                        if (!this.gameOver) this.score += enemy.score;
-                        if (this.isWin()) this.gameOver = true; // проверяем условие победы
-                    }
-                }
-            });
+
         });
 
         this.enemies = this.enemies.filter(enemy => !enemy.markedForDeletion);
