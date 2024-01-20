@@ -2,7 +2,8 @@ export class Enemy {
     constructor(game) {
         this.game = game;
         this.collisionX = 0;
-        this.collisionY;
+        this.collisionY = (Math.random() * (this.game.topMargin - this.game.height * 0.82) +
+                            this.game.height * 0.82);
         this.spriteX;
         this.spriteY;
         this.speedX = Math.random() * -1.5 - 2.5;

@@ -34,7 +34,7 @@ export class CanvasBackground {
 
         context.fillRect(0, this.gameFieldYstart, this.canvasWidth, this.gameFieldHeight);
         context.drawImage(this.imagePlansBackground, 0, this.gameFieldYstart - 180);
-        this.forest.draw(context);
+        // this.forest.draw(context);
 
         context.restore();
     }

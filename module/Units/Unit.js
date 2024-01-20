@@ -1,22 +1,26 @@
-import { Projectile } from '../Projectile.js';
+import { Ammunition } from '../Projectles/Ammunition.js';
+import { Splash } from '../Projectles/Splash.js';
 
 export class Unit {
     constructor(game) {
         this.game = game;
         this.collisionX = 0;
-        this.collisionY;
+        this.collisionY = 0;
         this.spriteX;
         this.spriteY;
         this.speedX = 0;
+        this.speedY = 0;
         this.maxSpeed = 5;
         this.shiftX = 0;
         this.shiftY = 0;
 
-        this.projectiles = [];
+        this.ammunition = [];
+        this.splashes = [];
+        this.projectilesObject = [];
 
         this.warning = false;
 
-        this.speedY = 0;
+        this.speedJump = 0;
         this.gravity = 0.5;
         this.jump = true;
 
@@ -24,33 +28,51 @@ export class Unit {
     }
     update() {
         this.collisionX += this.speedX;
+        this.collisionY += this.speedY;
         this.spriteX = this.collisionX;
         this.spriteY = this.collisionY;
         // гравитация
-        this.collisionY += this.speedY;
+        // this.collisionY += this.speedJump;
         // тело всегда падает
-        this.speedY += this.gravity;
+        // this.speedJump += this.gravity;
 
         // чтобы тело не падало ниже земли
-        if (this.collisionY + this.height >= this.game.height - 50) {
-            this.collisionY = this.game.height - this.height - 50;
+        // if (this.collisionY + this.height >= this.game.height - 50) {
+        //     this.collisionY = this.game.height - this.height - 50;
+        //     this.speedJump = 0;
+        // }
+        // // ограничение вертикального ускорения
+        // if (this.speedJump > 25) this.speedJump = 25;
+
+        if (this.game.keys.includes('ArrowLeft')) {
+            this.speedX = -this.maxSpeed;
             this.speedY = 0;
         }
-        // ограничение вертикального ускорения
-        if (this.speedY > 25) this.speedY = 25;
-
-        if (this.game.keys.includes('ArrowLeft')) this.speedX = -this.maxSpeed;
-        else if (this.game.keys.includes('ArrowRight')) this.speedX = this.maxSpeed;
-        else this.speedX = 0;
-
-        if (this.collisionY === this.game.height - this.height - 50) {
-            this.jump = true;
+        else if (this.game.keys.includes('ArrowRight')) {
+            this.speedX = this.maxSpeed;
+            this.speedY = 0;
+        }
+        else if (this.game.keys.includes('ArrowUp')) {
+            this.speedY = -this.maxSpeed;
+            this.speedX = 0;
+        }
+        else if (this.game.keys.includes('ArrowDown')) {
+            this.speedY = this.maxSpeed;
+            this.speedX = 0;
+        }
+        else {
+            this.speedX = 0;
+            this.speedY = 0;
         }
 
-        if (this.game.handlerJump && this.jump) {
-            this.speedY = -11;
-            this.jump = false;
-        }
+        // if (this.collisionY === this.game.height - this.height - 50) {
+        //     this.jump = true;
+        // }
+
+        // if (this.game.handlerJump && this.jump) {
+        //     this.speedJump = -11;
+        //     this.jump = false;
+        // }
 
         // чтобы не выходил за границы холста
         if (this.collisionX > this.game.width - this.maxXRight) {
@@ -58,11 +80,18 @@ export class Unit {
         } else if (this.collisionX < this.maxXLeft) {
             this.collisionX = this.maxXLeft;
         }
+        if (this.collisionY < this.maxTop) {
+            this.collisionY = this.maxTop;
+        } else if (this.collisionY > this.game.height - this.height) {
+            this.collisionY = this.game.height - this.height;
+        }
 
-        this.projectiles.forEach(pr => {
-            pr.update();
+        this.projectilesObject = [...this.ammunition, ...this.splashes];
+        this.projectilesObject.forEach(projectile => {
+            projectile.update();
         });
-        this.projectiles = this.projectiles.filter(pr => !pr.markedForDeletion);
+        this.ammunition = this.ammunition.filter(ammo => !ammo.markedForDeletion);
+        this.splashes = this.splashes.filter(splash => !splash.markedForDeletion);
 
         // sprite animation
         if (this.frameX < this.maxFrame) {
@@ -76,8 +105,8 @@ export class Unit {
         // hitbox player
         context.strokeStyle = 'yellow';
         if (this.game.debug) context.strokeRect(this.collisionX, this.collisionY, this.width, this.height);
-        this.projectiles.forEach(pr => {
-            pr.draw(context);
+        this.projectilesObject.forEach(projectile => {
+            projectile.draw(context);
         });
         context.drawImage(this.image,
             this.frameX * this.spriteWidth + this.shiftX, this.frameY * this.spriteHeight + this.shiftY,
@@ -87,9 +116,16 @@ export class Unit {
     }
 
     shootTop(x, y, direct) {
-        if (this.game.ammo > 0) {
-            this.projectiles.push(new Projectile(this.game, x, y, direct));
-            this.game.ammo--;
+        if (this.game.projectile > 0) {
+            this.ammunition.push(new Ammunition(this.game, x, y, direct));
+            this.game.projectile--;
+        }
+    }
+
+    shootSplash(x, y, direct) {
+        if (this.game.projectile > 0) {
+            this.splashes.push(new Splash(this.game, x, y, direct));
+            this.game.projectile--;
         }
     }
 }

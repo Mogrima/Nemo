@@ -9,6 +9,8 @@ export class Bush {
         this.height = this.spriteHeight;
         this.x = Math.random() * this.fieldWidth;
         this.y = (Math.random() * (350 - 250) + 250) - this.spriteHeight;
+        this.collisionX = this.x;
+        this.collisionY = this.y;
         this.frameX = Math.floor(Math.random() * 4);
         this.frameY = Math.floor(Math.random() * 3);
     }

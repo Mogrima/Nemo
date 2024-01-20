@@ -1,3 +1,4 @@
+import { CanvasBackground } from './Background/CanvasBackground.js';
 import { InputHandler } from './InputHandler.js';
 import { Background } from '../UI/Background.js';
 import { UI } from '../UI/UI.js';
@@ -12,22 +13,26 @@ import { GorgonExplosion } from './Explosions/GorgonExplosion.js';
 import { FPS } from './FPS.js';
 
 export class Game {
-    constructor(width, height) {
-        this.width = width;
-        this.height = height;
+    constructor(canvas) {
+        this.canvas = canvas
+        this.width = canvas.width;
+        this.height = canvas.height;
         this.fps = new FPS(this);
         this.fpsCount = 0;
+        this.canvasBackground = new CanvasBackground(this.canvas);
+        this.canvasObjects = [];
         this.player = new Nemo(this);
         this.player2 = new Nebessime(this);
 
         this.keys = [];
         this.input = new InputHandler(this);
+        this.topMargin = 232;
 
-        this.ammo = 20;
+        this.projectile = 20;
 
-        this.ammoInterval = 500;
-        this.maxAmmo = 20;
-        this.ammoTimer = 0;
+        this.projectileInterval = 500;
+        this.maxProjectile = 20;
+        this.projectileTimer = 0;
 
         this.ui = new UI(this);
 
@@ -37,13 +42,14 @@ export class Game {
         this.gameOver = false;
         this.score = 0;
         this.winningScore = 30;
+        this.win = false;
 
-        this.gameTime = 0;
-        this.timeLimit = 1000 * 1000;
+        this.gameTime = 90000;
 
         this.direction = [];
 
         this.health = 20;
+        this.maxHealth = 20;
 
         this.speed = 1;
         this.background = new Background(this);
@@ -63,11 +69,16 @@ export class Game {
         this.intervalFpsDisplay = 3000;
         this.timerFpsDisplay = 0;
 
+        this.gameObjects = [];
+
     }
 
-    update(deltaTime) {
-        if (!this.gameOver) this.gameTime += deltaTime;
-        if (this.gameTime > this.timeLimit) this.gameOver = true;
+    update(deltaTime, context) {
+        this.trackGameOver(deltaTime); 
+        this.canvasObjects = [...this.canvasBackground.forest.objects];
+        this.gameObjects = [this.player, this.player2,  
+                            ...this.props, ...this.canvasObjects,
+                            ...this.enemies, ...this.particles];
 
         if (this.fpsCount === 0 && deltaTime !== 0) {
             this.fpsCount = this.fps.render(deltaTime);
@@ -82,14 +93,20 @@ export class Game {
         this.player.update();
         this.player2.update();
         this.background.update();
-        this.props.forEach(prop => prop.update(deltaTime));
+        
+        this.props.forEach((prop) => {
+            prop.update(deltaTime, context);
+
+        });
+
+        this.props = this.props.filter(prop => !prop.markedForDeletion);
         this.input.update();
 
-        if (this.ammoTimer > this.ammoInterval) {
-            if (this.ammo < this.maxAmmo) this.ammo++;
-            this.ammoTimer = 0;
+        if (this.projectileTimer > this.projectileInterval) {
+            if (this.projectile < this.maxProjectile) this.projectile++;
+            this.projectileTimer = 0;
         } else {
-            this.ammoTimer += deltaTime;
+            this.projectileTimer += deltaTime;
         }
 
         this.particles.forEach(particle => particle.update());
@@ -119,20 +136,16 @@ export class Game {
                         enemy.collisionY + enemy.height * 0.5));
                 }
                 this.health--;
-                if (this.health <= 0) {
-                    this.gameOver = true;
-                }
-                if (this.health < 10) this.player.warning = true;
             }
-            // для всех активных пуль (projectiles) также проверим условие столкновения
+            // для всех активных пуль (ammo) также проверим условие столкновения
             // пули с врагом.
-            this.player.projectiles.forEach(projectile => {
-                if (this.checkCollision(projectile, enemy)) {
+            this.player.ammunition.forEach(ammo => {
+                if (this.checkCollision(ammo, enemy)) {
                     enemy.lives--; // уменьшаем жизни врага на единицу
                     // если столкновение произошло, помечаем снаряд как удаленный
                     this.particles.push(new Particle(this, enemy.collisionX + enemy.width * 0.5,
                         enemy.collisionY + enemy.height * 0.5));
-                    projectile.markedForDeletion = true;
+                        ammo.markedForDeletion = true;
                     if (enemy.lives <= 0) {
                         enemy.markedForDeletion = true; // удаляем врага
                         if (enemy.type === 'shadow') {
@@ -167,6 +180,10 @@ export class Game {
 
     }
 
+    init() {
+        this.canvasBackground.init(); 
+    }
+
     addEnemy() {
         const randomize = Math.random();
         if (randomize < 0.5) this.enemies.push(new Monster1(this));
@@ -190,10 +207,34 @@ export class Game {
 
             if (!overlap && testProp.spriteX > 0 &&
                     testProp.spriteX < this.width - testProp.width) {
-                this.props.push(testProp);
+                if (!this.checkCollision(this.player, testProp)) {
+                    this.props.push(testProp);
+                }
+                
             }
             attempts++;
         }
+        this.props.forEach((item, index) => {
+            if (index < 3) {
+                item.feature = item.strangeMessage;
+                item.featureName = 'strangeMessage';
+            } 
+            else if (index < 5) {
+                item.feature = item.lossOfHealth;
+                item.featureName = 'Lose health';
+            } else if (index < 8) {
+                item.feature = item.upHealth;
+                item.featureName = 'Up health';
+            }
+            else if (index < 9) {
+                item.feature = item.reboot;
+                item.featureName = 'Reboot!';
+            } 
+            else if (index === 9)  {
+                item.feature = item.escape;
+                item.featureName = 'The escape!';
+            }
+        });
 
     }
 
@@ -206,17 +247,36 @@ export class Game {
     }
 
     isWin() {
-        return this.score >= this.winningScore;
+        return ((this.win || (this.score >= this.winningScore))
+                && this.health > 0)
+    }
+
+    trackGameOver(deltaTime) {
+        if (!this.gameOver) this.gameTime -= deltaTime;
+        if (this.gameTime < 0) {
+            this.gameOver = true;
+            this.gameTime = 0;
+        }
+
+        if (this.health <= 10 ) this.player.warning = true;
+        else this.player.warning = false;
+        if (this.health <= 0) {
+            this.gameOver = true;
+        }
     }
 
     draw(context) {
         // this.background.draw(context);
+        
+        this.canvasBackground.draw(context);
+        this.gameObjects.sort((a, b) =>{
+            return (a.collisionY + a.height) - (b.collisionY + b.height);
+            
+        });
+        this.gameObjects.forEach(object => {
+            object.draw(context);
+        });
         this.ui.draw(context);
-        this.player.draw(context);
-        this.player2.draw(context);
-        this.particles.forEach(particle => particle.draw(context));
-        this.enemies.forEach(enemy => enemy.draw(context));
         this.explosions.forEach(explosion => explosion.draw(context));
-        this.props.forEach(prop => prop.draw(context));
     }
 }

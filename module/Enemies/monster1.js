@@ -8,7 +8,6 @@ export class Monster1 extends Enemy {
         this.width = this.spriteWidth;
         this.height = this.spriteHeight;
 
-        this.collisionY = game.height - this.height - 75;
         this.image = document.getElementById('enemy1');
         this.frameY = 1;
         this.maxFrame = 7;
