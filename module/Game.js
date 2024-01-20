@@ -116,16 +116,6 @@ export class Game {
 
         this.enemies.forEach(enemy => {
             enemy.update();
-            // Проверим, не столкнолся ли враг с главным игроком (player)
-            if (this.checkCollision(this.player, enemy)) {
-                // если столкновение произошло, помечаем врага как удаленного
-                enemy.markedForDeletion = true;
-                for (let i = 0; i < enemy.score; i++) {
-                    this.particles.push(new Particle(this, enemy.collisionX + enemy.width * 0.5,
-                        enemy.collisionY + enemy.height * 0.5));
-                }
-                this.health--;
-            }
             // для всех активных пуль (ammo) также проверим условие столкновения
             // пули с врагом.
             this.player.ammunition.forEach(ammo => {
@@ -258,6 +248,6 @@ export class Game {
             object.draw(context);
         });
         this.ui.draw(context);
-        this.explosions.forEach(explosion => explosion.draw(context));
+        // this.explosions.forEach(explosion => explosion.draw(context));
     }
 }

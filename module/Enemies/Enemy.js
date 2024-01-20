@@ -1,3 +1,5 @@
+import { Particle } from "../Particle.js";
+
 export class Enemy {
     constructor(game) {
         this.game = game;
@@ -28,7 +30,6 @@ export class Enemy {
     }
 
     update() {
-
         if (this.directX === 'right') {
             // Обновляем x-координату врага (уменьшаем ее на величину speedX)
             this.collisionX += this.speedX;
@@ -45,6 +46,17 @@ export class Enemy {
             this.frameX++;
         } else {
             this.frameX = 0;
+        }
+
+        // Проверим, не столкнолся ли враг с главным игроком (player)
+        if (this.game.checkCollision(this.game.player, this)) {
+            // если столкновение произошло, помечаем врага как удаленного
+            this.markedForDeletion = true;
+            for (let i = 0; i < this.score; i++) {
+                this.game.particles.push(new Particle(this.game, this.collisionX + this.width * 0.5,
+                    this.collisionY + this.height * 0.5));
+            }
+            this.game.health--;
         }
 
     }
