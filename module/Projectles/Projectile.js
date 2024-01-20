@@ -22,12 +22,12 @@ export class Projectile {
     update() {
         if (this.direct === 'right') {
             this.collisionX += this.speed;
-            if (this.collisionX > this.game.width * 0.9) this.markedForDeletion = true;
+            if (this.collisionX > this.flightDistanceRight) this.markedForDeletion = true;
 
         } else if (this.direct === 'left') {
             this.frameY = 1;
             this.collisionX -= this.speed;
-            if (this.collisionX < this.game.width * 0.1) this.markedForDeletion = true;
+            if (this.collisionX < this.flightDistanceLeft) this.markedForDeletion = true;
         }
         this.spriteX = this.collisionX;
         this.spriteY = this.collisionY;
