@@ -17,6 +17,7 @@ export class Props {
         this.fps = 30;
         this.timer = 0;
         this.interval = 1000/this.fps;
+        this.lives = 3;
 
         this.feature = null;
         this.featureName = null;
@@ -45,6 +46,7 @@ export class Props {
         if (this.game.debug) {
             context.save();
             context.fillStyle = 'yellow';
+            context.fillText(this.lives, this.spriteX, this.spriteY - 20);
             context.fillText(this.featureName, this.spriteX, this.spriteY);
             context.strokeRect(this.collisionX, this.collisionY, this.width, this.height);
             context.restore();
