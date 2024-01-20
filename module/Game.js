@@ -78,6 +78,10 @@ export class Game {
                             ...this.props, ...this.canvasObjects,
                             ...this.enemies, ...this.particles];
 
+        this.gameObjects.forEach(object => {
+            object.update(deltaTime, context);
+        });
+
         if (this.fpsCount === 0 && deltaTime !== 0) {
             this.fpsCount = this.fps.render(deltaTime);
         }
@@ -88,15 +92,8 @@ export class Game {
             this.timerFpsDisplay += deltaTime;
         }
 
-        this.player.update();
-        this.player2.update();
         this.background.update();
         
-        this.props.forEach((prop) => {
-            prop.update(deltaTime, context);
-
-        });
-
         this.props = this.props.filter(prop => !prop.markedForDeletion);
         this.input.update();
 
@@ -107,17 +104,11 @@ export class Game {
             this.projectileTimer += deltaTime;
         }
 
-        this.particles.forEach(particle => particle.update());
         this.particles = this.particles.filter(particle => !particle.markedForDeletion);
 
         this.explosions.forEach(explosion => explosion.update(deltaTime));
         this.explosions = this.explosions.filter(explosion => !explosion.markedForDeletion);
 
-
-        this.enemies.forEach(enemy => {
-            enemy.update();
-
-        });
 
         this.enemies = this.enemies.filter(enemy => !enemy.markedForDeletion);
 
