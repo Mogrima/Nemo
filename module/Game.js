@@ -181,7 +181,8 @@ export class Game {
     }
 
     init() {
-        this.canvasBackground.init(); 
+        this.canvasBackground.init();
+        this.addProps();
     }
 
     addEnemy() {
