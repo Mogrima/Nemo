@@ -28,11 +28,11 @@ export class Game {
         this.input = new InputHandler(this);
         this.topMargin = 232;
 
-        this.ammo = 20;
+        this.projectile = 20;
 
-        this.ammoInterval = 500;
-        this.maxAmmo = 20;
-        this.ammoTimer = 0;
+        this.projectileInterval = 500;
+        this.maxProjectile = 20;
+        this.projectileTimer = 0;
 
         this.ui = new UI(this);
 
@@ -102,11 +102,11 @@ export class Game {
         this.props = this.props.filter(prop => !prop.markedForDeletion);
         this.input.update();
 
-        if (this.ammoTimer > this.ammoInterval) {
-            if (this.ammo < this.maxAmmo) this.ammo++;
-            this.ammoTimer = 0;
+        if (this.projectileTimer > this.projectileInterval) {
+            if (this.projectile < this.maxProjectile) this.projectile++;
+            this.projectileTimer = 0;
         } else {
-            this.ammoTimer += deltaTime;
+            this.projectileTimer += deltaTime;
         }
 
         this.particles.forEach(particle => particle.update());
@@ -137,15 +137,15 @@ export class Game {
                 }
                 this.health--;
             }
-            // для всех активных пуль (projectiles) также проверим условие столкновения
+            // для всех активных пуль (ammo) также проверим условие столкновения
             // пули с врагом.
-            this.player.ammunition.forEach(projectile => {
-                if (this.checkCollision(projectile, enemy)) {
+            this.player.ammunition.forEach(ammo => {
+                if (this.checkCollision(ammo, enemy)) {
                     enemy.lives--; // уменьшаем жизни врага на единицу
                     // если столкновение произошло, помечаем снаряд как удаленный
                     this.particles.push(new Particle(this, enemy.collisionX + enemy.width * 0.5,
                         enemy.collisionY + enemy.height * 0.5));
-                    projectile.markedForDeletion = true;
+                        ammo.markedForDeletion = true;
                     if (enemy.lives <= 0) {
                         enemy.markedForDeletion = true; // удаляем врага
                         if (enemy.type === 'shadow') {

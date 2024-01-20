@@ -23,6 +23,19 @@ export class InputHandler {
                         this.game.player.collisionY + 30, 'right');
                 }
 
+            }
+            else if (e.key === 'c') {
+
+                if ((this.game.direction.lastIndexOf('ArrowLeft') === this.game.direction.length - 1)
+                && (this.game.direction.length > 0)) {
+                    this.game.player.shootSplash(this.game.player.collisionX,
+                        this.game.player.collisionY + 30, 'left');
+
+                } else {
+                    this.game.player.shootSplash(this.game.player.collisionX + this.game.player.width,
+                        this.game.player.collisionY + 30, 'right');
+                }
+
             } else if (e.key === 'd') {
                 this.game.debug = !this.game.debug;
             }

@@ -1,4 +1,5 @@
 import { Ammunition } from '../Projectles/Ammunition.js';
+import { Splash } from '../Projectles/Splash.js';
 
 export class Unit {
     constructor(game) {
@@ -14,6 +15,8 @@ export class Unit {
         this.shiftY = 0;
 
         this.ammunition = [];
+        this.splashes = [];
+        this.projectilesObject = [];
 
         this.warning = false;
 
@@ -83,10 +86,12 @@ export class Unit {
             this.collisionY = this.game.height - this.height;
         }
 
-        this.ammunition.forEach(ammo => {
-            ammo.update();
+        this.projectilesObject = [...this.ammunition, ...this.splashes];
+        this.projectilesObject.forEach(projectile => {
+            projectile.update();
         });
         this.ammunition = this.ammunition.filter(ammo => !ammo.markedForDeletion);
+        this.splashes = this.splashes.filter(splash => !splash.markedForDeletion);
 
         // sprite animation
         if (this.frameX < this.maxFrame) {
@@ -100,8 +105,8 @@ export class Unit {
         // hitbox player
         context.strokeStyle = 'yellow';
         if (this.game.debug) context.strokeRect(this.collisionX, this.collisionY, this.width, this.height);
-        this.ammunition.forEach(ammo => {
-            ammo.draw(context);
+        this.projectilesObject.forEach(projectile => {
+            projectile.draw(context);
         });
         context.drawImage(this.image,
             this.frameX * this.spriteWidth + this.shiftX, this.frameY * this.spriteHeight + this.shiftY,
@@ -111,9 +116,16 @@ export class Unit {
     }
 
     shootTop(x, y, direct) {
-        if (this.game.ammo > 0) {
+        if (this.game.projectile > 0) {
             this.ammunition.push(new Ammunition(this.game, x, y, direct));
-            this.game.ammo--;
+            this.game.projectile--;
+        }
+    }
+
+    shootSplash(x, y, direct) {
+        if (this.game.projectile > 0) {
+            this.splashes.push(new Splash(this.game, x, y, direct));
+            this.game.projectile--;
         }
     }
 }

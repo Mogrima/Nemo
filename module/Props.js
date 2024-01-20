@@ -41,9 +41,9 @@ export class Props {
             this.timer += deltaTime;
         }
 
-        this.game.player.ammunition.forEach(projectile => {
-            if (this.game.checkCollision(projectile, this)) {
-                projectile.markedForDeletion = true;
+        this.game.player.splashes.forEach(splash => {
+            if (this.game.checkCollision(splash, this)) {
+                splash.markedForDeletion = true;
                 if (this.lives > 0) this.lives--;
             }
         });
