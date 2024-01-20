@@ -1,6 +1,5 @@
 import { CanvasBackground } from './Background/CanvasBackground.js';
 import { InputHandler } from './InputHandler.js';
-import { Background } from '../UI/Background.js';
 import { UI } from '../UI/UI.js';
 import { Nemo } from './Units/Nemo.js';
 import { Nebessime } from './Units/Nebessime.js';
@@ -50,7 +49,6 @@ export class Game {
         this.maxHealth = 20;
 
         this.speed = 1;
-        this.background = new Background(this);
 
         this.particles = [];
 
@@ -88,8 +86,6 @@ export class Game {
         } else {
             this.timerFpsDisplay += deltaTime;
         }
-
-        this.background.update();
         
         this.props = this.props.filter(prop => !prop.markedForDeletion);
         this.input.update();
@@ -201,8 +197,6 @@ export class Game {
     }
 
     draw(context) {
-        // this.background.draw(context);
-        
         this.canvasBackground.draw(context);
         this.gameObjects.sort((a, b) =>{
             return (a.collisionY + a.height) - (b.collisionY + b.height);
