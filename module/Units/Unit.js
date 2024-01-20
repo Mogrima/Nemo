@@ -1,4 +1,4 @@
-import { Projectile } from '../Projectile.js';
+import { Projectile } from '../Projectles/Projectile.js';
 
 export class Unit {
     constructor(game) {
