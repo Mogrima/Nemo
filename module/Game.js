@@ -8,8 +8,6 @@ import { Monster1 } from './Enemies/monster1.js';
 import { Monster2 } from './Enemies/monster2.js';
 import { Props } from './Props.js';
 import { Particle } from './Particle.js';
-import { ShadowExplosion } from './Explosions/ShadowExplosion.js';
-import { GorgonExplosion } from './Explosions/GorgonExplosion.js';
 import { FPS } from './FPS.js';
 
 export class Game {
@@ -122,15 +120,6 @@ export class Game {
             if (this.checkCollision(this.player, enemy)) {
                 // если столкновение произошло, помечаем врага как удаленного
                 enemy.markedForDeletion = true;
-                if (enemy.type === 'shadow') {
-                    this.explosions.push(new
-                    ShadowExplosion(this, enemy.collisionX + enemy.width * 0.5,
-                        enemy.collisionY + enemy.height * 0.5));
-                } else {
-                    this.explosions.push(new
-                    GorgonExplosion(this, enemy.collisionX + enemy.width * 0.5,
-                        enemy.collisionY + enemy.height * 0.5));
-                }
                 for (let i = 0; i < enemy.score; i++) {
                     this.particles.push(new Particle(this, enemy.collisionX + enemy.width * 0.5,
                         enemy.collisionY + enemy.height * 0.5));
@@ -148,15 +137,6 @@ export class Game {
                         ammo.markedForDeletion = true;
                     if (enemy.lives <= 0) {
                         enemy.markedForDeletion = true; // удаляем врага
-                        if (enemy.type === 'shadow') {
-                            this.explosions.push(new
-                            ShadowExplosion(this, enemy.collisionX + enemy.width * 0.5,
-                                enemy.collisionY + enemy.height * 0.5));
-                        } else {
-                            this.explosions.push(new
-                            GorgonExplosion(this, enemy.collisionX + enemy.width * 0.5,
-                                enemy.collisionY + enemy.height * 0.5));
-                        }
                         for (let i = 0; i < enemy.score; i++) {
                             this.particles.push(new Particle(this, enemy.collisionX + enemy.width * 0.5,
                                 enemy.collisionY + enemy.height * 0.5));
