@@ -61,6 +61,7 @@ export class Props {
                 } else if (this.game.keys.includes('x')) {
                     this.feature(context);
                     this.markedForDeletion = true;
+                    this.game.removeGameObjects();
                     this.propTrigger = false;
                     
                 } 
@@ -68,6 +69,7 @@ export class Props {
             else {
                 this.feature(context);
                 this.markedForDeletion = true;
+                this.game.removeGameObjects();
                 this.propTrigger = false;
             }
     }

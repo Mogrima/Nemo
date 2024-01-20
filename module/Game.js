@@ -67,7 +67,8 @@ export class Game {
     }
 
     update(deltaTime, context) {
-        this.trackGameOver(deltaTime); 
+        this.trackGameOver(deltaTime);
+        this.input.update();
         this.canvasObjects = [...this.canvasBackground.forest.objects];
         this.gameObjects = [this.player, this.player2,  
                             ...this.props, ...this.canvasObjects,
@@ -86,9 +87,6 @@ export class Game {
         } else {
             this.timerFpsDisplay += deltaTime;
         }
-        
-        this.props = this.props.filter(prop => !prop.markedForDeletion);
-        this.input.update();
 
         if (this.projectileTimer > this.projectileInterval) {
             if (this.projectile < this.maxProjectile) this.projectile++;
@@ -96,10 +94,6 @@ export class Game {
         } else {
             this.projectileTimer += deltaTime;
         }
-
-        this.particles = this.particles.filter(particle => !particle.markedForDeletion);
-
-        this.enemies = this.enemies.filter(enemy => !enemy.markedForDeletion);
 
         if (this.enemyTimer > this.enemyInterval && !this.gameOver) {
             this.addEnemy();
@@ -194,6 +188,12 @@ export class Game {
         if (this.health <= 0) {
             this.gameOver = true;
         }
+    }
+
+    removeGameObjects() {
+        this.props = this.props.filter(object => !object.markedForDeletion);
+        this.enemies = this.enemies.filter(object => !object.markedForDeletion);
+        this.particles = this.particles.filter(object => !object.markedForDeletion);
     }
 
     draw(context) {

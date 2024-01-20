@@ -34,11 +34,17 @@ export class Enemy {
             // Обновляем x-координату врага (уменьшаем ее на величину speedX)
             this.collisionX += this.speedX;
             // Помечаем врага как удаленного, если он полностью пересечет левую границу игрового поля
-            if (this.collisionX + this.width < 0) this.markedForDeletion = true;
+            if (this.collisionX + this.width < 0) {
+                this.markedForDeletion = true;
+                this.game.removeGameObjects();
+            }
+
         } else {
             this.collisionX -= this.speedX;
-            if (this.collisionX + this.game.width < this.game.width) this.markedForDeletion = true;
-
+            if (this.collisionX - this.width > this.game.width) {
+                this.markedForDeletion = true;
+                this.game.removeGameObjects();
+            }
         }
         this.spriteX = this.collisionX;
         this.spriteY = this.collisionY;
@@ -52,6 +58,7 @@ export class Enemy {
         if (this.game.checkCollision(this.game.player, this)) {
             // если столкновение произошло, помечаем врага как удаленного
             this.markedForDeletion = true;
+            this.game.removeGameObjects();
             for (let i = 0; i < this.score; i++) {
                 this.game.particles.push(new Particle(this.game, this.collisionX + this.width * 0.5,
                     this.collisionY + this.height * 0.5));
@@ -68,7 +75,8 @@ export class Enemy {
                     this.collisionY + this.height * 0.5));
                     ammo.markedForDeletion = true;
                 if (this.lives <= 0) {
-                    this.markedForDeletion = true; // удаляем врага
+                    this.markedForDeletion = true; 
+                    this.game.removeGameObjects(); // удаляем врага
                     for (let i = 0; i < this.score; i++) {
                         this.game.particles.push(new Particle(this.game, this.collisionX + this.width * 0.5,
                             this.collisionY + this.height * 0.5));
