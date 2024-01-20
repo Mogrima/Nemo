@@ -62,22 +62,28 @@ export class InputHandler {
     }
     // постоянное отслеживание нажатой клавиши, чтобы персонаж двигался и смотрел в нужную сторону
     update() {
-        if ((this.game.keys.lastIndexOf('ArrowLeft') === this.game.keys.length - 1)
-        && (this.game.keys.length > 0)) {
-            this.game.player.maxFrame = 8;
+        this.game.player.maxFrame = 0;
+        if (this.game.keys.indexOf('ArrowLeft') > -1) {
             this.game.player.frameY = 7;
+            this.game.player.maxFrame = 8;
             this.game.player2.frameY = 1;
             this.game.direction.length = 0;
             this.game.direction.push('ArrowLeft');
-
-        } else if (this.game.keys.length === 0) {
-            this.game.player.maxFrame = 0;
-        } else {
-            this.game.player.maxFrame = 8;
+        } else if (this.game.keys.indexOf('ArrowRight') > -1) {
             this.game.player.frameY = 1;
+            this.game.player.maxFrame = 8;
             this.game.player2.frameY = 3;
             this.game.direction.length = 0;
             this.game.direction.push('ArrowRight');
+        } else if (this.game.keys.indexOf('ArrowUp') > -1) {
+            this.game.player.frameY = 4;
+            this.game.player.maxFrame = 8;
+            this.game.player2.frameY = 1;
+
+        } else if (this.game.keys.indexOf('ArrowDown') > -1) {
+            this.game.player.frameY = 0;
+            this.game.player.maxFrame = 8;
+            this.game.player2.frameY = 3;
         }
     }
 }
