@@ -63,7 +63,6 @@ export class Game {
 
         this.numberOfProps = 10;
         this.props = [];
-        this.propIndex = null;
 
         this.debug = true;
 
@@ -95,38 +94,8 @@ export class Game {
         this.player2.update();
         this.background.update();
         
-        this.props.forEach((prop, index) => {
-            prop.update(deltaTime);
-
-            this.player.projectiles.forEach(projectile => {
-                if (this.checkCollision(projectile, prop)) {
-                    projectile.markedForDeletion = true;
-                    if (prop.lives > 0) prop.lives--;
-                }
-            });
-
-           if (this.propIndex === null) {
-            if ((prop.feature !== null) && (!this.gameOver)) {
-            if (prop.lives < 1) this.propIndex = index;
-        }
-           }
-           if (this.propIndex !== null) {
-            if (this.props[this.propIndex].featureName === 'strangeMessage') {
-                if (!this.keys.includes('x')) {
-                    this.props[this.propIndex].feature(context);
-                } else if (this.keys.includes('x')) {
-                    this.props[this.propIndex].feature(context);
-                    this.props[this.propIndex].markedForDeletion = true;
-                    this.propIndex = null;
-                    
-                } 
-            } 
-            else {
-                this.props[this.propIndex].feature(context);
-                this.props[this.propIndex].markedForDeletion = true;
-                this.propIndex = null;
-            }
-    }
+        this.props.forEach((prop) => {
+            prop.update(deltaTime, context);
 
         });
 

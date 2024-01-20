@@ -22,6 +22,7 @@ export class Props {
         this.feature = null;
         this.featureName = null;
         this.markedForDeletion = false;
+        this.propTrigger = false;
 
         this.uncannyText = ['You have been chosen. They will come soon.',
                 'The end is near. Make preparations.',
@@ -31,7 +32,7 @@ export class Props {
         this.text = this.uncannyText[Math.floor(Math.random() * 5)];
     }
     
-    update(deltaTime) {
+    update(deltaTime, context) {
         if (this.frameX > this.maxFrame) this.frameX = 13;
         if (this.timer > this.interval) {
             this.frameX++;
@@ -39,6 +40,37 @@ export class Props {
         } else {
             this.timer += deltaTime;
         }
+
+        this.game.player.projectiles.forEach(projectile => {
+            if (this.game.checkCollision(projectile, this)) {
+                projectile.markedForDeletion = true;
+                if (this.lives > 0) this.lives--;
+            }
+        });
+
+        if (this.propTrigger === false) {
+            if ((this.feature !== null) && (!this.gameOver)) {
+            if (this.lives < 1) this.propTrigger = true;
+        }
+           }
+
+           if (this.propTrigger !== false) {
+            if (this.featureName === 'strangeMessage') {
+                if (!this.game.keys.includes('x')) {
+                    this.feature(context);
+                } else if (this.game.keys.includes('x')) {
+                    this.feature(context);
+                    this.markedForDeletion = true;
+                    this.propTrigger = false;
+                    
+                } 
+            } 
+            else {
+                this.feature(context);
+                this.markedForDeletion = true;
+                this.propTrigger = false;
+            }
+    }
 
     }
 
