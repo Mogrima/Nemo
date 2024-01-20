@@ -56,9 +56,6 @@ export class Game {
 
         this.handlerJump = false;
 
-
-        this.explosions = [];
-
         this.numberOfProps = 10;
         this.props = [];
 
@@ -105,10 +102,6 @@ export class Game {
         }
 
         this.particles = this.particles.filter(particle => !particle.markedForDeletion);
-
-        this.explosions.forEach(explosion => explosion.update(deltaTime));
-        this.explosions = this.explosions.filter(explosion => !explosion.markedForDeletion);
-
 
         this.enemies = this.enemies.filter(enemy => !enemy.markedForDeletion);
 
@@ -219,6 +212,5 @@ export class Game {
             object.draw(context);
         });
         this.ui.draw(context);
-        // this.explosions.forEach(explosion => explosion.draw(context));
     }
 }
