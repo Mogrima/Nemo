@@ -17,6 +17,6 @@ export class Monster2 extends Enemy {
         this.type = 'shadow';
 
 
-        if (this.directX !== 'right') this.frameY = 5;
+        if (this.directX === 'right') this.frameY = 4;
     }
 }
