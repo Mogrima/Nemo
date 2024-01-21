@@ -34,6 +34,8 @@ export class Game {
         this.ui = new UI(this);
 
         this.enemies = [];
+        this.maxEnemies = 10;
+        this.enemiesPool = [];
         this.enemyTimer = 0;
         this.enemyInterval = 5000;
         this.gameOver = false;
@@ -96,23 +98,38 @@ export class Game {
         }
 
         if (this.enemyTimer > this.enemyInterval && !this.gameOver) {
-            this.addEnemy();
+            let enemy = this.getEnemy();
+            if (enemy) {
+            this.enemies.push(enemy);
+            enemy.start();
+            }
             this.enemyTimer = 0;
         } else {
             this.enemyTimer += deltaTime;
-        }
-
+        }  
     }
 
     init() {
         this.canvasBackground.init();
         this.addProps();
+        this.addEnemy();
     }
 
     addEnemy() {
-        const randomize = Math.random();
-        if (randomize < 0.5) this.enemies.push(new Monster1(this));
-        else this.enemies.push(new Monster2(this));
+        for (let i = 0; i < this.maxEnemies; i++) {
+            const randomize = Math.random();
+            if (randomize < 0.5) this.enemiesPool.push(new Monster1(this));
+            else this.enemiesPool.push(new Monster2(this));
+        }
+    }
+
+    getEnemy() {
+        for (let i = 0; i < this.enemiesPool.length; i++) {
+
+            if (this.enemiesPool[i].free) {
+                return this.enemiesPool[i];
+            }
+        }
     }
 
     addProps() {
