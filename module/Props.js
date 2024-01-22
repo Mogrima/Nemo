@@ -44,6 +44,7 @@ export class Props {
         this.game.player.splashes.forEach(splash => {
             if (this.game.checkCollision(splash, this)) {
                 splash.markedForDeletion = true;
+                splash.reset();
                 if (this.lives > 0) this.lives--;
             }
         });

@@ -85,6 +85,7 @@ export class Enemy {
                     this.game.particles.push(new Particle(this.game, this.collisionX + this.width * 0.5,
                         this.collisionY + this.height * 0.5));
                         ammo.markedForDeletion = true;
+                        ammo.reset();
                     if (this.lives <= 0) {
                         this.markedForDeletion = true; 
                         this.game.removeGameObjects(); // удаляем врага

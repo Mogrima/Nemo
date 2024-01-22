@@ -8,6 +8,8 @@ import { Monster2 } from './Enemies/monster2.js';
 import { Props } from './Props.js';
 import { Particle } from './Particle.js';
 import { FPS } from './FPS.js';
+import { Ammunition } from './Projectles/Ammunition.js';
+import { Splash } from './Projectles/Splash.js';
 
 export class Game {
     constructor(canvas) {
@@ -26,6 +28,8 @@ export class Game {
         this.topMargin = 232;
 
         this.projectile = 20;
+        this.ammoPool = [];
+        this.splashPool = [];
 
         this.projectileInterval = 500;
         this.maxProjectile = 20;
@@ -113,6 +117,8 @@ export class Game {
         this.canvasBackground.init();
         this.addProps();
         this.addEnemy();
+        this.createAmmoProjectiles();
+        this.createSplashProjectiles();
     }
 
     addEnemy() {
@@ -129,6 +135,30 @@ export class Game {
             if (this.enemiesPool[i].free) {
                 return this.enemiesPool[i];
             }
+        }
+    }
+
+    createAmmoProjectiles() {
+        for (let i = 0; i < this.projectile; i++) {
+            this.ammoPool.push(new Ammunition(this));
+        }
+    }
+
+    getAmmoProjectile() {
+        for (let i = 0; i < this.ammoPool.length; i++) {
+            if (this.ammoPool[i].free) return this.ammoPool[i];
+        }
+    }
+
+    createSplashProjectiles() {
+        for (let i = 0; i < this.projectile; i++) {
+            this.splashPool.push(new Splash(this));
+        }
+    }
+
+    getSplashProjectile() {
+        for (let i = 0; i < this.splashPool.length; i++) {
+            if (this.splashPool[i].free) return this.splashPool[i];
         }
     }
 

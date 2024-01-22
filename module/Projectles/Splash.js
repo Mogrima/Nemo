@@ -1,11 +1,10 @@
 import { Projectile } from "./Projectile.js";
 
 export class Splash extends Projectile {
-    constructor(game, x, y, direct) {
-        super(game, x, y, direct);
+    constructor(game) {
+        super(game);
         this.image = document.getElementById('splash');
-        this.flightDistanceRight = x + 100;
-        this.flightDistanceLeft = x - 100;
-        console.log(this.flightDistanceLeft)
+        this.flightDistanceRight = this.game.player.collisionX + this.game.player.width + 100;
+        this.flightDistanceLeft = this.game.player.collisionX - 100;
     }
 }

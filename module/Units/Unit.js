@@ -115,17 +115,25 @@ export class Unit {
 
     }
 
-    shootTop(x, y, direct) {
+    shootTop(x, y, directX) {
+        const ammo = this.game.getAmmoProjectile();
         if (this.game.projectile > 0) {
-            this.ammunition.push(new Ammunition(this.game, x, y, direct));
-            this.game.projectile--;
+            if (ammo) {
+                ammo.start(x, y, directX);
+                this.ammunition.push(ammo);
+                this.game.projectile--;
+            }
         }
     }
 
-    shootSplash(x, y, direct) {
+    shootSplash(x, y, directX) {
+        const splash = this.game.getSplashProjectile();
         if (this.game.projectile > 0) {
-            this.splashes.push(new Splash(this.game, x, y, direct));
-            this.game.projectile--;
+            if (splash) {
+                splash.start(x, y, directX);
+                this.splashes.push(splash);
+                this.game.projectile--;
+            }
         }
     }
 }
