@@ -1,6 +1,3 @@
-import { Ammunition } from '../Projectles/Ammunition.js';
-import { Splash } from '../Projectles/Splash.js';
-
 export class Unit {
     constructor(game) {
         this.game = game;
@@ -31,18 +28,6 @@ export class Unit {
         this.collisionY += this.speedY;
         this.spriteX = this.collisionX;
         this.spriteY = this.collisionY;
-        // гравитация
-        // this.collisionY += this.speedJump;
-        // тело всегда падает
-        // this.speedJump += this.gravity;
-
-        // чтобы тело не падало ниже земли
-        // if (this.collisionY + this.height >= this.game.height - 50) {
-        //     this.collisionY = this.game.height - this.height - 50;
-        //     this.speedJump = 0;
-        // }
-        // // ограничение вертикального ускорения
-        // if (this.speedJump > 25) this.speedJump = 25;
 
         if (this.game.keys.includes('ArrowLeft')) {
             this.speedX = -this.maxSpeed;
@@ -64,15 +49,6 @@ export class Unit {
             this.speedX = 0;
             this.speedY = 0;
         }
-
-        // if (this.collisionY === this.game.height - this.height - 50) {
-        //     this.jump = true;
-        // }
-
-        // if (this.game.handlerJump && this.jump) {
-        //     this.speedJump = -11;
-        //     this.jump = false;
-        // }
 
         // чтобы не выходил за границы холста
         if (this.collisionX > this.game.width - this.maxXRight) {

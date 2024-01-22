@@ -12,7 +12,6 @@ export class Nemo extends Unit {
         this.collisionX = game.width / 2 - (this.width / 2);
         this.collisionY = game.height - this.height - 50;
 
-        this.color = '#fde910';
         this.maxXRight = this.width + 10;
         this.maxXLeft = 0;
         this.maxTop = 242;

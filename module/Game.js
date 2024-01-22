@@ -6,7 +6,6 @@ import { Nebessime } from './Units/Nebessime.js';
 import { Monster1 } from './Enemies/monster1.js';
 import { Monster2 } from './Enemies/monster2.js';
 import { Props } from './Props.js';
-import { Particle } from './Particle.js';
 import { FPS } from './FPS.js';
 import { Ammunition } from './Projectles/Ammunition.js';
 import { Splash } from './Projectles/Splash.js';

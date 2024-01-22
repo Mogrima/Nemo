@@ -11,7 +11,6 @@ export class Nebessime extends Unit {
         this.collisionX = (game.width / 2 - (this.width / 2)) + 100;
         this.collisionY = game.height - this.height - 43;
 
-        this.color = '#18171c';
         this.maxXRight = this.width + 10;
         this.maxXLeft = this.width - 10;
         this.maxTop = 232;
