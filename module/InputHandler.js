@@ -13,8 +13,6 @@ export class InputHandler {
                 (e.key === 'ArrowLeft')) &&
                 this.game.keys.indexOf(e.key) === -1) {
                 this.game.keys.push(e.key);
-            } else if (e.key === 'Shift') {
-                this.game.handlerJump = true;
             } else if (e.key === ' ') {
 
                 if ((this.game.direction.lastIndexOf('ArrowLeft') === this.game.direction.length - 1)
@@ -49,9 +47,6 @@ export class InputHandler {
 
         });
         window.addEventListener('keyup', e => {
-            if (this.game.handlerJump) {
-                this.game.handlerJump = false;
-            }
             if (this.game.keys.indexOf(e.key) > -1) {
                 this.game.keys.splice(this.game.keys.indexOf(e.key), 1);
 
