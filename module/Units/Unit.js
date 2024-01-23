@@ -91,22 +91,22 @@ export class Unit {
 
     }
 
-    shootTop(x, y, directX) {
+    shootTop(directX) {
         const ammo = this.game.getAmmoProjectile();
         if (this.game.projectile > 0) {
             if (ammo) {
-                ammo.start(x, y, directX);
+                ammo.start(this.collisionX, this.collisionY + 30, directX);
                 this.ammunition.push(ammo);
                 this.game.projectile--;
             }
         }
     }
 
-    shootSplash(x, y, directX) {
+    shootSplash(directX) {
         const splash = this.game.getSplashProjectile();
         if (this.game.projectile > 0) {
             if (splash) {
-                splash.start(x, y, directX);
+                splash.start(this.collisionX, this.collisionY + 30, directX);
                 this.splashes.push(splash);
                 this.game.projectile--;
             }

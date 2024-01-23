@@ -17,12 +17,10 @@ export class InputHandler {
 
                 if ((this.game.direction.lastIndexOf('ArrowLeft') === this.game.direction.length - 1)
                 && (this.game.direction.length > 0)) {
-                    this.game.player.shootTop(this.game.player.collisionX,
-                        this.game.player.collisionY + 30, 'left');
+                    this.game.player.shootTop('left');
 
                 } else {
-                    this.game.player.shootTop(this.game.player.collisionX + this.game.player.width,
-                        this.game.player.collisionY + 30, 'right');
+                    this.game.player.shootTop('right');
                 }
 
             }
@@ -30,12 +28,10 @@ export class InputHandler {
 
                 if ((this.game.direction.lastIndexOf('ArrowLeft') === this.game.direction.length - 1)
                 && (this.game.direction.length > 0)) {
-                    this.game.player.shootSplash(this.game.player.collisionX,
-                        this.game.player.collisionY + 30, 'left');
+                    this.game.player.shootSplash('left');
 
                 } else {
-                    this.game.player.shootSplash(this.game.player.collisionX + this.game.player.width,
-                        this.game.player.collisionY + 30, 'right');
+                    this.game.player.shootSplash('right');
                 }
 
             } else if (this.debagKeys.includes(e.key)) {
