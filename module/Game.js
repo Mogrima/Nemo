@@ -6,7 +6,6 @@ import { Nebessime } from './Units/Nebessime.js';
 import { Monster1 } from './Enemies/monster1.js';
 import { Monster2 } from './Enemies/monster2.js';
 import { Props } from './Props.js';
-import { FPS } from './FPS.js';
 import { Ammunition } from './Projectles/Ammunition.js';
 import { Splash } from './Projectles/Splash.js';
 
@@ -15,7 +14,6 @@ export class Game {
         this.canvas = canvas
         this.width = canvas.width;
         this.height = canvas.height;
-        this.fps = new FPS(this);
         this.fpsCount = 0;
         this.canvasBackground = new CanvasBackground(this.canvas);
         this.canvasObjects = [];
@@ -82,10 +80,10 @@ export class Game {
         });
 
         if (this.fpsCount === 0 && deltaTime !== 0) {
-            this.fpsCount = this.fps.render(deltaTime);
+            this.fpsCount = Math.floor(1000 / deltaTime);
         }
         if (this.timerFpsDisplay > this.intervalFpsDisplay) {
-            this.fpsCount = this.fps.render(deltaTime);
+            this.fpsCount = Math.floor(1000 / deltaTime);
             this.timerFpsDisplay = 0;
         } else {
             this.timerFpsDisplay += deltaTime;
