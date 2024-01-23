@@ -86,20 +86,23 @@ export class Enemy {
                         this.collisionY + this.height * 0.5));
                         ammo.markedForDeletion = true;
                         ammo.reset();
-                    if (this.lives <= 0) {
-                        this.markedForDeletion = true; 
-                        this.game.removeGameObjects(); // удаляем врага
-                        for (let i = 0; i < this.score; i++) {
-                            this.game.particles.push(new Particle(this.game, this.collisionX + this.width * 0.5,
-                                this.collisionY + this.height * 0.5));
-                        }
-                        this.game.removeGameObjects();
-                        this.reset(); // удаляем врага
-    
-                        // увеличиваем количество очков главного игрока
-                        if (!this.game.gameOver) this.game.score += this.score;
-                        if (this.game.isWin()) this.game.gameOver = true; // проверяем условие победы
-                    }
+                }
+
+            });
+            if (this.lives <= 0) {
+                this.markedForDeletion = true; 
+                this.game.removeGameObjects(); // удаляем врага
+                for (let i = 0; i < this.score; i++) {
+                    this.game.particles.push(new Particle(this.game, this.collisionX + this.width * 0.5,
+                        this.collisionY + this.height * 0.5));
+                }
+                this.game.removeGameObjects();
+                this.reset(); // удаляем врага
+
+                // увеличиваем количество очков главного игрока
+                if (!this.game.gameOver) this.game.score += this.score;
+                if (this.game.isWin()) this.game.gameOver = true; // проверяем условие победы
+            }
                 }
             });
     
