@@ -238,6 +238,27 @@ export class Game {
         this.particles = this.particles.filter(object => !object.markedForDeletion);
     }
 
+    restart() {
+        this.gameOver = false;
+        this.gameTime = 90000;
+        this.ammoPool = [];
+        this.projectile = 20;
+        this.splashPool = [];
+        this.enemies = [];
+        this.enemiesPool = [];
+        this.score = 0;
+        this.win = false;
+        this.direction = [];
+        this.particles = [];
+        this.props = [];
+        this.health = 20;
+        this.canvasBackground.forest.restart();
+        this.canvasBackground.sky.restart();
+        this.player.restart();
+        this.player2.restart();
+        this.init();
+    }
+
     draw(context) {
         this.canvasBackground.draw(context);
         this.gameObjects.sort((a, b) =>{

@@ -27,4 +27,14 @@ export class Nemo extends Unit {
         this.shiftY = 1;
     }
 
+    
+    restart() {
+        this.collisionX = this.game.width / 2 - (this.width / 2);
+        this.collisionY = this.game.height - this.height - 50;
+        this.spriteX = this.collisionX;
+        this.spriteY = this.collisionY;
+        this.frameX = 0;
+        this.frameY = 1;
+    }
+
 }

@@ -54,4 +54,9 @@ export class Sky {
         });
         context.restore();
     }
+
+    restart() {
+        this.clouds = [];
+        this.stars = [];
+    }
 }

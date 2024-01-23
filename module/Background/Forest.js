@@ -24,4 +24,9 @@ export class Forest {
 
     draw(context) {
     }
+
+    restart() {
+        this.trees = [];
+        this.bushes = [];
+    }
 }
