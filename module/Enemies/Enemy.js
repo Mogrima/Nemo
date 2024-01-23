@@ -4,11 +4,10 @@ export class Enemy {
     constructor(game) {
         this.game = game;
         this.collisionX = 0;
-        this.collisionY = (Math.random() * (this.game.topMargin - this.game.height * 0.82) +
-                            this.game.height * 0.82);
+        this.collisionY = 0;
         this.spriteX;
         this.spriteY;
-        this.speedX = Math.random() * -1.5 - 2.5;
+        this.speedX = 0;
         this.markedForDeletion = false;
 
         this.frameX = 0;
@@ -134,7 +133,7 @@ export class Enemy {
         this.direct();
         this.collisionY = (Math.random() * (this.game.topMargin - this.game.height * 0.82) +
                             this.game.height * 0.82);
-        this.speedX = Math.random() * -1.5 - 2.5;
+        this.speedX = Math.random() * -1.5 - 0.5;
         this.lives = this.maxLives;
     }
 }
