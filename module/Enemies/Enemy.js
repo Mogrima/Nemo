@@ -78,8 +78,8 @@ export class Enemy {
             }
             // для всех активных пуль (ammo) также проверим условие столкновения
             // пули с врагом.
-            this.game.player.ammunition.forEach(ammo => {
-                if (this.game.checkCollision(ammo, this)) {
+            this.game.ammoPool.forEach(ammo => {
+                if (!ammo.free && this.game.checkCollision(this, ammo)) {
                     this.lives--; // уменьшаем жизни врага на единицу
                     // если столкновение произошло, помечаем снаряд как удаленный
                     this.game.particles.push(new Particle(this.game, this.collisionX + this.width * 0.5,
@@ -103,8 +103,6 @@ export class Enemy {
                 if (!this.game.gameOver) this.game.score += this.score;
                 if (this.game.isWin()) this.game.gameOver = true; // проверяем условие победы
             }
-                }
-            });
     
         }
     }
