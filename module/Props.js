@@ -14,7 +14,7 @@ export class Props {
         this.maxFrame = 20;
         this.spriteX = this.collisionX;
         this.spriteY = this.collisionY;
-        this.fps = 30;
+        this.fps = 20;
         this.timer = 0;
         this.interval = 1000/this.fps;
         this.lives = 3;
@@ -41,8 +41,8 @@ export class Props {
             this.timer += deltaTime;
         }
 
-        this.game.player.splashes.forEach(splash => {
-            if (this.game.checkCollision(splash, this)) {
+        this.game.splashPool.forEach(splash => {
+            if (!splash.free && this.game.checkCollision(splash, this) && !this.game.gameOver) {
                 splash.markedForDeletion = true;
                 splash.reset();
                 if (this.lives > 0) this.lives--;
