@@ -57,8 +57,6 @@ export class Game {
 
         this.particles = [];
 
-        this.handlerJump = false;
-
         this.numberOfProps = 10;
         this.props = [];
 
@@ -139,7 +137,7 @@ export class Game {
 
     createAmmoProjectiles() {
         for (let i = 0; i < this.projectile; i++) {
-            this.ammoPool.push(new Ammunition(this));
+            this.ammoPool.push(new Ammunition(this, 1400));
         }
     }
 
@@ -151,7 +149,7 @@ export class Game {
 
     createSplashProjectiles() {
         for (let i = 0; i < this.projectile; i++) {
-            this.splashPool.push(new Splash(this));
+            this.splashPool.push(new Splash(this, 200));
         }
     }
 

@@ -1,5 +1,5 @@
 export class Projectile {
-    constructor(game) {
+    constructor(game, r) {
         this.game = game;
         this.spriteWidth = 16;
         this.spriteHeight = 16;
@@ -17,6 +17,7 @@ export class Projectile {
         this.frameX = 0;
         this.frameY = 0;
         this.maxFrame = 14;
+        this.flightRadius = r;
         this.free = true;
 
         this.direct = () => {
@@ -36,7 +37,7 @@ export class Projectile {
         if (!this.free) {
             if (this.directX === 'right') {
                 this.collisionX += this.speed;
-                if (this.collisionX > this.flightDistanceRight) {
+                if (this.collisionX > this.flightDistanceRight || this.collisionX > this.game.width) {
                     this.markedForDeletion = true;
                     this.reset();
                 }
@@ -44,7 +45,7 @@ export class Projectile {
             } else if (this.directX === 'left') {
                 // this.frameY = 1;
                 this.collisionX -= this.speed;
-                if (this.collisionX < this.flightDistanceLeft) {
+                if (this.collisionX < this.flightDistanceLeft || this.collisionX < 0) {
                     this.markedForDeletion = true;
                     this.reset();
                 }
@@ -75,6 +76,8 @@ export class Projectile {
         this.markedForDeletion = false;
         this.collisionX = x;
         this.collisionY = y;
+        this.flightDistanceRight = x + this.r;
+        this.flightDistanceLeft = x - this.r;
         this.spriteX = this.collisionX;
         this.spriteY = this.collisionY;
         this.directX = directX;
