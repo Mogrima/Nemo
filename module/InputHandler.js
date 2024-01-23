@@ -1,6 +1,10 @@
 export class InputHandler {
     constructor(game) {
         this.game = game;
+        this.debagKeys = ['d', 'D', 'в', 'В'];
+        this.splashKeys = ['c', 'C', 'с', 'С'];
+        this.closeMessageKeys = ['x', 'X', 'ч', 'Ч'];
+        this.restartKeys = ['r', 'R', 'к', 'К'];
         window.addEventListener('keydown', e => {
             if (((e.key === 'ArrowRight') ||
                 (e.key === 'ArrowUp') ||
@@ -24,7 +28,7 @@ export class InputHandler {
                 }
 
             }
-            else if (e.key === 'c') {
+            else if (this.splashKeys.includes(e.key)) {
 
                 if ((this.game.direction.lastIndexOf('ArrowLeft') === this.game.direction.length - 1)
                 && (this.game.direction.length > 0)) {
@@ -36,9 +40,9 @@ export class InputHandler {
                         this.game.player.collisionY + 30, 'right');
                 }
 
-            } else if (e.key === 'd') {
+            } else if (this.debagKeys.includes(e.key)) {
                 this.game.debug = !this.game.debug;
-            } else if (e.key === 'r') {
+            } else if (this.restartKeys.includes(e.key)) {
                 this.game.restart();
             }
 
