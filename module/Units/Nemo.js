@@ -12,7 +12,6 @@ export class Nemo extends Unit {
         this.collisionX = game.width / 2 - (this.width / 2);
         this.collisionY = game.height - this.height - 50;
 
-        this.color = '#fde910';
         this.maxXRight = this.width + 10;
         this.maxXLeft = 0;
         this.maxTop = 242;
@@ -26,6 +25,16 @@ export class Nemo extends Unit {
         // смещение спрайта, чтобы не было видно куска другого кадра
         this.shiftX = 1;
         this.shiftY = 1;
+    }
+
+    
+    restart() {
+        this.collisionX = this.game.width / 2 - (this.width / 2);
+        this.collisionY = this.game.height - this.height - 50;
+        this.spriteX = this.collisionX;
+        this.spriteY = this.collisionY;
+        this.frameX = 0;
+        this.frameY = 1;
     }
 
 }

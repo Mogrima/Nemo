@@ -1,6 +1,3 @@
-import { Ammunition } from '../Projectles/Ammunition.js';
-import { Splash } from '../Projectles/Splash.js';
-
 export class Unit {
     constructor(game) {
         this.game = game;
@@ -31,18 +28,6 @@ export class Unit {
         this.collisionY += this.speedY;
         this.spriteX = this.collisionX;
         this.spriteY = this.collisionY;
-        // гравитация
-        // this.collisionY += this.speedJump;
-        // тело всегда падает
-        // this.speedJump += this.gravity;
-
-        // чтобы тело не падало ниже земли
-        // if (this.collisionY + this.height >= this.game.height - 50) {
-        //     this.collisionY = this.game.height - this.height - 50;
-        //     this.speedJump = 0;
-        // }
-        // // ограничение вертикального ускорения
-        // if (this.speedJump > 25) this.speedJump = 25;
 
         if (this.game.keys.includes('ArrowLeft')) {
             this.speedX = -this.maxSpeed;
@@ -64,15 +49,6 @@ export class Unit {
             this.speedX = 0;
             this.speedY = 0;
         }
-
-        // if (this.collisionY === this.game.height - this.height - 50) {
-        //     this.jump = true;
-        // }
-
-        // if (this.game.handlerJump && this.jump) {
-        //     this.speedJump = -11;
-        //     this.jump = false;
-        // }
 
         // чтобы не выходил за границы холста
         if (this.collisionX > this.game.width - this.maxXRight) {
@@ -115,17 +91,25 @@ export class Unit {
 
     }
 
-    shootTop(x, y, direct) {
+    shootTop(directX) {
+        const ammo = this.game.getAmmoProjectile();
         if (this.game.projectile > 0) {
-            this.ammunition.push(new Ammunition(this.game, x, y, direct));
-            this.game.projectile--;
+            if (ammo) {
+                ammo.start(this.collisionX, this.collisionY + 30, directX);
+                this.ammunition.push(ammo);
+                this.game.projectile--;
+            }
         }
     }
 
-    shootSplash(x, y, direct) {
+    shootSplash(directX) {
+        const splash = this.game.getSplashProjectile();
         if (this.game.projectile > 0) {
-            this.splashes.push(new Splash(this.game, x, y, direct));
-            this.game.projectile--;
+            if (splash) {
+                splash.start(this.collisionX, this.collisionY + 30, directX);
+                this.splashes.push(splash);
+                this.game.projectile--;
+            }
         }
     }
 }

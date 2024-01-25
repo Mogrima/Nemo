@@ -42,7 +42,7 @@ export class UI {
             context.restore();
         }
 
-        for (let i = 0; i < this.game.ammo; i++) {
+        for (let i = 0; i < this.game.projectile; i++) {
             context.fillRect(5 * i + 20, 50, 3, 20);
         }
         // жизни

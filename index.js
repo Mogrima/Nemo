@@ -1,5 +1,4 @@
 'use strict';
-import { CanvasBackground } from './module/Background/CanvasBackground.js';
 import { Game } from './module/Game.js';
 
 window.addEventListener('load', function () {
@@ -11,7 +10,6 @@ window.addEventListener('load', function () {
 
     const game = new Game(canvas);
     game.init(); 
-    game.addProps();
     let lastTime = 0;
 
     // animation loop

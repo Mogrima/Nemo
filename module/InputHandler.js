@@ -1,6 +1,10 @@
 export class InputHandler {
     constructor(game) {
         this.game = game;
+        this.debagKeys = ['d', 'D', 'в', 'В'];
+        this.splashKeys = ['c', 'C', 'с', 'С'];
+        this.closeMessageKeys = ['x', 'X', 'ч', 'Ч'];
+        this.restartKeys = ['r', 'R', 'к', 'К'];
         window.addEventListener('keydown', e => {
             if (((e.key === 'ArrowRight') ||
                 (e.key === 'ArrowUp') ||
@@ -9,43 +13,36 @@ export class InputHandler {
                 (e.key === 'ArrowLeft')) &&
                 this.game.keys.indexOf(e.key) === -1) {
                 this.game.keys.push(e.key);
-            } else if (e.key === 'Shift') {
-                this.game.handlerJump = true;
             } else if (e.key === ' ') {
 
                 if ((this.game.direction.lastIndexOf('ArrowLeft') === this.game.direction.length - 1)
                 && (this.game.direction.length > 0)) {
-                    this.game.player.shootTop(this.game.player.collisionX,
-                        this.game.player.collisionY + 30, 'left');
+                    this.game.player.shootTop('left');
 
                 } else {
-                    this.game.player.shootTop(this.game.player.collisionX + this.game.player.width,
-                        this.game.player.collisionY + 30, 'right');
+                    this.game.player.shootTop('right');
                 }
 
             }
-            else if (e.key === 'c') {
+            else if (this.splashKeys.includes(e.key)) {
 
                 if ((this.game.direction.lastIndexOf('ArrowLeft') === this.game.direction.length - 1)
                 && (this.game.direction.length > 0)) {
-                    this.game.player.shootSplash(this.game.player.collisionX,
-                        this.game.player.collisionY + 30, 'left');
+                    this.game.player.shootSplash('left');
 
                 } else {
-                    this.game.player.shootSplash(this.game.player.collisionX + this.game.player.width,
-                        this.game.player.collisionY + 30, 'right');
+                    this.game.player.shootSplash('right');
                 }
 
-            } else if (e.key === 'd') {
+            } else if (this.debagKeys.includes(e.key)) {
                 this.game.debug = !this.game.debug;
+            } else if (this.restartKeys.includes(e.key)) {
+                this.game.restart();
             }
 
 
         });
         window.addEventListener('keyup', e => {
-            if (this.game.handlerJump) {
-                this.game.handlerJump = false;
-            }
             if (this.game.keys.indexOf(e.key) > -1) {
                 this.game.keys.splice(this.game.keys.indexOf(e.key), 1);
 

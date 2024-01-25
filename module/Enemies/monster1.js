@@ -12,6 +12,7 @@ export class Monster1 extends Enemy {
         this.frameY = 1;
         this.maxFrame = 7;
         this.lives = 2;
+        this.maxLives = this.lives;
         this.score = this.lives;
         this.type = 'gorgona';
 

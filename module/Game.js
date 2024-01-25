@@ -1,23 +1,20 @@
 import { CanvasBackground } from './Background/CanvasBackground.js';
 import { InputHandler } from './InputHandler.js';
-import { Background } from '../UI/Background.js';
 import { UI } from '../UI/UI.js';
 import { Nemo } from './Units/Nemo.js';
 import { Nebessime } from './Units/Nebessime.js';
 import { Monster1 } from './Enemies/monster1.js';
 import { Monster2 } from './Enemies/monster2.js';
-import { Props } from './Props.js';
-import { Particle } from './Particle.js';
-import { ShadowExplosion } from './Explosions/ShadowExplosion.js';
-import { GorgonExplosion } from './Explosions/GorgonExplosion.js';
-import { FPS } from './FPS.js';
+import { Props } from './Props/Props.js';
+import { Ammunition } from './Projectles/Ammunition.js';
+import { Splash } from './Projectles/Splash.js';
+import { Tentacles } from './Props/Tentacles.js';
 
 export class Game {
     constructor(canvas) {
         this.canvas = canvas
         this.width = canvas.width;
         this.height = canvas.height;
-        this.fps = new FPS(this);
         this.fpsCount = 0;
         this.canvasBackground = new CanvasBackground(this.canvas);
         this.canvasObjects = [];
@@ -29,6 +26,8 @@ export class Game {
         this.topMargin = 232;
 
         this.projectile = 20;
+        this.ammoPool = [];
+        this.splashPool = [];
 
         this.projectileInterval = 500;
         this.maxProjectile = 20;
@@ -37,6 +36,8 @@ export class Game {
         this.ui = new UI(this);
 
         this.enemies = [];
+        this.maxEnemies = 10;
+        this.enemiesPool = [];
         this.enemyTimer = 0;
         this.enemyInterval = 5000;
         this.gameOver = false;
@@ -52,14 +53,8 @@ export class Game {
         this.maxHealth = 20;
 
         this.speed = 1;
-        this.background = new Background(this);
 
         this.particles = [];
-
-        this.handlerJump = false;
-
-
-        this.explosions = [];
 
         this.numberOfProps = 10;
         this.props = [];
@@ -71,36 +66,31 @@ export class Game {
 
         this.gameObjects = [];
 
+        this.prop = new Props(this);
+
     }
 
     update(deltaTime, context) {
-        this.trackGameOver(deltaTime); 
+        this.trackGameOver(deltaTime);
+        this.input.update();
         this.canvasObjects = [...this.canvasBackground.forest.objects];
         this.gameObjects = [this.player, this.player2,  
                             ...this.props, ...this.canvasObjects,
                             ...this.enemies, ...this.particles];
 
+        this.gameObjects.forEach(object => {
+            object.update(deltaTime, context);
+        });
+
         if (this.fpsCount === 0 && deltaTime !== 0) {
-            this.fpsCount = this.fps.render(deltaTime);
+            this.fpsCount = Math.floor(1000 / deltaTime);
         }
         if (this.timerFpsDisplay > this.intervalFpsDisplay) {
-            this.fpsCount = this.fps.render(deltaTime);
+            this.fpsCount = Math.floor(1000 / deltaTime);
             this.timerFpsDisplay = 0;
         } else {
             this.timerFpsDisplay += deltaTime;
         }
-
-        this.player.update();
-        this.player2.update();
-        this.background.update();
-        
-        this.props.forEach((prop) => {
-            prop.update(deltaTime, context);
-
-        });
-
-        this.props = this.props.filter(prop => !prop.markedForDeletion);
-        this.input.update();
 
         if (this.projectileTimer > this.projectileInterval) {
             if (this.projectile < this.maxProjectile) this.projectile++;
@@ -109,92 +99,72 @@ export class Game {
             this.projectileTimer += deltaTime;
         }
 
-        this.particles.forEach(particle => particle.update());
-        this.particles = this.particles.filter(particle => !particle.markedForDeletion);
-
-        this.explosions.forEach(explosion => explosion.update(deltaTime));
-        this.explosions = this.explosions.filter(explosion => !explosion.markedForDeletion);
-
-
-        this.enemies.forEach(enemy => {
-            enemy.update();
-            // Проверим, не столкнолся ли враг с главным игроком (player)
-            if (this.checkCollision(this.player, enemy)) {
-                // если столкновение произошло, помечаем врага как удаленного
-                enemy.markedForDeletion = true;
-                if (enemy.type === 'shadow') {
-                    this.explosions.push(new
-                    ShadowExplosion(this, enemy.collisionX + enemy.width * 0.5,
-                        enemy.collisionY + enemy.height * 0.5));
-                } else {
-                    this.explosions.push(new
-                    GorgonExplosion(this, enemy.collisionX + enemy.width * 0.5,
-                        enemy.collisionY + enemy.height * 0.5));
-                }
-                for (let i = 0; i < enemy.score; i++) {
-                    this.particles.push(new Particle(this, enemy.collisionX + enemy.width * 0.5,
-                        enemy.collisionY + enemy.height * 0.5));
-                }
-                this.health--;
-            }
-            // для всех активных пуль (ammo) также проверим условие столкновения
-            // пули с врагом.
-            this.player.ammunition.forEach(ammo => {
-                if (this.checkCollision(ammo, enemy)) {
-                    enemy.lives--; // уменьшаем жизни врага на единицу
-                    // если столкновение произошло, помечаем снаряд как удаленный
-                    this.particles.push(new Particle(this, enemy.collisionX + enemy.width * 0.5,
-                        enemy.collisionY + enemy.height * 0.5));
-                        ammo.markedForDeletion = true;
-                    if (enemy.lives <= 0) {
-                        enemy.markedForDeletion = true; // удаляем врага
-                        if (enemy.type === 'shadow') {
-                            this.explosions.push(new
-                            ShadowExplosion(this, enemy.collisionX + enemy.width * 0.5,
-                                enemy.collisionY + enemy.height * 0.5));
-                        } else {
-                            this.explosions.push(new
-                            GorgonExplosion(this, enemy.collisionX + enemy.width * 0.5,
-                                enemy.collisionY + enemy.height * 0.5));
-                        }
-                        for (let i = 0; i < enemy.score; i++) {
-                            this.particles.push(new Particle(this, enemy.collisionX + enemy.width * 0.5,
-                                enemy.collisionY + enemy.height * 0.5));
-                        }
-                        // увеличиваем количество очков главного игрока
-                        if (!this.gameOver) this.score += enemy.score;
-                        if (this.isWin()) this.gameOver = true; // проверяем условие победы
-                    }
-                }
-            });
-        });
-
-        this.enemies = this.enemies.filter(enemy => !enemy.markedForDeletion);
-
         if (this.enemyTimer > this.enemyInterval && !this.gameOver) {
-            this.addEnemy();
+            let enemy = this.getEnemy();
+            if (enemy) {
+            this.enemies.push(enemy);
+            enemy.start();
+            }
             this.enemyTimer = 0;
         } else {
             this.enemyTimer += deltaTime;
-        }
-
+        }  
     }
 
     init() {
-        this.canvasBackground.init(); 
+        this.canvasBackground.init();
+        this.addProps();
+        this.addEnemy();
+        this.createAmmoProjectiles();
+        this.createSplashProjectiles();
     }
 
     addEnemy() {
-        const randomize = Math.random();
-        if (randomize < 0.5) this.enemies.push(new Monster1(this));
-        else this.enemies.push(new Monster2(this));
+        for (let i = 0; i < this.maxEnemies; i++) {
+            const randomize = Math.random();
+            if (randomize < 0.5) this.enemiesPool.push(new Monster1(this));
+            else this.enemiesPool.push(new Monster2(this));
+        }
+    }
+
+    getEnemy() {
+        for (let i = 0; i < this.enemiesPool.length; i++) {
+
+            if (this.enemiesPool[i].free) {
+                return this.enemiesPool[i];
+            }
+        }
+    }
+
+    createAmmoProjectiles() {
+        for (let i = 0; i < this.projectile; i++) {
+            this.ammoPool.push(new Ammunition(this, 1400));
+        }
+    }
+
+    getAmmoProjectile() {
+        for (let i = 0; i < this.ammoPool.length; i++) {
+            if (this.ammoPool[i].free) return this.ammoPool[i];
+        }
+    }
+
+    createSplashProjectiles() {
+        for (let i = 0; i < this.projectile; i++) {
+            this.splashPool.push(new Splash(this, 200));
+        }
+    }
+
+    getSplashProjectile() {
+        for (let i = 0; i < this.splashPool.length; i++) {
+            if (this.splashPool[i].free) return this.splashPool[i];
+        }
     }
 
     addProps() {
         let attempts = 0;
         while (this.props.length < this.
             numberOfProps && attempts < 100) {
-            const testProp = new Props(this);
+            const testProp = new Tentacles(this);
             let overlap = false;
 
             this.props.forEach(prop => {
@@ -215,22 +185,7 @@ export class Game {
             attempts++;
         }
         this.props.forEach((item, index) => {
-            if (index < 3) {
-                item.feature = item.strangeMessage;
-                item.featureName = 'strangeMessage';
-            } 
-            else if (index < 5) {
-                item.feature = item.lossOfHealth;
-                item.featureName = 'Lose health';
-            } else if (index < 8) {
-                item.feature = item.upHealth;
-                item.featureName = 'Up health';
-            }
-            else if (index < 9) {
-                item.feature = item.reboot;
-                item.featureName = 'Reboot!';
-            } 
-            else if (index === 9)  {
+            if (index === 0)  {
                 item.feature = item.escape;
                 item.featureName = 'The escape!';
             }
@@ -265,9 +220,34 @@ export class Game {
         }
     }
 
+    removeGameObjects() {
+        this.props = this.props.filter(object => !object.markedForDeletion);
+        this.enemies = this.enemies.filter(object => !object.markedForDeletion);
+        this.particles = this.particles.filter(object => !object.markedForDeletion);
+    }
+
+    restart() {
+        this.gameOver = false;
+        this.gameTime = 90000;
+        this.ammoPool = [];
+        this.projectile = 20;
+        this.splashPool = [];
+        this.enemies = [];
+        this.enemiesPool = [];
+        this.score = 0;
+        this.win = false;
+        this.direction = [];
+        this.particles = [];
+        this.props = [];
+        this.health = 20;
+        this.canvasBackground.forest.restart();
+        this.canvasBackground.sky.restart();
+        this.player.restart();
+        this.player2.restart();
+        this.init();
+    }
+
     draw(context) {
-        // this.background.draw(context);
-        
         this.canvasBackground.draw(context);
         this.gameObjects.sort((a, b) =>{
             return (a.collisionY + a.height) - (b.collisionY + b.height);
@@ -277,6 +257,5 @@ export class Game {
             object.draw(context);
         });
         this.ui.draw(context);
-        this.explosions.forEach(explosion => explosion.draw(context));
     }
 }

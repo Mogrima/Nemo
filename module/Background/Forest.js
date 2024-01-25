@@ -23,11 +23,10 @@ export class Forest {
     }
 
     draw(context) {
-        // this.objects.sort((a, b) =>{
-        //     return (a.y + a.height) - (b.y + b.height);
-        // });
-        // this.objects.forEach(object => {
-        //     object.draw(context);
-        // });
+    }
+
+    restart() {
+        this.trees = [];
+        this.bushes = [];
     }
 }

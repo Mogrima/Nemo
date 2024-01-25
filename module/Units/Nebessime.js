@@ -11,7 +11,6 @@ export class Nebessime extends Unit {
         this.collisionX = (game.width / 2 - (this.width / 2)) + 100;
         this.collisionY = game.height - this.height - 43;
 
-        this.color = '#18171c';
         this.maxXRight = this.width + 10;
         this.maxXLeft = this.width - 10;
         this.maxTop = 232;
@@ -23,6 +22,16 @@ export class Nebessime extends Unit {
         this.maxFrame = 5;
         // смещение спрайта, чтобы не было видно куска другого кадра
         this.shiftX = 3;
+    }
+
+    
+    restart() {
+        this.collisionX = ( this.game.width / 2 - (this.width / 2)) + 100;
+        this.collisionY =  this.game.height - this.height - 43;
+        this.spriteX = this.collisionX;
+        this.spriteY = this.collisionY;
+        this.frameX = 0;
+        this.frameY = 2;
     }
 
 }

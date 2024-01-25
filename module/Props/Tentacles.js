@@ -1,4 +1,4 @@
-export class Props {
+export class Tentacles {
     constructor(game) {
         this.game = game;
         this.image = document.getElementById('tentacles');
@@ -14,22 +14,18 @@ export class Props {
         this.maxFrame = 20;
         this.spriteX = this.collisionX;
         this.spriteY = this.collisionY;
-        this.fps = 30;
+        this.fps = 20;
         this.timer = 0;
         this.interval = 1000/this.fps;
         this.lives = 3;
 
-        this.feature = null;
-        this.featureName = null;
+        this.getFeature = this.game.prop.getFeature();
+        this.feature = this.getFeature[0];
+        this.featureName =  this.getFeature[1];
         this.markedForDeletion = false;
         this.propTrigger = false;
 
-        this.uncannyText = ['You have been chosen. They will come soon.',
-                'The end is near. Make preparations.',
-                'The drop off has been made. You`ve been warned.',
-                'The flashing light was just a test. You`ll have plenty of warning next time.',
-                'They`re coming soon. Maybe you should think twice about opening the fear.'];
-        this.text = this.uncannyText[Math.floor(Math.random() * 5)];
+        this.text = this.getFeature[2] || null;
     }
     
     update(deltaTime, context) {
@@ -41,9 +37,10 @@ export class Props {
             this.timer += deltaTime;
         }
 
-        this.game.player.splashes.forEach(splash => {
-            if (this.game.checkCollision(splash, this)) {
+        this.game.splashPool.forEach(splash => {
+            if (!splash.free && this.game.checkCollision(splash, this) && !this.game.gameOver) {
                 splash.markedForDeletion = true;
+                splash.reset();
                 if (this.lives > 0) this.lives--;
             }
         });
@@ -61,6 +58,7 @@ export class Props {
                 } else if (this.game.keys.includes('x')) {
                     this.feature(context);
                     this.markedForDeletion = true;
+                    this.game.removeGameObjects();
                     this.propTrigger = false;
                     
                 } 
@@ -68,6 +66,7 @@ export class Props {
             else {
                 this.feature(context);
                 this.markedForDeletion = true;
+                this.game.removeGameObjects();
                 this.propTrigger = false;
             }
     }
@@ -87,36 +86,5 @@ export class Props {
             this.frameX * this.spriteWidth, this.frameY * this.spriteHeight,
             this.spriteWidth, this.spriteHeight,
             this.spriteX, this.spriteY, this.width, this.height);
-    }
-
-    strangeMessage(context) {
-        context.fillStyle = 'black';
-        context.fillRect(this.game.width * 0.5, this.game.height * 0.5, 200, 200);
-        context.fillStyle = 'white';
-        context.fillText(this.text, this.game.width * 0.5, this.game.height * 0.5);
-       
-    }
-
-    lossOfHealth() {
-        this.game.health = Math.trunc(this.game.health / 2);
-        console.log('Lose health');
-        if (this.game.health <= 0) {
-            this.game.gameOver = true;
-        }
-    }
-
-    upHealth() {
-        this.game.health = this.game.maxHealth;
-        console.log('Up health');
-    }
-
-    escape() {
-        console.log('The escape!');
-        this.game.win = true;
-        this.game.gameOver = true;
-    }
-
-    reboot() {
-        this.game.addProps();
     }
 }
