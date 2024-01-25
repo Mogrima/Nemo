@@ -5,10 +5,10 @@ import { Nemo } from './Units/Nemo.js';
 import { Nebessime } from './Units/Nebessime.js';
 import { Monster1 } from './Enemies/monster1.js';
 import { Monster2 } from './Enemies/monster2.js';
-import { Props } from './Props.js';
+import { Props } from './Props/Props.js';
 import { Ammunition } from './Projectles/Ammunition.js';
 import { Splash } from './Projectles/Splash.js';
-import { Tentacles } from './Tentacles.js';
+import { Tentacles } from './Props/Tentacles.js';
 
 export class Game {
     constructor(canvas) {
