@@ -8,6 +8,7 @@ import { Monster2 } from './Enemies/monster2.js';
 import { Props } from './Props.js';
 import { Ammunition } from './Projectles/Ammunition.js';
 import { Splash } from './Projectles/Splash.js';
+import { Tentacles } from './Tentacles.js';
 
 export class Game {
     constructor(canvas) {
@@ -64,6 +65,8 @@ export class Game {
         this.timerFpsDisplay = 0;
 
         this.gameObjects = [];
+
+        this.prop = new Props(this);
 
     }
 
@@ -161,7 +164,7 @@ export class Game {
         let attempts = 0;
         while (this.props.length < this.
             numberOfProps && attempts < 100) {
-            const testProp = new Props(this);
+            const testProp = new Tentacles(this);
             let overlap = false;
 
             this.props.forEach(prop => {
@@ -182,22 +185,7 @@ export class Game {
             attempts++;
         }
         this.props.forEach((item, index) => {
-            if (index < 3) {
-                item.feature = item.strangeMessage;
-                item.featureName = 'strangeMessage';
-            } 
-            else if (index < 5) {
-                item.feature = item.lossOfHealth;
-                item.featureName = 'Lose health';
-            } else if (index < 8) {
-                item.feature = item.upHealth;
-                item.featureName = 'Up health';
-            }
-            else if (index < 9) {
-                item.feature = item.reboot;
-                item.featureName = 'Reboot!';
-            } 
-            else if (index === 9)  {
+            if (index === 0)  {
                 item.feature = item.escape;
                 item.featureName = 'The escape!';
             }
