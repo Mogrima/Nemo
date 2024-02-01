@@ -5,7 +5,7 @@ export class Tentacles {
         this.collisionX = Math.random() * this.game.width;
         this.collisionY = (Math.random() * (this.game.topMargin - this.game.height * 0.82) +
                             this.game.height * 0.82);
-        this.spriteWidth = 25;
+        this.spriteWidth = 50;
         this.spriteHeight = 87;
         this.width = this.spriteWidth;
         this.height = this.spriteHeight;
@@ -84,6 +84,6 @@ export class Tentacles {
         context.drawImage(this.image,
             this.frameX * this.spriteWidth, this.frameY * this.spriteHeight,
             this.spriteWidth, this.spriteHeight,
-            this.spriteX, this.spriteY, this.width, this.height);
+            this.spriteX + 14, this.spriteY, this.width, this.height);
     }
 }
