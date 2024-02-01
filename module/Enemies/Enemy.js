@@ -63,7 +63,8 @@ export class Enemy {
             }
     
             // Проверим, не столкнолся ли враг с главным игроком (player)
-            if (this.game.checkCollision(this.game.player, this)) {
+            if (this.game.checkCollision(this.game.player, this)
+                && !this.game.player.markedForDeletion) {
                 // если столкновение произошло, помечаем врага как удаленного
                 this.markedForDeletion = true;
                 for (let i = 0; i < this.score; i++) {
