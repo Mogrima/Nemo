@@ -55,8 +55,7 @@ export class Tentacles {
             if (this.featureName === 'strangeMessage') {
                 if (!this.game.keys.includes('x')) {
                     this.feature(context);
-                } else if (this.game.keys.includes('x')) {
-                    this.feature(context);
+                } else {
                     this.markedForDeletion = true;
                     this.game.removeGameObjects();
                     this.propTrigger = false;
