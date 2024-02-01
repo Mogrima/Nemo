@@ -1,11 +1,11 @@
 export class Props {
     constructor(game) {
         this.game = game;
-        this.uncannyText = ['You have been chosen. They will come soon.',
-                'The end is near. Make preparations.',
-                'The drop off has been made. You`ve been warned.',
-                'The flashing light was just a test. You`ll have plenty of warning next time.',
-                'They`re coming soon. Maybe you should think twice about opening the fear.'];
+        this.uncannyText = ['You have been chosen.\nThey will come soon.',
+                'The end is near.\nMake preparations.',
+                'The drop off has been\nmade. You`ve been warned.',
+                'The flashing light was\njust a test. You`ll have\nplenty of warning next time.',
+                'They`re coming soon.\nMaybe you should think\ntwice about opening the fear.'];
     }
 
     strangeMessage(context) {
