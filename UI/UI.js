@@ -29,7 +29,7 @@ export class UI {
             let message1;
             let message2;
             if (this.game.isWin()) {
-                context.fillStyle = this.colorWin;
+                context.fillStyle = '#ed05da';
                 message1 = 'Liberty!';
                 message2 = 'You have overcome the Darkness!';
             } else {
@@ -37,6 +37,7 @@ export class UI {
                 message1 = 'This is the end!';
                 message2 = 'Mental breakdown!';
             }
+            context.shadowBlur = 5;
             context.font = '70px ' + this.fontFamily;
             context.fillText(message1, this.game.width * 0.5, this.game.height * 0.5 - 20);
             context.font = '25px ' + this.fontFamily;
