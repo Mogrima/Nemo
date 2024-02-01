@@ -20,6 +20,7 @@ export class Game {
         this.canvasObjects = [];
         this.player = new Nemo(this);
         this.player2 = new Nebessime(this);
+        this.units = [this.player, this.player2];
 
         this.keys = [];
         this.input = new InputHandler(this);
@@ -75,7 +76,7 @@ export class Game {
         this.trackGameOver(deltaTime);
         this.input.update();
         this.canvasObjects = [...this.canvasBackground.forest.objects];
-        this.gameObjects = [this.player, this.player2,  
+        this.gameObjects = [...this.units,  
                             ...this.props, ...this.canvasObjects,
                             ...this.enemies, ...this.particles,
                             ...this.corpuscles];
