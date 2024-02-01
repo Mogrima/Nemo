@@ -56,19 +56,39 @@ export class Tentacles {
            if (this.propTrigger !== false) {
             if (this.featureName === 'strangeMessage') {
                 if (!this.game.keys.includes('x')) {
-                    this.feature(context);
+                    if (this.frameX > 0) {
+                        if (this.timer > this.interval) {
+                            this.frameX--;
+                            this.timer = 0;
+                        } else {
+                            this.timer += deltaTime;
+                        }
+                        
+                    } else {
+                        this.feature(context);
+                    }
                 } else {
-                    this.markedForDeletion = true;
-                    this.game.removeGameObjects();
-                    this.propTrigger = false;
-                    
+                        this.markedForDeletion = true;
+                        this.game.removeGameObjects();
+                        this.propTrigger = false;
                 } 
             } 
             else {
-                this.feature(context);
-                this.markedForDeletion = true;
-                this.game.removeGameObjects();
-                this.propTrigger = false;
+                if (this.frameX > 0) {
+                    if (this.timer > this.interval) {
+                        this.frameX--;
+                        this.timer = 0;
+                    } else {
+                        this.timer += deltaTime;
+                    }
+                }
+                else {
+                    this.feature(context);
+                    this.markedForDeletion = true;
+                    this.game.removeGameObjects();
+                    this.propTrigger = false;
+                }
+                
             }
     }
 
