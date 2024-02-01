@@ -41,6 +41,8 @@ export class UI {
             context.fillText(message1, this.game.width * 0.5, this.game.height * 0.5 - 20);
             context.font = '25px ' + this.fontFamily;
             context.fillText(message2, this.game.width * 0.5, this.game.height * 0.5 + 20);
+            context.font = '15px ' + this.fontFamily;
+            context.fillText('Press key \'R\' to restart the Game', this.game.width * 0.5, this.game.height * 0.5 + 60);
             context.restore();
         }
 
