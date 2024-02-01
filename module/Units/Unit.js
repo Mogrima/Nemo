@@ -23,6 +23,8 @@ export class Unit {
 
         this.markedForDeletion = false;
 
+        this.numberOfCorpuscle = 20;
+
     }
     update() {
         this.collisionX += this.speedX;
