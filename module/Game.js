@@ -55,6 +55,7 @@ export class Game {
         this.speed = 1;
 
         this.particles = [];
+        this.corpuscles = [];
 
         this.numberOfProps = 10;
         this.props = [];
@@ -76,7 +77,8 @@ export class Game {
         this.canvasObjects = [...this.canvasBackground.forest.objects];
         this.gameObjects = [this.player, this.player2,  
                             ...this.props, ...this.canvasObjects,
-                            ...this.enemies, ...this.particles];
+                            ...this.enemies, ...this.particles,
+                            ...this.corpuscles];
 
         this.gameObjects.forEach(object => {
             object.update(deltaTime, context);
@@ -224,6 +226,7 @@ export class Game {
         this.props = this.props.filter(object => !object.markedForDeletion);
         this.enemies = this.enemies.filter(object => !object.markedForDeletion);
         this.particles = this.particles.filter(object => !object.markedForDeletion);
+        this.corpuscles = this.corpuscles.filter(object => !object.markedForDeletion);
     }
 
     restart() {

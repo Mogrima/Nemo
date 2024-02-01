@@ -1,3 +1,5 @@
+import { Spark } from '../Spark.js';
+
 export class Tentacles {
     constructor(game) {
         this.game = game;
@@ -71,6 +73,10 @@ export class Tentacles {
                         this.markedForDeletion = true;
                         this.game.removeGameObjects();
                         this.propTrigger = false;
+                        for (let i = 0; i < 5; i++) {
+                            this.game.corpuscles.push(new Spark(this.game, this.collisionX,
+                                this.collisionY + this.height, 'gold'));
+                        }
                 } 
             } 
             else {
@@ -87,6 +93,10 @@ export class Tentacles {
                     this.markedForDeletion = true;
                     this.game.removeGameObjects();
                     this.propTrigger = false;
+                    for (let i = 0; i < 5; i++) {
+                        this.game.corpuscles.push(new Spark(this.game, this.collisionX,
+                            this.collisionY + this.height, '#0000ff'));
+                    }
                 }
                 
             }
