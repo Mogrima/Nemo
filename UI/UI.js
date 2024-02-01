@@ -10,6 +10,8 @@ export class UI {
 
     draw(context) {
         context.save();
+        context.fillStyle = 'rgba(0, 128, 0, 0.5)';
+        context.fillRect(10, 5, 200, 220);
         context.fillStyle = this.color;
         context.shadowOffsetX = 2;
         context.shadowOffsetY = 2;
