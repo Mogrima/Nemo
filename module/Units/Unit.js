@@ -21,6 +21,7 @@ export class Unit {
         this.gravity = 0.5;
         this.jump = true;
 
+        this.markedForDeletion = false;
 
     }
     update() {
