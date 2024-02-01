@@ -30,11 +30,13 @@ export class Tentacles {
     
     update(deltaTime, context) {
         if (this.frameX > this.maxFrame) this.frameX = 13;
-        if (this.timer > this.interval) {
-            this.frameX++;
-            this.timer = 0;
-        } else {
-            this.timer += deltaTime;
+        if (!this.propTrigger) {
+            if (this.timer > this.interval) {
+                this.frameX++;
+                this.timer = 0;
+            } else {
+                this.timer += deltaTime;
+            }
         }
 
         this.game.splashPool.forEach(splash => {
