@@ -9,10 +9,27 @@ export class Props {
     }
 
     strangeMessage(context) {
+        const messageWidth = 400;
+        const messageHeight = 300;
+        const text = this.text.split('\n');
+        context.save();
+        context.fillStyle = '#00BC17';
+        context.font = 20 + 'px ' + 'Silkscreen';
+        context.shadowOffsetX = 2;
+        context.shadowColor = 'black';
+        context.textAlign = 'center';
+        context.fillRect(this.game.width * 0.5 - messageWidth * 0.5,
+            this.game.height * 0.5 - messageHeight * 0.5,
+            messageWidth, messageHeight);
         context.fillStyle = 'black';
-        context.fillRect(this.game.width * 0.5, this.game.height * 0.5, 200, 200);
-        context.fillStyle = 'white';
-        context.fillText(this.text, this.game.width * 0.5, this.game.height * 0.5);
+        context.shadowOffsetY = 2;
+        context.shadowBlur = 0;
+        context.shadowColor = 'red';
+        for (let i = 0; i < text.length; i++) {
+            context.fillText(text[i],  this.game.width * 0.5,
+                this.game.height * 0.5 + i * 25);
+        }
+        context.restore();
        
     }
 
