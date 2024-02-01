@@ -4,6 +4,7 @@ export class Corpuscle {
         this.collisionX = x;
         this.collisionY = y;
         this.color = color;
+        this.colorStroke = '#ffff00';
         // от 5 до 15
         this.radius = Math.floor(Math.random() * 10 + 5);
         // от -3 до 3
@@ -20,7 +21,7 @@ export class Corpuscle {
         context.beginPath();
         context.arc(this.collisionX, this.collisionY, this.radius, 0, Math.PI * 2);
         context.fill();
-        context.strokeStyle= '#ffff00';
+        context.strokeStyle= this.colorStroke;
         context.stroke();
         context.restore();
     }
