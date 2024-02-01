@@ -1,5 +1,5 @@
 import { Unit } from './Unit.js';
-
+import { Farefly } from "../Farefly.js";
 
 export class Nemo extends Unit {
     constructor(game) {
@@ -25,6 +25,14 @@ export class Nemo extends Unit {
         // смещение спрайта, чтобы не было видно куска другого кадра
         this.shiftX = 1;
         this.shiftY = 1;
+    }
+
+    update() {
+        super.update();
+        if (this.game.health < 1) {
+            this.markedForDeletion = true;
+            this.game.removeGameObjects();
+        }
     }
 
     

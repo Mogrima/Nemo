@@ -224,6 +224,7 @@ export class Game {
     }
 
     removeGameObjects() {
+        this.units = this.units.filter(object => !object.markedForDeletion);
         this.props = this.props.filter(object => !object.markedForDeletion);
         this.enemies = this.enemies.filter(object => !object.markedForDeletion);
         this.particles = this.particles.filter(object => !object.markedForDeletion);
