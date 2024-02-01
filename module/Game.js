@@ -186,7 +186,7 @@ export class Game {
         }
         this.props.forEach((item, index) => {
             if (index === 0)  {
-                item.feature = item.escape;
+                item.feature = this.prop.escape;
                 item.featureName = 'The escape!';
             }
         });
