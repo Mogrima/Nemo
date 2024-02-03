@@ -9,7 +9,6 @@ export class InputHandler {
             if (((e.key === 'ArrowRight') ||
                 (e.key === 'ArrowUp') ||
                 (e.key === 'ArrowDown') ||
-                (e.key === 'x') ||
                 (e.key === 'ArrowLeft')) &&
                 this.game.keys.indexOf(e.key) === -1) {
                 this.game.keys.push(e.key);
@@ -38,6 +37,8 @@ export class InputHandler {
                 this.game.debug = !this.game.debug;
             } else if (this.restartKeys.includes(e.key)) {
                 this.game.restart();
+            } else if (this.closeMessageKeys.includes(e.key)) {
+                this.game.toggleMessage = true;
             }
 
 
@@ -54,6 +55,7 @@ export class InputHandler {
                     this.game.player2.frameY = 2;
                 }
             }
+            this.game.toggleMessage = false;
         });
 
     }
