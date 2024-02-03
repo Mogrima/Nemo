@@ -244,10 +244,12 @@ export class Game {
         this.win = false;
         this.direction = [];
         this.particles = [];
+        this.corpuscles = [];
         this.props = [];
         this.health = 20;
         this.canvasBackground.forest.restart();
         this.canvasBackground.sky.restart();
+        this.units = [this.player, this.player2];
         this.player.restart();
         this.player2.restart();
         this.init();
