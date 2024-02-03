@@ -57,7 +57,7 @@ export class Tentacles {
 
            if (this.propTrigger !== false) {
             if (this.featureName === 'strangeMessage') {
-                if (!this.game.keys.includes('x')) {
+                if (!this.game.toggleMessage) {
                     if (this.frameX > 0) {
                         if (this.timer > this.interval) {
                             this.frameX--;
@@ -67,7 +67,7 @@ export class Tentacles {
                         }
                         
                     } else {
-                        this.feature(context);
+                        this.feature(context); 
                     }
                 } else {
                         this.markedForDeletion = true;
