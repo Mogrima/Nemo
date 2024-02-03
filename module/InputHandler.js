@@ -3,7 +3,7 @@ export class InputHandler {
         this.game = game;
         this.debagKeys = ['d', 'D', 'в', 'В'];
         this.splashKeys = ['c', 'C', 'с', 'С'];
-        this.closeMessageKeys = ['x', 'X', 'ч', 'Ч'];
+        this.closeMessageKeys = ['x', 'X', 'ч', 'Ч', 'Escape'];
         this.restartKeys = ['r', 'R', 'к', 'К'];
         window.addEventListener('keydown', e => {
             if (((e.key === 'ArrowRight') ||
