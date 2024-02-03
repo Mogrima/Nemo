@@ -69,6 +69,7 @@ export class Game {
         this.gameObjects = [];
 
         this.prop = new Props(this);
+        this.toggleMessage = false;
 
     }
 
