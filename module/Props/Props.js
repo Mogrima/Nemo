@@ -32,7 +32,7 @@ export class Props {
         context.font = 13 + 'px ' + 'Silkscreen';
         context.shadowOffsetX = 0;
         context.shadowOffsetY = 0;
-        context.fillText('Press key \'X\' or \'Esc\' to restart the Game',  this.game.width * 0.5,
+        context.fillText('Press key \'X\' or \'Esc\' to close the message',  this.game.width * 0.5,
             this.game.height * 0.5 + messageHeight * 0.5 - 20);
         context.restore();
        
