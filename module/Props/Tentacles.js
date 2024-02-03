@@ -46,6 +46,8 @@ export class Tentacles {
                 splash.markedForDeletion = true;
                 splash.reset();
                 if (this.lives > 0) this.lives--;
+                this.game.corpuscles.push(new Spark(this.game, this.collisionX,
+                    this.collisionY + this.height * 0.5, '#0000ff'));
             }
         });
 
