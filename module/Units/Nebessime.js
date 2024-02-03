@@ -26,12 +26,14 @@ export class Nebessime extends Unit {
 
     
     restart() {
+        this.markedForDeletion = false;
         this.collisionX = ( this.game.width / 2 - (this.width / 2)) + 100;
         this.collisionY =  this.game.height - this.height - 43;
         this.spriteX = this.collisionX;
         this.spriteY = this.collisionY;
         this.frameX = 0;
         this.frameY = 2;
+        this.numberOfCorpuscle = 20;
     }
 
 }

@@ -33,7 +33,6 @@ export class Nemo extends Unit {
             this.markedForDeletion = true;
             this.game.removeGameObjects();
             for (let i = 0; this.numberOfCorpuscle > 0; i++) {
-                console.log(this.numberOfCorpuscle)
                 this.numberOfCorpuscle--;
                 this.game.corpuscles.push(new Farefly(this.game, this.collisionX,
                     this.collisionY + this.height, '#8b00ff'));
@@ -43,12 +42,14 @@ export class Nemo extends Unit {
 
     
     restart() {
+        this.markedForDeletion = false;
         this.collisionX = this.game.width / 2 - (this.width / 2);
         this.collisionY = this.game.height - this.height - 50;
         this.spriteX = this.collisionX;
         this.spriteY = this.collisionY;
         this.frameX = 0;
         this.frameY = 1;
+        this.numberOfCorpuscle = 20;
     }
 
 }
