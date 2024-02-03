@@ -9,7 +9,7 @@ export class Tentacles {
                             this.game.height * 0.82);
         this.spriteWidth = 50;
         this.spriteHeight = 87;
-        this.width = this.spriteWidth;
+        this.width = 25;
         this.height = this.spriteHeight;
         this.frameX = 0;
         this.frameY = 0;
@@ -116,6 +116,6 @@ export class Tentacles {
         context.drawImage(this.image,
             this.frameX * this.spriteWidth, this.frameY * this.spriteHeight,
             this.spriteWidth, this.spriteHeight,
-            this.spriteX + 14, this.spriteY, this.width, this.height);
+            this.spriteX, this.spriteY, this.spriteWidth, this.spriteHeight,);
     }
 }
