@@ -22,14 +22,20 @@ export class Nebessime extends Unit {
         this.maxFrame = 5;
         // смещение спрайта, чтобы не было видно куска другого кадра
         this.shiftX = 3;
+
+        this.fps = 60;
+        this.timer = 0;
+        this.interval = 1000/this.fps;
     }
 
-    update() {
+    update(deltaTime) {
         super.update();
-        if (this.frameX < this.maxFrame) {
+        if (this.frameX >= this.maxFrame) this.frameX = 0;
+        if (this.timer > this.interval) {
             this.frameX++;
+            this.timer = 0;
         } else {
-            this.frameX = 0;
+            this.timer += deltaTime;
         }
     }
     
