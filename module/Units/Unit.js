@@ -71,13 +71,6 @@ export class Unit {
         });
         this.ammunition = this.ammunition.filter(ammo => !ammo.markedForDeletion);
         this.splashes = this.splashes.filter(splash => !splash.markedForDeletion);
-
-        // sprite animation
-        if (this.frameX < this.maxFrame) {
-            this.frameX++;
-        } else {
-            this.frameX = 0;
-        }
     }
 
     draw(context) {

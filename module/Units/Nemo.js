@@ -38,6 +38,11 @@ export class Nemo extends Unit {
                     this.collisionY + this.height, '#8b00ff'));
             }
         }
+        if (this.frameX < this.maxFrame) {
+            this.frameX++;
+        } else {
+            this.frameX = 0;
+        }
     }
 
     

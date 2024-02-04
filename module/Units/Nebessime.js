@@ -24,6 +24,14 @@ export class Nebessime extends Unit {
         this.shiftX = 3;
     }
 
+    update() {
+        super.update();
+        if (this.frameX < this.maxFrame) {
+            this.frameX++;
+        } else {
+            this.frameX = 0;
+        }
+    }
     
     restart() {
         this.markedForDeletion = false;
