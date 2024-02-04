@@ -31,7 +31,7 @@ export class Tentacles {
     }
     
     update(deltaTime, context) {
-        if (this.frameX > this.maxFrame) this.frameX = 13;
+        if (this.frameX >= this.maxFrame) this.frameX = 13;
         if (!this.propTrigger) {
             if (this.timer > this.interval) {
                 this.frameX++;
