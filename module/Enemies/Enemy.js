@@ -122,6 +122,7 @@ export class Enemy {
     reset() {
         this.free = true;
         this.markedForDeletion = false;
+        this.frameX = 0;
     }
 
     start() {
