@@ -56,11 +56,6 @@ export class Enemy {
             }
             this.spriteX = this.collisionX;
             this.spriteY = this.collisionY;
-            if (this.frameX < this.maxFrame) {
-                this.frameX++;
-            } else {
-                this.frameX = 0;
-            }
     
             // Проверим, не столкнолся ли враг с главным игроком (player)
             if (this.game.checkCollision(this.game.player, this)

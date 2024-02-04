@@ -16,7 +16,28 @@ export class Monster2 extends Enemy {
         this.score = this.lives;
         this.type = 'shadow';
 
+        this.fps = 20;
+        this.timer = 0;
+        this.interval = 1000/this.fps;
 
-        if (this.directX === 'right') this.frameY = 4;
+
+        if (this.directX === 'right') this.frameY = 0;
+    }
+
+    update(deltaTime) {
+        super.update();
+        if (this.collisionX > 100 &&
+            this.collisionX < this.game.width - 100) {
+            if (this.timer > this.interval) {
+                if (this.frameX < this.maxFrame) {
+                    this.frameX++;
+                } else {
+                    this.frameX = this.maxFrame;
+                }
+                this.timer = 0;
+            } else {
+                this.timer += deltaTime;
+            }
+        }
     }
 }

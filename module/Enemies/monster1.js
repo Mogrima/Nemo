@@ -19,5 +19,12 @@ export class Monster1 extends Enemy {
         if (this.directX === 'right') this.frameY = 4;
     }
 
-
+    update() {
+        super.update();
+        if (this.frameX < this.maxFrame) {
+            this.frameX++;
+        } else {
+            this.frameX = 0;
+        }
+    }
 }
