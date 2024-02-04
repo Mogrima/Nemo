@@ -20,6 +20,7 @@ export class Game {
         this.canvasObjects = [];
         this.player = new Nemo(this);
         this.player2 = new Nebessime(this);
+        this.units = [this.player, this.player2];
 
         this.keys = [];
         this.input = new InputHandler(this);
@@ -55,6 +56,7 @@ export class Game {
         this.speed = 1;
 
         this.particles = [];
+        this.corpuscles = [];
 
         this.numberOfProps = 10;
         this.props = [];
@@ -67,6 +69,7 @@ export class Game {
         this.gameObjects = [];
 
         this.prop = new Props(this);
+        this.toggleMessage = false;
 
     }
 
@@ -74,9 +77,10 @@ export class Game {
         this.trackGameOver(deltaTime);
         this.input.update();
         this.canvasObjects = [...this.canvasBackground.forest.objects];
-        this.gameObjects = [this.player, this.player2,  
+        this.gameObjects = [...this.units,  
                             ...this.props, ...this.canvasObjects,
-                            ...this.enemies, ...this.particles];
+                            ...this.enemies, ...this.particles,
+                            ...this.corpuscles];
 
         this.gameObjects.forEach(object => {
             object.update(deltaTime, context);
@@ -186,7 +190,7 @@ export class Game {
         }
         this.props.forEach((item, index) => {
             if (index === 0)  {
-                item.feature = item.escape;
+                item.feature = this.prop.escape;
                 item.featureName = 'The escape!';
             }
         });
@@ -221,9 +225,11 @@ export class Game {
     }
 
     removeGameObjects() {
+        this.units = this.units.filter(object => !object.markedForDeletion);
         this.props = this.props.filter(object => !object.markedForDeletion);
         this.enemies = this.enemies.filter(object => !object.markedForDeletion);
         this.particles = this.particles.filter(object => !object.markedForDeletion);
+        this.corpuscles = this.corpuscles.filter(object => !object.markedForDeletion);
     }
 
     restart() {
@@ -238,10 +244,12 @@ export class Game {
         this.win = false;
         this.direction = [];
         this.particles = [];
+        this.corpuscles = [];
         this.props = [];
         this.health = 20;
         this.canvasBackground.forest.restart();
         this.canvasBackground.sky.restart();
+        this.units = [this.player, this.player2];
         this.player.restart();
         this.player2.restart();
         this.init();

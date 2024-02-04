@@ -1,3 +1,5 @@
+import { Spark } from '../Spark.js';
+
 export class Tentacles {
     constructor(game) {
         this.game = game;
@@ -5,9 +7,9 @@ export class Tentacles {
         this.collisionX = Math.random() * this.game.width;
         this.collisionY = (Math.random() * (this.game.topMargin - this.game.height * 0.82) +
                             this.game.height * 0.82);
-        this.spriteWidth = 25;
+        this.spriteWidth = 50;
         this.spriteHeight = 87;
-        this.width = this.spriteWidth;
+        this.width = 25;
         this.height = this.spriteHeight;
         this.frameX = 0;
         this.frameY = 0;
@@ -29,12 +31,14 @@ export class Tentacles {
     }
     
     update(deltaTime, context) {
-        if (this.frameX > this.maxFrame) this.frameX = 13;
-        if (this.timer > this.interval) {
-            this.frameX++;
-            this.timer = 0;
-        } else {
-            this.timer += deltaTime;
+        if (this.frameX >= this.maxFrame) this.frameX = 13;
+        if (!this.propTrigger) {
+            if (this.timer > this.interval) {
+                this.frameX++;
+                this.timer = 0;
+            } else {
+                this.timer += deltaTime;
+            }
         }
 
         this.game.splashPool.forEach(splash => {
@@ -42,6 +46,8 @@ export class Tentacles {
                 splash.markedForDeletion = true;
                 splash.reset();
                 if (this.lives > 0) this.lives--;
+                this.game.corpuscles.push(new Spark(this.game, this.collisionX,
+                    this.collisionY + this.height * 0.5, '#0000ff'));
             }
         });
 
@@ -53,21 +59,48 @@ export class Tentacles {
 
            if (this.propTrigger !== false) {
             if (this.featureName === 'strangeMessage') {
-                if (!this.game.keys.includes('x')) {
-                    this.feature(context);
-                } else if (this.game.keys.includes('x')) {
+                if (!this.game.toggleMessage) {
+                    if (this.frameX > 0) {
+                        if (this.timer > this.interval) {
+                            this.frameX--;
+                            this.timer = 0;
+                        } else {
+                            this.timer += deltaTime;
+                        }
+                        
+                    } else {
+                        this.feature(context); 
+                    }
+                } else {
+                        this.markedForDeletion = true;
+                        this.game.removeGameObjects();
+                        this.propTrigger = false;
+                        for (let i = 0; i < 5; i++) {
+                            this.game.corpuscles.push(new Spark(this.game, this.collisionX,
+                                this.collisionY + this.height, 'gold'));
+                        }
+                } 
+            } 
+            else {
+                if (this.frameX > 0) {
+                    if (this.timer > this.interval) {
+                        this.frameX--;
+                        this.timer = 0;
+                    } else {
+                        this.timer += deltaTime;
+                    }
+                }
+                else {
                     this.feature(context);
                     this.markedForDeletion = true;
                     this.game.removeGameObjects();
                     this.propTrigger = false;
-                    
-                } 
-            } 
-            else {
-                this.feature(context);
-                this.markedForDeletion = true;
-                this.game.removeGameObjects();
-                this.propTrigger = false;
+                    for (let i = 0; i < 5; i++) {
+                        this.game.corpuscles.push(new Spark(this.game, this.collisionX,
+                            this.collisionY + this.height, '#0000ff'));
+                    }
+                }
+                
             }
     }
 
@@ -85,6 +118,6 @@ export class Tentacles {
         context.drawImage(this.image,
             this.frameX * this.spriteWidth, this.frameY * this.spriteHeight,
             this.spriteWidth, this.spriteHeight,
-            this.spriteX, this.spriteY, this.width, this.height);
+            this.spriteX, this.spriteY, this.spriteWidth, this.spriteHeight,);
     }
 }

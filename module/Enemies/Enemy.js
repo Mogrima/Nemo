@@ -22,12 +22,12 @@ export class Enemy {
                 this.directX = 'right';
                 this.collisionX = this.game.width + this.margin;
                 if (this.type === 'gorgona') this.frameY = 4;
-                else if (this.type === 'shadow') this.frameY = 4;
+                else if (this.type === 'shadow') this.frameY = 0;
             } else {
                 this.directX = 'left';
                 this.collisionX = -this.margin;
                 if (this.type === 'gorgona') this.frameY = 1;
-                else if (this.type === 'shadow') this.frameY = 5;
+                else if (this.type === 'shadow') this.frameY = 1;
             }
         };
         this.direct();
@@ -56,14 +56,10 @@ export class Enemy {
             }
             this.spriteX = this.collisionX;
             this.spriteY = this.collisionY;
-            if (this.frameX < this.maxFrame) {
-                this.frameX++;
-            } else {
-                this.frameX = 0;
-            }
     
             // Проверим, не столкнолся ли враг с главным игроком (player)
-            if (this.game.checkCollision(this.game.player, this)) {
+            if (this.game.checkCollision(this.game.player, this)
+                && !this.game.player.markedForDeletion && !this.game.gameOver) {
                 // если столкновение произошло, помечаем врага как удаленного
                 this.markedForDeletion = true;
                 for (let i = 0; i < this.score; i++) {
@@ -126,6 +122,7 @@ export class Enemy {
     reset() {
         this.free = true;
         this.markedForDeletion = false;
+        this.frameX = 0;
     }
 
     start() {

@@ -22,16 +22,32 @@ export class Nebessime extends Unit {
         this.maxFrame = 5;
         // смещение спрайта, чтобы не было видно куска другого кадра
         this.shiftX = 3;
+
+        this.fps = 60;
+        this.timer = 0;
+        this.interval = 1000/this.fps;
     }
 
+    update(deltaTime) {
+        super.update();
+        if (this.frameX >= this.maxFrame) this.frameX = 0;
+        if (this.timer > this.interval) {
+            this.frameX++;
+            this.timer = 0;
+        } else {
+            this.timer += deltaTime;
+        }
+    }
     
     restart() {
+        this.markedForDeletion = false;
         this.collisionX = ( this.game.width / 2 - (this.width / 2)) + 100;
         this.collisionY =  this.game.height - this.height - 43;
         this.spriteX = this.collisionX;
         this.spriteY = this.collisionY;
         this.frameX = 0;
         this.frameY = 2;
+        this.numberOfCorpuscle = 20;
     }
 
 }

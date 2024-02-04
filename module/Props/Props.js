@@ -1,18 +1,40 @@
 export class Props {
     constructor(game) {
         this.game = game;
-        this.uncannyText = ['You have been chosen. They will come soon.',
-                'The end is near. Make preparations.',
-                'The drop off has been made. You`ve been warned.',
-                'The flashing light was just a test. You`ll have plenty of warning next time.',
-                'They`re coming soon. Maybe you should think twice about opening the fear.'];
+        this.uncannyText = ['You have been chosen.\nThey will come soon.',
+                'The end is near.\nMake preparations.',
+                'The drop off has been\nmade. You`ve been warned.',
+                'The flashing light was\njust a test. You`ll have\nplenty of warning next time.',
+                'They`re coming soon.\nMaybe you should think\ntwice about opening the fear.'];
     }
 
     strangeMessage(context) {
+        const messageWidth = 400;
+        const messageHeight = 300;
+        const text = this.text.split('\n');
+        context.save();
+        context.fillStyle = '#00BC17';
+        context.font = 20 + 'px ' + 'Silkscreen';
+        context.shadowOffsetX = 2;
+        context.shadowColor = 'black';
+        context.textAlign = 'center';
+        context.fillRect(this.game.width * 0.5 - messageWidth * 0.5,
+            this.game.height * 0.5 - messageHeight * 0.5,
+            messageWidth, messageHeight);
         context.fillStyle = 'black';
-        context.fillRect(this.game.width * 0.5, this.game.height * 0.5, 200, 200);
-        context.fillStyle = 'white';
-        context.fillText(this.text, this.game.width * 0.5, this.game.height * 0.5);
+        context.shadowOffsetY = 2;
+        context.shadowBlur = 0;
+        context.shadowColor = 'red';
+        for (let i = 0; i < text.length; i++) {
+            context.fillText(text[i],  this.game.width * 0.5,
+                this.game.height * 0.5 + i * 25);
+        }
+        context.font = 13 + 'px ' + 'Silkscreen';
+        context.shadowOffsetX = 0;
+        context.shadowOffsetY = 0;
+        context.fillText('Press key \'X\' or \'Esc\' to close the message',  this.game.width * 0.5,
+            this.game.height * 0.5 + messageHeight * 0.5 - 20);
+        context.restore();
        
     }
 

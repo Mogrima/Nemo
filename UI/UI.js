@@ -10,6 +10,8 @@ export class UI {
 
     draw(context) {
         context.save();
+        context.fillStyle = 'rgba(0, 128, 0, 0.5)';
+        context.fillRect(10, 5, 200, 220);
         context.fillStyle = this.color;
         context.shadowOffsetX = 2;
         context.shadowOffsetY = 2;
@@ -27,7 +29,7 @@ export class UI {
             let message1;
             let message2;
             if (this.game.isWin()) {
-                context.fillStyle = this.colorWin;
+                context.fillStyle = '#ed05da';
                 message1 = 'Liberty!';
                 message2 = 'You have overcome the Darkness!';
             } else {
@@ -35,10 +37,13 @@ export class UI {
                 message1 = 'This is the end!';
                 message2 = 'Mental breakdown!';
             }
+            context.shadowBlur = 5;
             context.font = '70px ' + this.fontFamily;
             context.fillText(message1, this.game.width * 0.5, this.game.height * 0.5 - 20);
             context.font = '25px ' + this.fontFamily;
             context.fillText(message2, this.game.width * 0.5, this.game.height * 0.5 + 20);
+            context.font = '15px ' + this.fontFamily;
+            context.fillText('Press key \'R\' to restart the Game', this.game.width * 0.5, this.game.height * 0.5 + 60);
             context.restore();
         }
 
