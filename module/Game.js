@@ -86,15 +86,7 @@ export class Game {
             object.update(deltaTime, context);
         });
 
-        if (this.fpsCount === 0 && deltaTime !== 0) {
-            this.fpsCount = Math.floor(1000 / deltaTime);
-        }
-        if (this.timerFpsDisplay > this.intervalFpsDisplay) {
-            this.fpsCount = Math.floor(1000 / deltaTime);
-            this.timerFpsDisplay = 0;
-        } else {
-            this.timerFpsDisplay += deltaTime;
-        }
+        this.fpsDraw(deltaTime);
 
         if (this.projectileTimer > this.projectileInterval) {
             if (this.projectile < this.maxProjectile) this.projectile++;
@@ -230,6 +222,18 @@ export class Game {
         this.enemies = this.enemies.filter(object => !object.markedForDeletion);
         this.particles = this.particles.filter(object => !object.markedForDeletion);
         this.corpuscles = this.corpuscles.filter(object => !object.markedForDeletion);
+    }
+
+    fpsDraw(deltaTime) {
+        if (this.fpsCount === 0 && deltaTime !== 0) {
+            this.fpsCount = Math.floor(1000 / deltaTime);
+        }
+        if (this.timerFpsDisplay > this.intervalFpsDisplay) {
+            this.fpsCount = Math.floor(1000 / deltaTime);
+            this.timerFpsDisplay = 0;
+        } else {
+            this.timerFpsDisplay += deltaTime;
+        }
     }
 
     restart() {
