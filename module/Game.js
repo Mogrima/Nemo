@@ -22,7 +22,7 @@ export class Game {
         this.player2 = new Nebessime(this);
         this.units = [this.player, this.player2];
 
-        this.keys = [];
+        this.keys = new Set();
         this.input = new InputHandler(this);
         this.topMargin = 232;
 

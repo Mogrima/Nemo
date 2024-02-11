@@ -32,19 +32,19 @@ export class Unit {
         this.spriteX = this.collisionX;
         this.spriteY = this.collisionY;
 
-        if (this.game.keys.includes('ArrowLeft')) {
+        if (this.game.keys.has('ArrowLeft')) {
             this.speedX = -this.maxSpeed;
             this.speedY = 0;
         }
-        else if (this.game.keys.includes('ArrowRight')) {
+        else if (this.game.keys.has('ArrowRight')) {
             this.speedX = this.maxSpeed;
             this.speedY = 0;
         }
-        else if (this.game.keys.includes('ArrowUp')) {
+        else if (this.game.keys.has('ArrowUp')) {
             this.speedY = -this.maxSpeed;
             this.speedX = 0;
         }
-        else if (this.game.keys.includes('ArrowDown')) {
+        else if (this.game.keys.has('ArrowDown')) {
             this.speedY = this.maxSpeed;
             this.speedX = 0;
         }

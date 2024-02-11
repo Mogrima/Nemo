@@ -9,9 +9,8 @@ export class InputHandler {
             if (((e.key === 'ArrowRight') ||
                 (e.key === 'ArrowUp') ||
                 (e.key === 'ArrowDown') ||
-                (e.key === 'ArrowLeft')) &&
-                this.game.keys.indexOf(e.key) === -1) {
-                this.game.keys.push(e.key);
+                (e.key === 'ArrowLeft'))) {
+                this.game.keys.add(e.key);
             } else if (e.key === ' ') {
 
                 if ((this.game.direction.lastIndexOf('ArrowLeft') === this.game.direction.length - 1)
@@ -44,8 +43,8 @@ export class InputHandler {
 
         });
         window.addEventListener('keyup', e => {
-            if (this.game.keys.indexOf(e.key) > -1) {
-                this.game.keys.splice(this.game.keys.indexOf(e.key), 1);
+            if (this.game.keys.has(e.key)) {
+                this.game.keys.delete(e.key);
 
                 if ((this.game.direction.lastIndexOf('ArrowLeft') === this.game.direction.length - 1)
                 && (this.game.direction.length > 0)) {
@@ -62,24 +61,24 @@ export class InputHandler {
     // постоянное отслеживание нажатой клавиши, чтобы персонаж двигался и смотрел в нужную сторону
     update() {
         this.game.player.maxFrame = 0;
-        if (this.game.keys.indexOf('ArrowLeft') > -1) {
+        if (this.game.keys.has('ArrowLeft')) {
             this.game.player.frameY = 7;
             this.game.player.maxFrame = 8;
             this.game.player2.frameY = 1;
             this.game.direction.length = 0;
             this.game.direction.push('ArrowLeft');
-        } else if (this.game.keys.indexOf('ArrowRight') > -1) {
+        } else if (this.game.keys.has('ArrowRight')) {
             this.game.player.frameY = 1;
             this.game.player.maxFrame = 8;
             this.game.player2.frameY = 3;
             this.game.direction.length = 0;
             this.game.direction.push('ArrowRight');
-        } else if (this.game.keys.indexOf('ArrowUp') > -1) {
+        } else if (this.game.keys.has('ArrowUp')) {
             this.game.player.frameY = 4;
             this.game.player.maxFrame = 8;
             this.game.player2.frameY = 1;
 
-        } else if (this.game.keys.indexOf('ArrowDown') > -1) {
+        } else if (this.game.keys.has('ArrowDown')) {
             this.game.player.frameY = 0;
             this.game.player.maxFrame = 8;
             this.game.player2.frameY = 3;
