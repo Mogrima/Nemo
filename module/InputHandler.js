@@ -13,7 +13,7 @@ export class InputHandler {
                 this.game.keys.add(e.key);
             } else if (e.key === ' ') {
 
-                if ((this.game.direction.lastIndexOf('ArrowLeft') === this.game.direction.length - 1)) {
+                if ((this.game.direction.has('ArrowLeft'))) {
                     this.game.player.shootTop('left');
 
                 } else {
@@ -23,7 +23,7 @@ export class InputHandler {
             }
             else if (this.splashKeys.includes(e.key)) {
 
-                if ((this.game.direction.lastIndexOf('ArrowLeft') === this.game.direction.length - 1)) {
+                if ((this.game.direction.has('ArrowLeft'))) {
                     this.game.player.shootSplash('left');
 
                 } else {
@@ -44,7 +44,7 @@ export class InputHandler {
             if (this.game.keys.has(e.key)) {
                 this.game.keys.delete(e.key);
 
-                if ((this.game.direction.lastIndexOf('ArrowLeft') === this.game.direction.length - 1)) {
+                if ((this.game.direction.has('ArrowLeft'))) {
                     this.game.player2.frameY = 0;
 
                 } else {
@@ -62,14 +62,14 @@ export class InputHandler {
             this.game.player.frameY = 7;
             this.game.player.maxFrame = 8;
             this.game.player2.frameY = 1;
-            this.game.direction.length = 0;
-            this.game.direction.push('ArrowLeft');
+            this.game.direction.clear();
+            this.game.direction.add('ArrowLeft');
         } else if (this.game.keys.has('ArrowRight')) {
             this.game.player.frameY = 1;
             this.game.player.maxFrame = 8;
             this.game.player2.frameY = 3;
-            this.game.direction.length = 0;
-            this.game.direction.push('ArrowRight');
+            this.game.direction.clear();
+            this.game.direction.add('ArrowRight');
         } else if (this.game.keys.has('ArrowUp')) {
             this.game.player.frameY = 4;
             this.game.player.maxFrame = 8;

@@ -48,7 +48,7 @@ export class Game {
 
         this.gameTime = 90000;
 
-        this.direction = [];
+        this.direction = new Set();
 
         this.health = 20;
         this.maxHealth = 20;
