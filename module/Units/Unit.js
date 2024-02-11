@@ -91,7 +91,12 @@ export class Unit {
         const ammo = this.game.getAmmoProjectile();
         if (this.game.projectile > 0) {
             if (ammo) {
-                ammo.start(this.collisionX, this.collisionY + 30, directX);
+                let x = this.collisionX;
+                let y = this.collisionY + 30;
+                if (directX === 'right') {
+                    x = x + this.width - 25;
+                }
+                ammo.start(x, y, directX);
                 this.ammunition.push(ammo);
                 this.game.projectile--;
             }
@@ -102,7 +107,12 @@ export class Unit {
         const splash = this.game.getSplashProjectile();
         if (this.game.projectile > 0) {
             if (splash) {
-                splash.start(this.collisionX, this.collisionY + 30, directX);
+                let x = this.collisionX;
+                let y = this.collisionY + 30;
+                if (directX === 'right') {
+                    x = x + this.width - 25;
+                }
+                splash.start(x, y, directX);
                 this.splashes.push(splash);
                 this.game.projectile--;
             }
