@@ -1,3 +1,15 @@
+@font-face {
+    font-family: 'Silkscreen';
+    src: url('./fonts/Silkscreen-Regular.eot');
+    src: url('./fonts/Silkscreen-Regular.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/Silkscreen-Regular.woff2') format('woff2'),
+        url('./fonts/Silkscreen-Regular.woff') format('woff'),
+        url('./fonts/Silkscreen-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,7 +17,7 @@
 }
 
 body {
-    background-image: url("./Assets/Layers/Space_Background.png");
+    background-image: url("../Assets/Layers/Space_Background.png");
 }
 
 #canvas {
