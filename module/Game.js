@@ -249,7 +249,7 @@ export class Game {
         this.enemiesPool = [];
         this.score = 0;
         this.win = false;
-        this.direction = [];
+        this.direction.clear();
         this.particles = [];
         this.corpuscles = [];
         this.props = [];
