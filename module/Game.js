@@ -15,60 +15,50 @@ export class Game {
         this.canvas = canvas
         this.width = canvas.width;
         this.height = canvas.height;
-        this.fpsCount = 0;
+
         this.canvasBackground = new CanvasBackground(this.canvas);
-        this.canvasObjects = [];
+        this.ui = new UI(this);
         this.player = new Nemo(this);
         this.player2 = new Nebessime(this);
-        this.units = [this.player, this.player2];
-
-        this.keys = new Set();
         this.input = new InputHandler(this);
-        this.topMargin = 232;
+        this.prop = new Props(this);
 
-        this.projectile = 20;
+        this.topMargin = 232;
+        this.speed = 1;
+        this.winningScore = 30;
+        this.maxHealth = 20;
+        this.gameTime = 90000;
+        this.numberOfProps = 10;
+        this.maxProjectile = 20;
+        this.maxEnemies = 10;
+        this.projectileInterval = 500;
+        this.enemyInterval = 5000;
+        this.intervalFpsDisplay = 3000;
+        
+        this.canvasObjects = [];
+        this.units = [this.player, this.player2];
+        this.keys = new Set();
+        this.direction = new Set();
         this.ammoPool = [];
         this.splashPool = [];
-
-        this.projectileInterval = 500;
-        this.maxProjectile = 20;
-        this.projectileTimer = 0;
-
-        this.ui = new UI(this);
-
         this.enemies = new Set();
-        this.maxEnemies = 10;
         this.enemiesPool = [];
-        this.enemyTimer = 0;
-        this.enemyInterval = 5000;
-        this.gameOver = false;
-        this.score = 0;
-        this.winningScore = 30;
-        this.win = false;
-
-        this.gameTime = 90000;
-
-        this.direction = new Set();
-
-        this.health = 20;
-        this.maxHealth = 20;
-
-        this.speed = 1;
-
         this.particles = [];
         this.corpuscles = [];
-
-        this.numberOfProps = 10;
         this.props = [];
-
-        this.debug = true;
-
-        this.intervalFpsDisplay = 3000;
+        this.gameObjects = [];
+ 
+        this.gameOver;
+        this.score;
+        this.win;
+        this.health;
+        this.projectile;
+        this.projectileTimer;
+        this.enemyTimer;
+        this.fpsCount = 0;
         this.timerFpsDisplay = 0;
 
-        this.gameObjects = [];
-
-        this.prop = new Props(this);
+        this.debug = true;
         this.toggleMessage = false;
 
     }
@@ -108,6 +98,13 @@ export class Game {
     }
 
     init() {
+        this.gameOver = false;
+        this.score = 0;
+        this.win = false;
+        this.health = 20;
+        this.projectile = 20;
+        this.projectileTimer = 0;
+        this.enemyTimer = 0;
         this.canvasBackground.init();
         this.addProps();
         this.addEnemy();
@@ -240,20 +237,15 @@ export class Game {
     }
 
     restart() {
-        this.gameOver = false;
         this.gameTime = 90000;
         this.ammoPool = [];
-        this.projectile = 20;
         this.splashPool = [];
         this.enemies.clear();
         this.enemiesPool = [];
-        this.score = 0;
-        this.win = false;
         this.direction.clear();
         this.particles = [];
         this.corpuscles = [];
         this.props = [];
-        this.health = 20;
         this.canvasBackground.forest.restart();
         this.canvasBackground.sky.restart();
         this.units = [this.player, this.player2];
