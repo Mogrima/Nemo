@@ -43,7 +43,6 @@ export class Tentacles {
 
         this.game.splashPool.forEach(splash => {
             if (!splash.free && this.game.checkCollision(splash, this) && !this.game.gameOver) {
-                splash.markedForDeletion = true;
                 splash.reset();
                 if (this.lives > 0) this.lives--;
                 this.game.corpuscles.push(new Spark(this.game, this.collisionX,

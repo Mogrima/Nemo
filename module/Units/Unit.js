@@ -11,8 +11,6 @@ export class Unit {
         this.shiftX = 0;
         this.shiftY = 0;
 
-        this.ammunition = [];
-        this.splashes = [];
         this.projectilesObject = [];
 
         this.warning = false;
@@ -65,12 +63,10 @@ export class Unit {
             this.collisionY = this.game.height - this.height;
         }
 
-        this.projectilesObject = [...this.ammunition, ...this.splashes];
+        this.projectilesObject = [...this.game.ammoPool, ...this.game.splashPool];
         this.projectilesObject.forEach(projectile => {
             projectile.update();
         });
-        this.ammunition = this.ammunition.filter(ammo => !ammo.markedForDeletion);
-        this.splashes = this.splashes.filter(splash => !splash.markedForDeletion);
     }
 
     draw(context) {
@@ -97,7 +93,6 @@ export class Unit {
                     x = x + this.width - 25;
                 }
                 ammo.start(x, y, directX);
-                this.ammunition.push(ammo);
                 this.game.projectile--;
             }
         }
@@ -113,7 +108,6 @@ export class Unit {
                     x = x + this.width - 25;
                 }
                 splash.start(x, y, directX);
-                this.splashes.push(splash);
                 this.game.projectile--;
             }
         }

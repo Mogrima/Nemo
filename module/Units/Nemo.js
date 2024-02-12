@@ -55,7 +55,6 @@ export class Nemo extends Unit {
         this.frameX = 0;
         this.frameY = 1;
         this.numberOfCorpuscle = 20;
-        this.ammunition = [];
         this.splashes = [];
     }
 

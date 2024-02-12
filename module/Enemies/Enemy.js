@@ -72,7 +72,6 @@ export class Enemy {
                     // если столкновение произошло, помечаем снаряд как удаленный
                     this.game.particles.push(new Particle(this.game, this.collisionX + this.width * 0.5,
                         this.collisionY + this.height * 0.5));
-                        ammo.markedForDeletion = true;
                         ammo.reset();
                 }
 

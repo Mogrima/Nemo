@@ -12,7 +12,7 @@ export class Projectile {
         this.spriteY = this.collisionY;
 
         // this.directX = direct;
-        this.speed = 8;
+        this.speed = 0;
         this.markedForDeletion = false;
         this.frameX = 0;
         this.frameY = 0;
@@ -73,7 +73,6 @@ export class Projectile {
 
     start(x, y, directX) {
         this.free = false;
-        this.markedForDeletion = false;
         this.collisionX = x;
         this.collisionY = y;
         this.flightDistanceRight = x + this.r;
@@ -82,7 +81,7 @@ export class Projectile {
         this.spriteY = this.collisionY;
         this.directX = directX;
         this.direct();
-        this.speed = 8;
+        this.speed = 3;
     }
     reset() {
         this.free = true;
