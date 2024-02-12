@@ -36,7 +36,7 @@ export class Game {
 
         this.ui = new UI(this);
 
-        this.enemies = [];
+        this.enemies = new Set();
         this.maxEnemies = 10;
         this.enemiesPool = [];
         this.enemyTimer = 0;
@@ -98,7 +98,7 @@ export class Game {
         if (this.enemyTimer > this.enemyInterval && !this.gameOver) {
             let enemy = this.getEnemy();
             if (enemy) {
-            this.enemies.push(enemy);
+            this.enemies.add(enemy);
             enemy.start();
             }
             this.enemyTimer = 0;
@@ -118,8 +118,12 @@ export class Game {
     addEnemy() {
         for (let i = 0; i < this.maxEnemies; i++) {
             const randomize = Math.random();
-            if (randomize < 0.5) this.enemiesPool.push(new Monster1(this));
-            else this.enemiesPool.push(new Monster2(this));
+            if (randomize < 0.5) {
+                this.enemiesPool.push(new Monster1(this));
+            }
+            else {
+                this.enemiesPool.push(new Monster2(this));
+            } 
         }
     }
 
@@ -219,7 +223,6 @@ export class Game {
     removeGameObjects() {
         this.units = this.units.filter(object => !object.markedForDeletion);
         this.props = this.props.filter(object => !object.markedForDeletion);
-        this.enemies = this.enemies.filter(object => !object.markedForDeletion);
         this.particles = this.particles.filter(object => !object.markedForDeletion);
         this.corpuscles = this.corpuscles.filter(object => !object.markedForDeletion);
     }
@@ -242,7 +245,7 @@ export class Game {
         this.ammoPool = [];
         this.projectile = 20;
         this.splashPool = [];
-        this.enemies = [];
+        this.enemies.clear();
         this.enemiesPool = [];
         this.score = 0;
         this.win = false;

@@ -8,7 +8,6 @@ export class Enemy {
         this.spriteX;
         this.spriteY;
         this.speedX = 0;
-        this.markedForDeletion = false;
 
         this.frameX = 0;
         this.frameY = 0;
@@ -41,16 +40,12 @@ export class Enemy {
                 this.collisionX += this.speedX;
                 // Помечаем врага как удаленного, если он полностью пересечет левую границу игрового поля
                 if (this.collisionX + this.width < 0) {
-                    this.markedForDeletion = true;
-                    this.game.removeGameObjects();
                     this.reset();
                 }
     
             } else {
                 this.collisionX -= this.speedX;
                 if (this.collisionX - this.width > this.game.width) {
-                    this.markedForDeletion = true;
-                    this.game.removeGameObjects();
                     this.reset();
                 }
             }
@@ -61,12 +56,10 @@ export class Enemy {
             if (this.game.checkCollision(this.game.player, this)
                 && !this.game.player.markedForDeletion && !this.game.gameOver) {
                 // если столкновение произошло, помечаем врага как удаленного
-                this.markedForDeletion = true;
                 for (let i = 0; i < this.score; i++) {
                     this.game.particles.push(new Particle(this.game, this.collisionX + this.width * 0.5,
                         this.collisionY + this.height * 0.5));
                 }
-                this.game.removeGameObjects();
                 this.reset();
     
                 this.game.health--;
@@ -84,16 +77,12 @@ export class Enemy {
                 }
 
             });
-            if (this.lives <= 0) {
-                this.markedForDeletion = true; 
-                this.game.removeGameObjects(); // удаляем врага
+            if (this.lives <= 0) { 
+                this.reset(); // удаляем врага
                 for (let i = 0; i < this.score; i++) {
                     this.game.particles.push(new Particle(this.game, this.collisionX + this.width * 0.5,
                         this.collisionY + this.height * 0.5));
                 }
-                this.game.removeGameObjects();
-                this.reset(); // удаляем врага
-
                 // увеличиваем количество очков главного игрока
                 if (!this.game.gameOver) this.game.score += this.score;
                 if (this.game.isWin()) this.game.gameOver = true; // проверяем условие победы
@@ -121,12 +110,12 @@ export class Enemy {
 
     reset() {
         this.free = true;
-        this.markedForDeletion = false;
-        this.frameX = 0;
+        this.game.enemies.delete(this);
     }
 
     start() {
         this.free = false;
+        this.frameX = 0;
         this.direct();
         this.collisionY = (Math.random() * (this.game.topMargin - this.game.height * 0.82) +
                             this.game.height * 0.82);
