@@ -183,12 +183,6 @@ export class Game {
             }
             attempts++;
         }
-        this.props.forEach((item, index) => {
-            if (index === 0)  {
-                item.feature = this.prop.escape;
-                item.featureName = 'The escape!';
-            }
-        });
 
     }
 
@@ -246,6 +240,7 @@ export class Game {
         this.units.add(this.player);
         this.player.restart();
         this.player2.restart();
+        this.prop.restart();
         this.init();
     }
 

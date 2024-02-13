@@ -1,6 +1,7 @@
 export class Props {
     constructor(game) {
         this.game = game;
+        this.isEscape = false;
         this.uncannyText = ['You have been chosen.\nThey will come soon.',
                 'The end is near.\nMake preparations.',
                 'The drop off has been\nmade. You`ve been warned.',
@@ -58,13 +59,20 @@ export class Props {
     }
 
     reboot() {
-        this.game.props = [];
+        this.game.prop.isEscape = false;
+        this.game.props.clear();
         this.game.addProps();
     }
 
     getFeature() {
         const randomize = Math.random();
-        if (randomize < 0.3) {
+        if (!this.isEscape) {
+            this.isEscape = true;
+            return ([
+                this.escape,
+                'escape',
+               ]);
+        } else if (randomize < 0.3) {
            return ([
             this.strangeMessage,
             'strangeMessage',
@@ -87,5 +95,9 @@ export class Props {
             ]);
          } 
         
+    }
+
+    restart() {
+        this.isEscape = false;
     }
 }
