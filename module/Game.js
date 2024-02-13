@@ -9,6 +9,7 @@ import { Props } from './Props/Props.js';
 import { Ammunition } from './Projectles/Ammunition.js';
 import { Splash } from './Projectles/Splash.js';
 import { Tentacles } from './Props/Tentacles.js';
+import { SoundController } from './SoundController.js';
 
 export class Game {
     constructor(canvas) {
@@ -22,6 +23,7 @@ export class Game {
         this.player2 = new Nebessime(this);
         this.input = new InputHandler(this);
         this.prop = new Props(this);
+        this.sound = new SoundController();
 
         this.topMargin = 232;
         this.speed = 1;
@@ -111,6 +113,7 @@ export class Game {
         this.addEnemy();
         this.createAmmoProjectiles();
         this.createSplashProjectiles();
+        this.sound.mainTheme();
     }
 
     addEnemy() {
