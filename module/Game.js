@@ -36,7 +36,7 @@ export class Game {
         this.intervalFpsDisplay = 3000;
         
         this.canvasObjects = [];
-        this.units = [this.player, this.player2];
+        this.units = new Set();;
         this.keys = new Set();
         this.direction = new Set();
         this.ammoPool = [];
@@ -102,6 +102,8 @@ export class Game {
         this.score = 0;
         this.win = false;
         this.health = 20;
+        this.units.add(this.player);
+        this.units.add(this.player2);
         this.projectile = 20;
         this.projectileTimer = 0;
         this.enemyTimer = 0;
@@ -218,7 +220,7 @@ export class Game {
     }
 
     removeGameObjects() {
-        this.units = this.units.filter(object => !object.markedForDeletion);
+        // this.units = this.units.filter(object => !object.markedForDeletion);
         this.props = this.props.filter(object => !object.markedForDeletion);
     }
 
@@ -246,7 +248,7 @@ export class Game {
         this.props = [];
         this.canvasBackground.forest.restart();
         this.canvasBackground.sky.restart();
-        this.units = [this.player, this.player2];
+        this.units.add(this.player);
         this.player.restart();
         this.player2.restart();
         this.init();
