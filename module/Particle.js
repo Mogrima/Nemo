@@ -17,7 +17,6 @@ export class Particle {
         this.speedY = Math.random() * - 15;
         // сила тяжести, чтобы частицы подали вниз
         this.gravity = 0.5;
-        this.markedForDeletion = false;
         // вращение
         this.angle = 0;
         // скорсть вращения от - 0.2 до 0.1
@@ -36,7 +35,6 @@ export class Particle {
         this.collisionX -= this.speedX + this.game.speed;
         this.collisionY += this.speedY;
         if (this.collisionY > this.game.height + this.size || this.collisionX < 0 - this.size) {
-            this.markedForDeletion = true;
             this.remove();
         }
         // подпрыгивание частиц
