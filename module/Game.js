@@ -43,7 +43,7 @@ export class Game {
         this.splashPool = [];
         this.enemies = new Set();
         this.enemiesPool = [];
-        this.particles = [];
+        this.particles = new Set();
         this.corpuscles = [];
         this.props = [];
         this.gameObjects = [];
@@ -220,7 +220,6 @@ export class Game {
     removeGameObjects() {
         this.units = this.units.filter(object => !object.markedForDeletion);
         this.props = this.props.filter(object => !object.markedForDeletion);
-        this.particles = this.particles.filter(object => !object.markedForDeletion);
         this.corpuscles = this.corpuscles.filter(object => !object.markedForDeletion);
     }
 
@@ -243,7 +242,7 @@ export class Game {
         this.enemies.clear();
         this.enemiesPool = [];
         this.direction.clear();
-        this.particles = [];
+        this.particles.clear();
         this.corpuscles = [];
         this.props = [];
         this.canvasBackground.forest.restart();

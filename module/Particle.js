@@ -37,7 +37,7 @@ export class Particle {
         this.collisionY += this.speedY;
         if (this.collisionY > this.game.height + this.size || this.collisionX < 0 - this.size) {
             this.markedForDeletion = true;
-            this.game.removeGameObjects();
+            this.remove();
         }
         // подпрыгивание частиц
         if (this.collisionY > this.game.height - this.bottomBounceBoundary && this.bounced < 2) {
@@ -61,5 +61,9 @@ export class Particle {
         context.drawImage(this.image, this.frameX * this.spriteSize, this.frameY * this.spriteSize,
             this.spriteSize, this.spriteSize, this.size * -0.5, this.size * -0.5, this.size, this.size);
         context.restore();
+    }
+
+    remove() {
+        this.game.particles.delete(this);
     }
 }
