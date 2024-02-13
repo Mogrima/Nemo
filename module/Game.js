@@ -45,7 +45,7 @@ export class Game {
         this.enemiesPool = [];
         this.particles = new Set();
         this.corpuscles = new Set();
-        this.props = [];
+        this.props = new Set();
         this.gameObjects = [];
  
         this.gameOver;
@@ -161,7 +161,7 @@ export class Game {
 
     addProps() {
         let attempts = 0;
-        while (this.props.length < this.
+        while (this.props.size < this.
             numberOfProps && attempts < 100) {
             const testProp = new Tentacles(this);
             let overlap = false;
@@ -177,7 +177,7 @@ export class Game {
             if (!overlap && testProp.spriteX > 0 &&
                     testProp.spriteX < this.width - testProp.width) {
                 if (!this.checkCollision(this.player, testProp)) {
-                    this.props.push(testProp);
+                    this.props.add(testProp);
                 }
                 
             }
@@ -219,11 +219,6 @@ export class Game {
         }
     }
 
-    removeGameObjects() {
-        // this.units = this.units.filter(object => !object.markedForDeletion);
-        this.props = this.props.filter(object => !object.markedForDeletion);
-    }
-
     fpsDraw(deltaTime) {
         if (this.fpsCount === 0 && deltaTime !== 0) {
             this.fpsCount = Math.floor(1000 / deltaTime);
@@ -244,8 +239,8 @@ export class Game {
         this.enemiesPool = [];
         this.direction.clear();
         this.particles.clear();
-        this.corpuscles.clear();;
-        this.props = [];
+        this.corpuscles.clear();
+        this.props.clear();
         this.canvasBackground.forest.restart();
         this.canvasBackground.sky.restart();
         this.units.add(this.player);

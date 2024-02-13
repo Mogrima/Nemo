@@ -24,7 +24,6 @@ export class Tentacles {
         this.getFeature = this.game.prop.getFeature();
         this.feature = this.getFeature[0];
         this.featureName =  this.getFeature[1];
-        this.markedForDeletion = false;
         this.propTrigger = false;
 
         this.text = this.getFeature[2] || null;
@@ -71,8 +70,7 @@ export class Tentacles {
                         this.feature(context); 
                     }
                 } else {
-                        this.markedForDeletion = true;
-                        this.game.removeGameObjects();
+                        this.remove();
                         this.propTrigger = false;
                         for (let i = 0; i < 5; i++) {
                             this.game.corpuscles.add(new Spark(this.game, this.collisionX,
@@ -91,8 +89,7 @@ export class Tentacles {
                 }
                 else {
                     this.feature(context);
-                    this.markedForDeletion = true;
-                    this.game.removeGameObjects();
+                    this.remove();
                     this.propTrigger = false;
                     for (let i = 0; i < 5; i++) {
                         this.game.corpuscles.add(new Spark(this.game, this.collisionX,
@@ -118,5 +115,9 @@ export class Tentacles {
             this.frameX * this.spriteWidth, this.frameY * this.spriteHeight,
             this.spriteWidth, this.spriteHeight,
             this.spriteX, this.spriteY, this.spriteWidth, this.spriteHeight,);
+    }
+
+    remove() {
+        this.game.props.delete(this);
     }
 }
