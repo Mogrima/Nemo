@@ -102,8 +102,7 @@ export class Game {
         this.score = 0;
         this.win = false;
         this.health = 20;
-        this.units.add(this.player);
-        this.units.add(this.player2);
+        this.units.add(this.player).add(this.player2);
         this.projectile = 20;
         this.projectileTimer = 0;
         this.enemyTimer = 0;
