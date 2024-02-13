@@ -34,7 +34,7 @@ export class Nemo extends Unit {
             this.game.removeGameObjects();
             for (let i = 0; this.numberOfCorpuscle > 0; i++) {
                 this.numberOfCorpuscle--;
-                this.game.corpuscles.push(new Farefly(this.game, this.collisionX,
+                this.game.corpuscles.add(new Farefly(this.game, this.collisionX,
                     this.collisionY + this.height, '#8b00ff'));
             }
         }

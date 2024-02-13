@@ -15,8 +15,7 @@ export class Farefly extends Corpuscle {
         this.collisionX += Math.cos(this.angle) * this.speedX;
         this.collisionY -= this.speedY * 0.5;
         if (this.collisionY < 0 - this.radius) {
-            this.markedForDeletion = true;
-            this.game.removeGameObjects();
+            this.remove();
         }
     }
 }

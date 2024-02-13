@@ -45,7 +45,7 @@ export class Tentacles {
             if (!splash.free && this.game.checkCollision(splash, this) && !this.game.gameOver) {
                 splash.reset();
                 if (this.lives > 0) this.lives--;
-                this.game.corpuscles.push(new Spark(this.game, this.collisionX,
+                this.game.corpuscles.add(new Spark(this.game, this.collisionX,
                     this.collisionY + this.height * 0.5, '#0000ff'));
             }
         });
@@ -75,7 +75,7 @@ export class Tentacles {
                         this.game.removeGameObjects();
                         this.propTrigger = false;
                         for (let i = 0; i < 5; i++) {
-                            this.game.corpuscles.push(new Spark(this.game, this.collisionX,
+                            this.game.corpuscles.add(new Spark(this.game, this.collisionX,
                                 this.collisionY + this.height, 'gold'));
                         }
                 } 
@@ -95,7 +95,7 @@ export class Tentacles {
                     this.game.removeGameObjects();
                     this.propTrigger = false;
                     for (let i = 0; i < 5; i++) {
-                        this.game.corpuscles.push(new Spark(this.game, this.collisionX,
+                        this.game.corpuscles.add(new Spark(this.game, this.collisionX,
                             this.collisionY + this.height, '#0000ff'));
                     }
                 }

@@ -44,7 +44,7 @@ export class Game {
         this.enemies = new Set();
         this.enemiesPool = [];
         this.particles = new Set();
-        this.corpuscles = [];
+        this.corpuscles = new Set();
         this.props = [];
         this.gameObjects = [];
  
@@ -220,7 +220,6 @@ export class Game {
     removeGameObjects() {
         this.units = this.units.filter(object => !object.markedForDeletion);
         this.props = this.props.filter(object => !object.markedForDeletion);
-        this.corpuscles = this.corpuscles.filter(object => !object.markedForDeletion);
     }
 
     fpsDraw(deltaTime) {
@@ -243,7 +242,7 @@ export class Game {
         this.enemiesPool = [];
         this.direction.clear();
         this.particles.clear();
-        this.corpuscles = [];
+        this.corpuscles.clear();;
         this.props = [];
         this.canvasBackground.forest.restart();
         this.canvasBackground.sky.restart();

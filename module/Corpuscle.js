@@ -12,7 +12,6 @@ export class Corpuscle {
         this.speedY = Math.random() * 2 + 0.5;
         this.angle = 0;
         this.va = Math.random() * 0.1 + 0.01;
-        this.markedForDeletion = false;
     }
 
     draw(context) {
@@ -24,5 +23,9 @@ export class Corpuscle {
         context.strokeStyle= this.colorStroke;
         context.stroke();
         context.restore();
+    }
+
+    remove() {
+        this.game.corpuscles.delete(this);
     }
 }

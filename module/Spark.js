@@ -9,8 +9,7 @@ export class Spark extends Corpuscle {
         // частицы будут сжиматься пока совсем не исчезнут
         if (this.radius > 0.1) this.radius -= 0.05;
         if (this.radius < 0.2) {
-            this.markedForDeletion = true;
-            this.game.removeGameObjects();
+            this.remove();
         }
     }
 }
