@@ -39,6 +39,8 @@ export class UI {
                 context.fillStyle = this.colorLose;
                 message1 = 'This is the end!';
                 message2 = 'Mental breakdown!';
+                this.game.sound.youLoseSound.volume = 0.5;
+                this.game.sound.youLoseSound.play();
             }
             context.shadowBlur = 5;
             context.font = '70px ' + this.fontFamily;

@@ -2,6 +2,7 @@ export class SoundController {
     constructor() {
         this.mainSound = document.getElementById('mainTheme');
         this.escape = document.getElementById('escape');
+        this.youLoseSound = document.getElementById('youLose');
         this.hitSound = document.getElementById('hit');
         this.anotherHitSound = document.getElementById('anotherHit');
     }
@@ -32,6 +33,9 @@ export class SoundController {
     }
 
     youLose() {
+        this.youLoseSound.currentTime = 0;
+        this.youLoseSound.volume = 0.1;
+        this.youLoseSound.play();
     }
 
     tentacles() {
