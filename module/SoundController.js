@@ -10,6 +10,7 @@ export class SoundController {
         this.beastSound2 = document.getElementById('beast2');
         this.healthLoseSound = document.getElementById('healthLose');
         this.healthUpSound = document.getElementById('healthUp');
+        this.strangeMessageSound = document.getElementById('strangeMessage');
     }
 
     mainTheme() {
@@ -70,6 +71,12 @@ export class SoundController {
         this.healthUpSound.currentTime = 0;
         this.healthUpSound.volume = 0.8;
         this.healthUpSound.play();
+    }
+
+    strangeMessage() {
+        this.strangeMessageSound.currentTime = 0;
+        this.strangeMessageSound.volume = 0.8;
+        this.strangeMessageSound.play();
     }
 
     collision() {

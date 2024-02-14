@@ -68,6 +68,7 @@ export class Tentacles {
                         }
                         
                     } else {
+                        this.game.sound.strangeMessageSound.play();
                         this.feature(context); 
                     }
                 } else {
