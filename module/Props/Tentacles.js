@@ -98,6 +98,10 @@ export class Tentacles {
                             this.collisionY + this.height, '#0000ff'));
                     }
                 }
+
+                if (this.featureName === 'Lose health') {
+                    this.game.sound.healthLose();
+                }
                 
             }
     }

@@ -8,6 +8,7 @@ export class SoundController {
         this.tentaclesSound = document.getElementById('tentaclesSound');
         this.beastSound = document.getElementById('beast');
         this.beastSound2 = document.getElementById('beast2');
+        this.healthLoseSound = document.getElementById('healthLose');
     }
 
     mainTheme() {
@@ -56,6 +57,12 @@ export class SoundController {
         this.beastSound2.currentTime = 0;
         this.beastSound2.volume = 0.8;
         this.beastSound2.play();
+    }
+
+    healthLose() {
+        this.healthLoseSound.currentTime = 0;
+        this.healthLoseSound.volume = 0.8;
+        this.healthLoseSound.play();
     }
 
     collision() {
