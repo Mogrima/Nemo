@@ -9,6 +9,7 @@ export class SoundController {
         this.beastSound = document.getElementById('beast');
         this.beastSound2 = document.getElementById('beast2');
         this.healthLoseSound = document.getElementById('healthLose');
+        this.healthUpSound = document.getElementById('healthUp');
     }
 
     mainTheme() {
@@ -63,6 +64,12 @@ export class SoundController {
         this.healthLoseSound.currentTime = 0;
         this.healthLoseSound.volume = 0.8;
         this.healthLoseSound.play();
+    }
+
+    healthUp() {
+        this.healthUpSound.currentTime = 0;
+        this.healthUpSound.volume = 0.8;
+        this.healthUpSound.play();
     }
 
     collision() {

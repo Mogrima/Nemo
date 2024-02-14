@@ -102,6 +102,10 @@ export class Tentacles {
                 if (this.featureName === 'Lose health') {
                     this.game.sound.healthLose();
                 }
+
+                if (this.featureName === 'Up health') {
+                    this.game.sound.healthUp();
+                }
                 
             }
     }
