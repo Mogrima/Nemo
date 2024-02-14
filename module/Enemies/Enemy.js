@@ -61,6 +61,7 @@ export class Enemy {
                         this.collisionY + this.height * 0.5));
                 }
                 this.reset();
+                this.game.sound.collision();
     
                 this.game.health--;
             }

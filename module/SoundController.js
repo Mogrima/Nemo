@@ -11,6 +11,7 @@ export class SoundController {
         this.healthLoseSound = document.getElementById('healthLose');
         this.healthUpSound = document.getElementById('healthUp');
         this.strangeMessageSound = document.getElementById('strangeMessage');
+        this.collisionSound = document.getElementById('collision');
     }
 
     mainTheme() {
@@ -80,6 +81,8 @@ export class SoundController {
     }
 
     collision() {
-        this.cooldownRun = true;
+        this.collisionSound.currentTime = 0;
+        this.collisionSound.volume = 0.1;
+        this.collisionSound.play();
     }
 }
