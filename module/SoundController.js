@@ -2,6 +2,7 @@ export class SoundController {
     constructor() {
         this.mainSound = document.getElementById('mainTheme');
         this.hitSound = document.getElementById('hit');
+        this.anotherHitSound = document.getElementById('anotherHit');
     }
 
     mainTheme() {
@@ -18,6 +19,12 @@ export class SoundController {
         this.hitSound.currentTime = 0;
         this.hitSound.volume = 0.4;
         this.hitSound.play();
+    }
+
+    anotherHit() {
+        this.anotherHitSound.currentTime = 0;
+        this.anotherHitSound.volume = 0.4;
+        this.anotherHitSound.play();
     }
 
     youLose() {
