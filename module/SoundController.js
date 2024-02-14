@@ -29,13 +29,13 @@ export class SoundController {
 
     hit() {
         this.hitSound.currentTime = 0;
-        this.hitSound.volume = 0.4;
+        this.hitSound.volume = 0.2;
         this.hitSound.play();
     }
 
     anotherHit() {
         this.anotherHitSound.currentTime = 0;
-        this.anotherHitSound.volume = 0.4;
+        this.anotherHitSound.volume = 0.2;
         this.anotherHitSound.play();
     }
 
@@ -52,37 +52,37 @@ export class SoundController {
 
     deathEnemy() {
         this.beastSound.currentTime = 0;
-        this.beastSound.volume = 0.8;
+        this.beastSound.volume = 0.6;
         this.beastSound.play();
     }
 
     deathEnemy2() {
         this.beastSound2.currentTime = 0;
-        this.beastSound2.volume = 0.8;
+        this.beastSound2.volume = 0.6;
         this.beastSound2.play();
     }
 
     healthLose() {
         this.healthLoseSound.currentTime = 0;
-        this.healthLoseSound.volume = 0.8;
+        this.healthLoseSound.volume = 0.1;
         this.healthLoseSound.play();
     }
 
     healthUp() {
         this.healthUpSound.currentTime = 0;
-        this.healthUpSound.volume = 0.8;
+        this.healthUpSound.volume = 0.1;
         this.healthUpSound.play();
     }
 
     strangeMessage() {
         this.strangeMessageSound.currentTime = 0;
-        this.strangeMessageSound.volume = 0.8;
+        this.strangeMessageSound.volume = 0.5;
         this.strangeMessageSound.play();
     }
 
     collision() {
         this.collisionSound.currentTime = 0;
-        this.collisionSound.volume = 0.1;
+        this.collisionSound.volume = 0.05;
         this.collisionSound.play();
     }
 }
