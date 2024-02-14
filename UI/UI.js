@@ -32,6 +32,9 @@ export class UI {
                 context.fillStyle = '#ed05da';
                 message1 = 'Liberty!';
                 message2 = 'You have overcome the Darkness!';
+                this.game.sound.escape.volume = 0.5;
+                this.game.sound.escape.play();
+                
             } else {
                 context.fillStyle = this.colorLose;
                 message1 = 'This is the end!';

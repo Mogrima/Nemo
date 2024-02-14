@@ -1,6 +1,7 @@
 export class SoundController {
     constructor() {
         this.mainSound = document.getElementById('mainTheme');
+        this.escape = document.getElementById('escape');
         this.hitSound = document.getElementById('hit');
         this.anotherHitSound = document.getElementById('anotherHit');
     }
@@ -13,6 +14,9 @@ export class SoundController {
     }
 
     youIsEscape() {
+        this.escape.currentTime = 0;
+        this.escape.volume = 0.1;
+        this.escape.play();
     }
 
     hit() {

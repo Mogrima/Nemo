@@ -228,6 +228,8 @@ export class Game {
     }
 
     restart() {
+        this.sound.escape.pause();
+        this.sound.escape.currentTime = 0;
         this.gameTime = 90000;
         this.ammoPool = [];
         this.splashPool = [];
