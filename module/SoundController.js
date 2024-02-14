@@ -1,6 +1,7 @@
 export class SoundController {
     constructor() {
         this.mainSound = document.getElementById('mainTheme');
+        this.hitSound = document.getElementById('hit');
     }
 
     mainTheme() {
@@ -14,6 +15,9 @@ export class SoundController {
     }
 
     hit() {
+        this.hitSound.currentTime = 0;
+        this.hitSound.volume = 0.4;
+        this.hitSound.play();
     }
 
     youLose() {
