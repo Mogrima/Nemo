@@ -5,6 +5,7 @@ export class SoundController {
         this.youLoseSound = document.getElementById('youLose');
         this.hitSound = document.getElementById('hit');
         this.anotherHitSound = document.getElementById('anotherHit');
+        this.tentaclesSound = document.getElementById('tentaclesSound');
     }
 
     mainTheme() {
@@ -39,6 +40,8 @@ export class SoundController {
     }
 
     tentacles() {
+        this.tentaclesSound.volume = 1;
+        this.tentaclesSound.play();
     }
 
     collision() {

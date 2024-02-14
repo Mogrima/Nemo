@@ -59,6 +59,7 @@ export class Tentacles {
             if (this.featureName === 'strangeMessage') {
                 if (!this.game.toggleMessage) {
                     if (this.frameX > 0) {
+                        this.game.sound.tentacles();
                         if (this.timer > this.interval) {
                             this.frameX--;
                             this.timer = 0;
@@ -80,6 +81,7 @@ export class Tentacles {
             } 
             else {
                 if (this.frameX > 0) {
+                    this.game.sound.tentacles();
                     if (this.timer > this.interval) {
                         this.frameX--;
                         this.timer = 0;
