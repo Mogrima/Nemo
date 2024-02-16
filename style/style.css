@@ -41,49 +41,6 @@ body {
     pointer-events: none;
 }
 
-#layer1,
-#layer2,
-#layer3,
-#layer4,
-#layer5,
-#layer6,
-#layer7,
-#layer8,
-#layer9,
-#layer10,
-#layer11,
-#layer12,
-#layer13,
-#layer15,
-#player,
-#player2,
-#player3,
-#projectile1,
-#projectile2,
-#projectile3,
-#splash,
-#enemy1,
-#enemy2,
-#enemy3,
-#particle,
-#particle2,
-#explosion1,
-#explosion2,
-#tentacles,
-#cloud,
-#tree1,
-#tree2,
-#tree3,
-#tree4,
-#tree5,
-#tree6,
-#tree7,
-#city,
-#plansBackground,
-#bushes {
-    display: none;
-}
-
-#assets {
+.assets {
     display: none;
 }
