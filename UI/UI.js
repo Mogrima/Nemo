@@ -32,10 +32,13 @@ export class UI {
                 context.fillStyle = '#ed05da';
                 message1 = 'Liberty!';
                 message2 = 'You have overcome the Darkness!';
+                this.game.sound.escape.play();
+                
             } else {
                 context.fillStyle = this.colorLose;
                 message1 = 'This is the end!';
                 message2 = 'Mental breakdown!';
+                this.game.sound.youLoseSound.play();
             }
             context.shadowBlur = 5;
             context.font = '70px ' + this.fontFamily;

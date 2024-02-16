@@ -59,6 +59,7 @@ export class Tentacles {
             if (this.featureName === 'strangeMessage') {
                 if (!this.game.toggleMessage) {
                     if (this.frameX > 0) {
+                        this.game.sound.tentacles();
                         if (this.timer > this.interval) {
                             this.frameX--;
                             this.timer = 0;
@@ -67,6 +68,7 @@ export class Tentacles {
                         }
                         
                     } else {
+                        this.game.sound.strangeMessageSound.play();
                         this.feature(context); 
                     }
                 } else {
@@ -80,6 +82,7 @@ export class Tentacles {
             } 
             else {
                 if (this.frameX > 0) {
+                    this.game.sound.tentacles();
                     if (this.timer > this.interval) {
                         this.frameX--;
                         this.timer = 0;
@@ -95,6 +98,14 @@ export class Tentacles {
                         this.game.corpuscles.add(new Spark(this.game, this.collisionX,
                             this.collisionY + this.height, '#0000ff'));
                     }
+                }
+
+                if (this.featureName === 'Lose health') {
+                    this.game.sound.healthLose();
+                }
+
+                if (this.featureName === 'Up health') {
+                    this.game.sound.healthUp();
                 }
                 
             }

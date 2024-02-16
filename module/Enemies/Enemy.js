@@ -61,6 +61,7 @@ export class Enemy {
                         this.collisionY + this.height * 0.5));
                 }
                 this.reset();
+                this.game.sound.collision();
     
                 this.game.health--;
             }
@@ -77,6 +78,11 @@ export class Enemy {
 
             });
             if (this.lives <= 0) { 
+                if (this.type === 'shadow') {
+                    this.game.sound.deathEnemy2();
+                } else {
+                    this.game.sound.deathEnemy();
+                }
                 this.reset(); // удаляем врага
                 for (let i = 0; i < this.score; i++) {
                     this.game.particles.add(new Particle(this.game, this.collisionX + this.width * 0.5,

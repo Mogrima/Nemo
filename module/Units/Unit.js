@@ -91,6 +91,7 @@ export class Unit {
                     x = x + this.width - 25;
                 }
                 ammo.start(x, y, directX);
+                this.game.sound.hit();
                 this.game.projectile--;
             }
         }
@@ -106,6 +107,7 @@ export class Unit {
                     x = x + this.width - 25;
                 }
                 splash.start(x, y, directX);
+                this.game.sound.anotherHit();
                 this.game.projectile--;
             }
         }
