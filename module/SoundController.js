@@ -12,12 +12,24 @@ export class SoundController {
         this.healthUpSound = document.getElementById('healthUp');
         this.strangeMessageSound = document.getElementById('strangeMessage');
         this.collisionSound = document.getElementById('collision');
+
+        this.mainSound.volume = 0.5;
+        this.escape.volume = 0.3;
+        this.youLoseSound.volume = 0.2;
+        this.strangeMessageSound.volume = 0.3;
+        this.hitSound.volume = 0.1;
+        this.anotherHitSound.volume = 0.1;
+        this.tentaclesSound.volume = 0.8;
+        this.beastSound.volume = 0.2;
+        this.beastSound2.volume = 0.6;
+        this.healthLoseSound.volume = 0.07;
+        this.healthUpSound.volume = 0.07;
+        this.collisionSound.volume = 0.1;
     }
 
     mainTheme() {
         this.mainSound.currentTime = 0;
         this.mainSound.loop = true;
-        this.mainSound.volume = 1;
         this.mainSound.play();
     }
 
@@ -29,13 +41,11 @@ export class SoundController {
 
     hit() {
         this.hitSound.currentTime = 0;
-        this.hitSound.volume = 0.2;
         this.hitSound.play();
     }
 
     anotherHit() {
         this.anotherHitSound.currentTime = 0;
-        this.anotherHitSound.volume = 0.2;
         this.anotherHitSound.play();
     }
 
@@ -46,43 +56,36 @@ export class SoundController {
     }
 
     tentacles() {
-        this.tentaclesSound.volume = 1;
         this.tentaclesSound.play();
     }
 
     deathEnemy() {
         this.beastSound.currentTime = 0;
-        this.beastSound.volume = 0.6;
         this.beastSound.play();
     }
 
     deathEnemy2() {
         this.beastSound2.currentTime = 0;
-        this.beastSound2.volume = 0.6;
         this.beastSound2.play();
     }
 
     healthLose() {
         this.healthLoseSound.currentTime = 0;
-        this.healthLoseSound.volume = 0.1;
         this.healthLoseSound.play();
     }
 
     healthUp() {
         this.healthUpSound.currentTime = 0;
-        this.healthUpSound.volume = 0.1;
         this.healthUpSound.play();
     }
 
     strangeMessage() {
         this.strangeMessageSound.currentTime = 0;
-        this.strangeMessageSound.volume = 0.5;
         this.strangeMessageSound.play();
     }
 
     collision() {
         this.collisionSound.currentTime = 0;
-        this.collisionSound.volume = 0.05;
         this.collisionSound.play();
     }
 }
