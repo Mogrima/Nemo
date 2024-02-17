@@ -4,7 +4,7 @@ export class Bush {
         this.fieldHeight = fieldHeight;
         this.image = document.getElementById('bushes');
         this.spriteWidth = 80;
-        this.spriteHeight = 70;
+        this.spriteHeight = 95;
         this.width = this.spriteWidth;
         this.height = this.spriteHeight;
         this.x = Math.random() * this.fieldWidth;
@@ -12,7 +12,7 @@ export class Bush {
         this.collisionX = this.x;
         this.collisionY = this.y;
         this.frameX = Math.floor(Math.random() * 4);
-        this.frameY = Math.floor(Math.random() * 3);
+        this.frameY = Math.floor(Math.random() * 2);
     }
 
     draw(context) {
