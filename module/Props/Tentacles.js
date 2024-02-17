@@ -58,19 +58,9 @@ export class Tentacles {
            if (this.propTrigger !== false) {
             if (this.featureName === 'strangeMessage') {
                 if (!this.game.toggleMessage) {
-                    if (this.frameX > 0) {
-                        this.game.sound.tentacles();
-                        if (this.timer > this.interval) {
-                            this.frameX--;
-                            this.timer = 0;
-                        } else {
-                            this.timer += deltaTime;
-                        }
-                        
-                    } else {
-                        this.game.sound.strangeMessageSound.play();
-                        this.feature(context); 
-                    }
+                    this.disappearingTentacles(deltaTime);
+                    this.game.sound.strangeMessageSound.play();
+                    this.feature(context); 
                 } else {
                         this.remove();
                         this.propTrigger = false;
@@ -82,15 +72,13 @@ export class Tentacles {
             } 
             else {
                 this.disappearingTentacles(deltaTime);
-                // else {
-                    this.feature(context);
-                    this.remove();
-                    this.propTrigger = false;
-                    for (let i = 0; i < 5; i++) {
-                        this.game.corpuscles.add(new Spark(this.game, this.collisionX,
-                            this.collisionY + this.height, '#0000ff'));
-                    }
-                // }
+                this.feature(context);
+                this.remove();
+                this.propTrigger = false;
+                for (let i = 0; i < 5; i++) {
+                    this.game.corpuscles.add(new Spark(this.game, this.collisionX,
+                        this.collisionY + this.height, '#0000ff'));
+                }
 
                 if (this.featureName === 'Lose health') {
                     this.game.sound.healthLose();
