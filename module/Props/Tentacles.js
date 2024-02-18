@@ -62,15 +62,6 @@ export class Tentacles {
                     this.game.corpuscles.add(new Spark(this.game, this.collisionX,
                         this.collisionY + this.height, '#0000ff'));
                 }
-
-                if (this.featureName === 'Lose health') {
-                    this.game.sound.healthLose();
-                }
-
-                if (this.featureName === 'Up health') {
-                    this.game.sound.healthUp();
-                }
-                
             }
     }
 

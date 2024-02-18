@@ -40,6 +40,7 @@ export class Props {
     }
 
     lossOfHealth() {
+        this.game.sound.healthLose();
         this.game.health = Math.trunc(this.game.health / 2);
         console.log('Lose health');
         if (this.game.health <= 0) {
@@ -48,6 +49,7 @@ export class Props {
     }
 
     upHealth() {
+        this.game.sound.healthUp();
         this.game.health = this.game.maxHealth;
         console.log('Up health');
     }
