@@ -24,14 +24,13 @@ export class Tentacles {
         this.getFeature = this.game.prop.getFeature();
         this.feature = this.getFeature[0];
         this.featureName =  this.getFeature[1];
-        this.propTrigger = false;
 
         this.text = this.getFeature[2] || null;
     }
     
     update(deltaTime, context) {
         if (this.frameX >= this.maxFrame) this.frameX = 13;
-        if (!this.propTrigger) {
+        if (!this.propTrigger()) {
             if (this.timer > this.interval) {
                 this.frameX++;
                 this.timer = 0;
@@ -49,13 +48,7 @@ export class Tentacles {
             }
         });
 
-        if (this.propTrigger === false) {
-            if ((this.feature !== null) && (!this.gameOver)) {
-            if (this.lives < 1) this.propTrigger = true;
-        }
-           }
-
-           if (this.propTrigger !== false) {
+           if (this.propTrigger()) {
             if (this.featureName === 'strangeMessage') {
                 if (!this.game.toggleMessage) {
                     this.disappearingTentacles(deltaTime);
@@ -63,7 +56,6 @@ export class Tentacles {
                     this.feature(context); 
                 } else {
                         this.remove();
-                        this.propTrigger = false;
                         for (let i = 0; i < 5; i++) {
                             this.game.corpuscles.add(new Spark(this.game, this.collisionX,
                                 this.collisionY + this.height, 'gold'));
@@ -74,7 +66,6 @@ export class Tentacles {
                 this.disappearingTentacles(deltaTime);
                 this.feature(context);
                 this.remove();
-                this.propTrigger = false;
                 for (let i = 0; i < 5; i++) {
                     this.game.corpuscles.add(new Spark(this.game, this.collisionX,
                         this.collisionY + this.height, '#0000ff'));
@@ -106,6 +97,13 @@ export class Tentacles {
             this.frameX * this.spriteWidth, this.frameY * this.spriteHeight,
             this.spriteWidth, this.spriteHeight,
             this.spriteX, this.spriteY, this.spriteWidth, this.spriteHeight,);
+    }
+
+    propTrigger() {
+        return ((this.feature !== null) &&
+                (!this.gameOver) &&
+                (this.lives < 1)) 
+
     }
 
     disappearingTentacles(deltaTime) {
