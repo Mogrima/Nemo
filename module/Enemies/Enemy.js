@@ -1,4 +1,4 @@
-import { Particle } from "../Particle.js";
+import { Particle } from '../Particle.js';
 
 export class Enemy {
     constructor(game) {
@@ -42,7 +42,7 @@ export class Enemy {
                 if (this.collisionX + this.width < 0) {
                     this.reset();
                 }
-    
+
             } else {
                 this.collisionX -= this.speedX;
                 if (this.collisionX - this.width > this.game.width) {
@@ -51,7 +51,7 @@ export class Enemy {
             }
             this.spriteX = this.collisionX;
             this.spriteY = this.collisionY;
-    
+
             // Проверим, не столкнолся ли враг с главным игроком (player)
             if (this.game.checkCollision(this.game.player, this)
                 && !this.game.player.markedForDeletion && !this.game.gameOver) {
@@ -62,7 +62,7 @@ export class Enemy {
                 }
                 this.reset();
                 this.game.sound.collision();
-    
+
                 this.game.health--;
             }
             // для всех активных пуль (ammo) также проверим условие столкновения
@@ -73,11 +73,11 @@ export class Enemy {
                     // если столкновение произошло, помечаем снаряд как удаленный
                     this.game.particles.add(new Particle(this.game, this.collisionX + this.width * 0.5,
                         this.collisionY + this.height * 0.5));
-                        ammo.reset();
+                    ammo.reset();
                 }
 
             });
-            if (this.lives <= 0) { 
+            if (this.lives <= 0) {
                 if (this.type === 'shadow') {
                     this.game.sound.deathEnemy2();
                 } else {
@@ -92,7 +92,7 @@ export class Enemy {
                 if (!this.game.gameOver) this.game.score += this.score;
                 if (this.game.isWin()) this.game.gameOver = true; // проверяем условие победы
             }
-    
+
         }
     }
 
@@ -103,7 +103,7 @@ export class Enemy {
                 this.frameX * this.spriteWidth, this.frameY * this.spriteHeight,
                 this.spriteWidth, this.spriteHeight,
                 this.spriteX, this.spriteY, this.width, this.height);
-    
+
             // отобразим у каждого врага его жизни
             if (this.game.debug) {
                 context.fillStyle = '#ffff00';

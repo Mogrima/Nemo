@@ -3,10 +3,10 @@ export class Props {
         this.game = game;
         this.isEscape = false;
         this.uncannyText = ['You have been chosen.\nThey will come soon.',
-                'The end is near.\nMake preparations.',
-                'The drop off has been\nmade. You`ve been warned.',
-                'The flashing light was\njust a test. You`ll have\nplenty of warning next time.',
-                'They`re coming soon.\nMaybe you should think\ntwice about opening the fear.'];
+            'The end is near.\nMake preparations.',
+            'The drop off has been\nmade. You`ve been warned.',
+            'The flashing light was\njust a test. You`ll have\nplenty of warning next time.',
+            'They`re coming soon.\nMaybe you should think\ntwice about opening the fear.'];
     }
 
     strangeMessage(context) {
@@ -27,16 +27,16 @@ export class Props {
         context.shadowBlur = 0;
         context.shadowColor = 'red';
         for (let i = 0; i < text.length; i++) {
-            context.fillText(text[i],  this.game.width * 0.5,
+            context.fillText(text[i], this.game.width * 0.5,
                 this.game.height * 0.5 + i * 25);
         }
         context.font = 13 + 'px ' + 'Silkscreen';
         context.shadowOffsetX = 0;
         context.shadowOffsetY = 0;
-        context.fillText('Press key \'X\' or \'Esc\' to close the message',  this.game.width * 0.5,
+        context.fillText('Press key \'X\' or \'Esc\' to close the message', this.game.width * 0.5,
             this.game.height * 0.5 + messageHeight * 0.5 - 20);
         context.restore();
-       
+
     }
 
     lossOfHealth() {
@@ -73,30 +73,30 @@ export class Props {
             return ([
                 this.escape,
                 'escape',
-               ]);
+            ]);
         } else if (randomize < 0.3) {
-           return ([
-            this.strangeMessage,
-            'strangeMessage',
-            this.uncannyText[Math.floor(Math.random() * 5)]
-           ]);
+            return ([
+                this.strangeMessage,
+                'strangeMessage',
+                this.uncannyText[Math.floor(Math.random() * 5)],
+            ]);
         } else if (randomize < 0.5) {
             return ([
-             this.lossOfHealth,
-             'Lose health'
+                this.lossOfHealth,
+                'Lose health',
             ]);
-         } else if (randomize < 0.8) {
+        } else if (randomize < 0.8) {
             return ([
-             this.upHealth,
-             'Up health'
+                this.upHealth,
+                'Up health',
             ]);
-         } else if (randomize < 1) {
+        } else if (randomize < 1) {
             return ([
-             this.reboot,
-             'Reboot!'
+                this.reboot,
+                'Reboot!',
             ]);
-         } 
-        
+        }
+
     }
 
     restart() {

@@ -1,4 +1,4 @@
-import { Projectile } from "./Projectile.js";
+import { Projectile } from './Projectile.js';
 
 export class Ammunition extends Projectile {
     constructor(game, r) {

@@ -13,7 +13,7 @@ import { SoundController } from './SoundController.js';
 
 export class Game {
     constructor(canvas) {
-        this.canvas = canvas
+        this.canvas = canvas;
         this.width = canvas.width;
         this.height = canvas.height;
 
@@ -36,9 +36,9 @@ export class Game {
         this.projectileInterval = 500;
         this.enemyInterval = 5000;
         this.intervalFpsDisplay = 3000;
-        
+
         this.canvasObjects = [];
-        this.units = new Set();;
+        this.units = new Set();
         this.keys = new Set();
         this.direction = new Set();
         this.ammoPool = [];
@@ -49,7 +49,7 @@ export class Game {
         this.corpuscles = new Set();
         this.props = new Set();
         this.gameObjects = [];
- 
+
         this.gameOver;
         this.score;
         this.win;
@@ -69,10 +69,10 @@ export class Game {
         this.trackGameOver(deltaTime);
         this.input.update();
         this.canvasObjects = [...this.canvasBackground.forest.objects];
-        this.gameObjects = [...this.units,  
-                            ...this.props, ...this.canvasObjects,
-                            ...this.enemies, ...this.particles,
-                            ...this.corpuscles];
+        this.gameObjects = [...this.units,
+            ...this.props, ...this.canvasObjects,
+            ...this.enemies, ...this.particles,
+            ...this.corpuscles];
 
         this.gameObjects.forEach(object => {
             object.update(deltaTime, context);
@@ -88,15 +88,15 @@ export class Game {
         }
 
         if (this.enemyTimer > this.enemyInterval && !this.gameOver) {
-            let enemy = this.getEnemy();
+            const enemy = this.getEnemy();
             if (enemy) {
-            this.enemies.add(enemy);
-            enemy.start();
+                this.enemies.add(enemy);
+                enemy.start();
             }
             this.enemyTimer = 0;
         } else {
             this.enemyTimer += deltaTime;
-        }  
+        }
     }
 
     init() {
@@ -121,10 +121,9 @@ export class Game {
             const randomize = Math.random();
             if (randomize < 0.5) {
                 this.enemiesPool.push(new Monster1(this));
-            }
-            else {
+            } else {
                 this.enemiesPool.push(new Monster2(this));
-            } 
+            }
         }
     }
 
@@ -181,7 +180,7 @@ export class Game {
                 if (!this.checkCollision(this.player, testProp)) {
                     this.props.add(testProp);
                 }
-                
+
             }
             attempts++;
         }
@@ -198,7 +197,7 @@ export class Game {
 
     isWin() {
         return ((this.win || (this.score >= this.winningScore))
-                && this.health > 0)
+                && this.health > 0);
     }
 
     trackGameOver(deltaTime) {
@@ -208,7 +207,7 @@ export class Game {
             this.gameTime = 0;
         }
 
-        if (this.health <= 10 ) this.player.warning = true;
+        if (this.health <= 10) this.player.warning = true;
         else this.player.warning = false;
         if (this.health <= 0) {
             this.gameOver = true;
@@ -254,7 +253,7 @@ export class Game {
         this.canvasBackground.draw(context);
         this.gameObjects.sort((a, b) =>{
             return (a.collisionY + a.height) - (b.collisionY + b.height);
-            
+
         });
         this.gameObjects.forEach(object => {
             object.draw(context);

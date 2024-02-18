@@ -31,20 +31,16 @@ export class Unit {
         if (this.game.keys.has('ArrowLeft')) {
             this.speedX = -this.maxSpeed;
             this.speedY = 0;
-        }
-        else if (this.game.keys.has('ArrowRight')) {
+        } else if (this.game.keys.has('ArrowRight')) {
             this.speedX = this.maxSpeed;
             this.speedY = 0;
-        }
-        else if (this.game.keys.has('ArrowUp')) {
+        } else if (this.game.keys.has('ArrowUp')) {
             this.speedY = -this.maxSpeed;
             this.speedX = 0;
-        }
-        else if (this.game.keys.has('ArrowDown')) {
+        } else if (this.game.keys.has('ArrowDown')) {
             this.speedY = this.maxSpeed;
             this.speedX = 0;
-        }
-        else {
+        } else {
             this.speedX = 0;
             this.speedY = 0;
         }
@@ -86,7 +82,7 @@ export class Unit {
         if (this.game.projectile > 0) {
             if (ammo) {
                 let x = this.collisionX;
-                let y = this.collisionY + 30;
+                const y = this.collisionY + 30;
                 if (directX === 'right') {
                     x = x + this.width - 25;
                 }
@@ -102,7 +98,7 @@ export class Unit {
         if (this.game.projectile > 0) {
             if (splash) {
                 let x = this.collisionX;
-                let y = this.collisionY + 30;
+                const y = this.collisionY + 30;
                 if (directX === 'right') {
                     x = x + this.width - 25;
                 }

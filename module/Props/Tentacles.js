@@ -100,13 +100,13 @@ export class Tentacles {
         context.drawImage(this.image,
             this.frameX * this.spriteWidth, this.frameY * this.spriteHeight,
             this.spriteWidth, this.spriteHeight,
-            this.spriteX, this.spriteY, this.spriteWidth, this.spriteHeight, );
+            this.spriteX, this.spriteY, this.spriteWidth, this.spriteHeight);
     }
 
     propTrigger() {
         return ((this.feature !== null) &&
             (!this.gameOver) &&
-            (this.lives < 1))
+            (this.lives < 1));
 
     }
 

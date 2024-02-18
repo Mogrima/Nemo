@@ -20,8 +20,7 @@ export class InputHandler {
                     this.game.player.shootTop('right');
                 }
 
-            }
-            else if (this.splashKeys.includes(e.key)) {
+            } else if (this.splashKeys.includes(e.key)) {
 
                 if ((this.game.direction.has('ArrowLeft'))) {
                     this.game.player.shootSplash('left');

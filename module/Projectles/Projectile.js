@@ -41,7 +41,7 @@ export class Projectile {
                     this.markedForDeletion = true;
                     this.reset();
                 }
-    
+
             } else if (this.directX === 'left') {
                 // this.frameY = 1;
                 this.collisionX -= this.speed;
@@ -52,22 +52,22 @@ export class Projectile {
             }
             this.spriteX = this.collisionX;
             this.spriteY = this.collisionY;
-    
+
             if (this.frameX < this.maxFrame) {
                 this.frameX++;
             } else {
                 this.frameX = 0;
             }
-    
+
         }
     }
 
     draw(context) {
         if (!this.free) {
-        context.drawImage(this.image,
-            this.spriteWidth * this.frameX, this.spriteHeight * this.frameY,
-            this.spriteWidth, this.spriteHeight, this.spriteX, this.spriteY,
-            this.width, this.height);
+            context.drawImage(this.image,
+                this.spriteWidth * this.frameX, this.spriteHeight * this.frameY,
+                this.spriteWidth, this.spriteHeight, this.spriteX, this.spriteY,
+                this.width, this.height);
         }
     }
 

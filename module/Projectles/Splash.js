@@ -1,4 +1,4 @@
-import { Projectile } from "./Projectile.js";
+import { Projectile } from './Projectile.js';
 
 export class Splash extends Projectile {
     constructor(game, r) {

@@ -33,7 +33,7 @@ export class UI {
                 message1 = 'Liberty!';
                 message2 = 'You have overcome the Darkness!';
                 this.game.sound.escape.play();
-                
+
             } else {
                 context.fillStyle = this.colorLose;
                 message1 = 'This is the end!';

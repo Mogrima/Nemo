@@ -1,5 +1,5 @@
 import { Unit } from './Unit.js';
-import {Farefly} from "../Farefly.js";
+import { Farefly } from '../Farefly.js';
 
 export class Nemo extends Unit {
     constructor(game) {
@@ -44,7 +44,7 @@ export class Nemo extends Unit {
         }
     }
 
-    
+
     restart() {
         this.collisionX = this.game.width / 2 - (this.width / 2);
         this.collisionY = this.game.height - this.height - 50;
