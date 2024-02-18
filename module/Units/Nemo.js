@@ -29,6 +29,24 @@ export class Nemo extends Unit {
 
     update() {
         super.update();
+
+        if (this.game.keys.has('ArrowLeft')) {
+            this.speedX = -this.maxSpeed;
+            this.speedY = 0;
+        } else if (this.game.keys.has('ArrowRight')) {
+            this.speedX = this.maxSpeed;
+            this.speedY = 0;
+        } else if (this.game.keys.has('ArrowUp')) {
+            this.speedY = -this.maxSpeed;
+            this.speedX = 0;
+        } else if (this.game.keys.has('ArrowDown')) {
+            this.speedY = this.maxSpeed;
+            this.speedX = 0;
+        } else {
+            this.speedX = 0;
+            this.speedY = 0;
+        }
+
         if (this.game.health < 1) {
             this.remove();
             for (let i = 0; this.numberOfCorpuscle > 0; i++) {

@@ -28,23 +28,6 @@ export class Unit {
         this.spriteX = this.collisionX;
         this.spriteY = this.collisionY;
 
-        if (this.game.keys.has('ArrowLeft')) {
-            this.speedX = -this.maxSpeed;
-            this.speedY = 0;
-        } else if (this.game.keys.has('ArrowRight')) {
-            this.speedX = this.maxSpeed;
-            this.speedY = 0;
-        } else if (this.game.keys.has('ArrowUp')) {
-            this.speedY = -this.maxSpeed;
-            this.speedX = 0;
-        } else if (this.game.keys.has('ArrowDown')) {
-            this.speedY = this.maxSpeed;
-            this.speedX = 0;
-        } else {
-            this.speedX = 0;
-            this.speedY = 0;
-        }
-
         // чтобы не выходил за границы холста
         if (this.collisionX > this.game.width - this.maxXRight) {
             this.collisionX = this.game.width - this.maxXRight;
