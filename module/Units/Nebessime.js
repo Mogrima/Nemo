@@ -26,10 +26,20 @@ export class Nebessime extends Unit {
         this.fps = 60;
         this.timer = 0;
         this.interval = 1000/this.fps;
+        this.radius = 100;
+        this.angle = 0;
     }
 
     update(deltaTime) {
         super.update();
+        const vx = Math.cos(this.angle) * this.radius;
+        const vy = Math.sin(this.angle) * this.radius;
+        
+        this.collisionX = this.game.player.collisionX + vx;
+        this.collisionY = this.game.player.collisionY + vy;
+
+        this.angle += 0.01;
+
         if (this.frameX >= this.maxFrame) this.frameX = 0;
         if (this.timer > this.interval) {
             this.frameX++;
