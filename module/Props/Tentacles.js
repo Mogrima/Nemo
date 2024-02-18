@@ -29,15 +29,7 @@ export class Tentacles {
     }
     
     update(deltaTime, context) {
-        if (this.frameX >= this.maxFrame) this.frameX = 13;
-        if (!this.propTrigger()) {
-            if (this.timer > this.interval) {
-                this.frameX++;
-                this.timer = 0;
-            } else {
-                this.timer += deltaTime;
-            }
-        }
+        this.handleFrames(deltaTime);
 
         this.game.splashPool.forEach(splash => {
             if (!splash.free && this.game.checkCollision(splash, this) && !this.game.gameOver) {
@@ -118,6 +110,18 @@ export class Tentacles {
             
         } else {
             return;
+        }
+    }
+
+    handleFrames(deltaTime) {
+        if (this.frameX >= this.maxFrame) this.frameX = 13;
+        if (!this.propTrigger()) {
+            if (this.timer > this.interval) {
+                this.frameX++;
+                this.timer = 0;
+            } else {
+                this.timer += deltaTime;
+            }
         }
     }
 
