@@ -23,7 +23,7 @@ export class Nebessime extends Unit {
         // смещение спрайта, чтобы не было видно куска другого кадра
         this.shiftX = 3;
 
-        this.fps = 60;
+        this.fps = 20;
         this.timer = 0;
         this.interval = 1000/this.fps;
         this.radius = 100;
