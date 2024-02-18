@@ -40,6 +40,13 @@ export class Nebessime extends Unit {
 
         this.angle += 0.01;
 
+        this.dx = this.game.player.collisionX - this.collisionX;
+        this.dy = this.game.player.collisionY - this.collisionY;
+        const angle = Math.atan2(this.dy, this.dx);
+
+        if (angle < -1 || angle > 2) this.frameY = 1;
+        else this.frameY = 3;
+
         if (this.frameX >= this.maxFrame) this.frameX = 0;
         if (this.timer > this.interval) {
             this.frameX++;
