@@ -28,6 +28,8 @@ export class Nebessime extends Unit {
         this.interval = 1000/this.fps;
         this.radius = 100;
         this.angle = 0;
+        this.enemy;
+
     }
 
     update(deltaTime) {
@@ -54,6 +56,11 @@ export class Nebessime extends Unit {
         } else {
             this.timer += deltaTime;
         }
+    }
+
+    targetEnemy() {
+        const iterator = this.game.enemies.values();
+        return iterator.next().value;
     }
 
     calcAim(a, b) {
