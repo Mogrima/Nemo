@@ -29,25 +29,18 @@ export class Nebessime extends Unit {
         this.radius = 100;
         this.angle = 0;
         this.enemy;
-
     }
 
     update(deltaTime) {
         super.update();
-        const vx = Math.cos(this.angle) * this.radius;
-        const vy = Math.sin(this.angle) * this.radius;
-        
-        this.collisionX = this.game.player.collisionX + vx;
-        this.collisionY = this.game.player.collisionY + vy;
 
-        this.angle += 0.01;
-
-        this.dx = this.game.player.collisionX - this.collisionX;
-        this.dy = this.game.player.collisionY - this.collisionY;
-        const angle = Math.atan2(this.dy, this.dx);
-
-        if (angle < -1 || angle > 2) this.frameY = 1;
-        else this.frameY = 3;
+        if (this.enemy === undefined) {
+            this.enemy = this.targetEnemy();
+        } else {
+            const aim = this.calcAim(this, this.enemy);
+            this.speedX = aim[0];
+            this.speedY = aim[1];
+        }
 
         if (this.frameX >= this.maxFrame) this.frameX = 0;
         if (this.timer > this.interval) {
