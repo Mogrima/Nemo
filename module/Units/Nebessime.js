@@ -56,6 +56,15 @@ export class Nebessime extends Unit {
         }
     }
 
+    calcAim(a, b) {
+        const dx = a.collisionX - b.collisionX;
+        const dy = a.collisionY - b.collisionY;
+        const distance = Math.hypot(dx, dy);
+        const aimX = dx / distance * -1;
+        const aimY = dy / distance * -1;
+        return [aimX, aimY, dx, dy];
+    }
+
     restart() {
         this.markedForDeletion = false;
         this.collisionX = (this.game.width / 2 - (this.width / 2)) + 100;
