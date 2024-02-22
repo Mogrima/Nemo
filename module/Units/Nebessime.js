@@ -31,6 +31,7 @@ export class Nebessime extends Unit {
         this.handleFrames();
 
         if (this.enemy === undefined) {
+            this.maxFrame = 5;
             this.frameY = this.direct === 1 ? 5 : 0;
             this.speedX = 0;
             this.speedY = 0;
@@ -40,6 +41,7 @@ export class Nebessime extends Unit {
                 const aim = this.calcAim(this, this.enemy);
                 this.speedX = aim[0];
                 this.speedY = aim[1];
+                this.maxFrame = 4;
                 if (this.enemy.collisionX - this.collisionX < 0) {
                     this.direct = 0;
                     this.frameY = 1;
