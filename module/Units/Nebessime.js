@@ -1,4 +1,5 @@
 import { Unit } from './Unit.js';
+import { Hunting, Attack, Idle } from './State.js';
 
 export class Nebessime extends Unit {
     constructor(game) {
@@ -23,47 +24,24 @@ export class Nebessime extends Unit {
         this.direct = 1;
 
         this.enemy;
+
+        this.states = [new Idle(game, this), new Hunting(game, this), new Attack(game, this)];
+        this.currentState;
+        this.setState(0);
     }
 
     update(deltaTime) {
         super.update();
-
-        this.handleFrames();
-
+        this.currentState.update();
         if (this.enemy === undefined) {
-            this.maxFrame = 5;
-            this.frameY = this.direct === 1 ? 5 : 0;
-            this.speedX = 0;
-            this.speedY = 0;
-            this.enemy = this.targetEnemy();
+            this.setState(0);
         } else {
             if (this.enemy.collisionX < this.game.width && this.enemy.collisionX > 0) {
-                const aim = this.calcAim(this, this.enemy);
-                this.speedX = aim[0];
-                this.speedY = aim[1];
-                this.maxFrame = 4;
-                if (this.enemy.collisionX - this.collisionX < 0) {
-                    this.direct = 0;
-                    this.frameY = 1;
-                } else {
-                    this.direct = 1;
-                    this.frameY = 4;
-                }
+                this.setState(1);
             }
 
             if (this.game.checkCollision(this.enemy, this)) {
-                this.frameY = this.direct === 1 ? 6 : 2;
-                this.speedX = 0;
-                this.speedY = 0;
-                this.enemy.speedX = 0;
-                if (this.game.spriteUpdate) {
-                    this.frameX++;
-                    if (this.frameX > this.maxFrame) {
-                        this.enemy.reset();
-                        this.game.sound.collision();
-                        this.enemy = undefined;
-                    }
-                }
+                this.setState(2);
             }
         }
 
@@ -76,6 +54,11 @@ export class Nebessime extends Unit {
             this.spriteWidth, this.spriteHeight,
             this.spriteX - this.width * 0.5, this.spriteY - this.height,
             this.spriteWidth * 1.5, this.spriteHeight * 1.5);
+    }
+
+    setState(state) {
+        this.currentState = this.states[state];
+        this.currentState.start();
     }
 
     targetEnemy() {
@@ -103,6 +86,7 @@ export class Nebessime extends Unit {
     }
 
     restart() {
+        this.setState(0);
         this.markedForDeletion = false;
         this.collisionX = (this.game.width / 2 - (this.width / 2)) + 100;
         this.collisionY = this.game.height - this.height - 43;
