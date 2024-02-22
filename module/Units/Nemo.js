@@ -62,6 +62,14 @@ export class Nemo extends Unit {
         }
     }
 
+    draw(context) {
+        super.draw(context);
+        context.drawImage(this.image,
+            this.frameX * this.spriteWidth + this.shiftX, this.frameY * this.spriteHeight + this.shiftY,
+            this.spriteWidth, this.spriteHeight,
+            this.spriteX, this.spriteY, this.width, this.height);
+    }
+
 
     restart() {
         this.collisionX = this.game.width / 2 - (this.width / 2);

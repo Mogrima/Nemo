@@ -59,6 +59,15 @@ export class Nebessime extends Unit {
         }
     }
 
+    draw(context) {
+        super.draw(context);
+        context.drawImage(this.image,
+            this.frameX * this.spriteWidth, this.frameY * this.spriteHeight,
+            this.spriteWidth, this.spriteHeight,
+            this.spriteX - this.width * 0.5, this.spriteY - this.height,
+            this.spriteWidth * 1.5, this.spriteHeight * 1.5);
+    }
+
     targetEnemy() {
         const iterator = this.game.enemies.values();
         return iterator.next().value;
