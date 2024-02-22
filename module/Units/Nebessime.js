@@ -4,9 +4,9 @@ export class Nebessime extends Unit {
     constructor(game) {
         super(game);
         this.spriteWidth = 64;
-        this.spriteHeight = 67;
-        this.width = this.spriteWidth * 1.5;
-        this.height = this.spriteHeight * 1.5;
+        this.spriteHeight = 64;
+        this.width = 50;
+        this.height = 50;
 
         this.collisionX = (game.width / 2 - (this.width / 2)) + 100;
         this.collisionY = game.height - this.height - 43;
@@ -45,7 +45,7 @@ export class Nebessime extends Unit {
                 if (this.enemy.collisionX - this.collisionX < 0) {
                     this.frameY = 1;
                 } else {
-                    this.frameY = 3;
+                    this.frameY = 4;
                 }
             }
         }
