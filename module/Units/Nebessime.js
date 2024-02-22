@@ -4,7 +4,7 @@ export class Nebessime extends Unit {
     constructor(game) {
         super(game);
         this.spriteWidth = 64;
-        this.spriteHeight = 64;
+        this.spriteHeight = 67;
         this.width = 50;
         this.height = 50;
 
