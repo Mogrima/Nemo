@@ -31,6 +31,8 @@ export class Nebessime extends Unit {
     update(deltaTime) {
         super.update();
 
+        this.handleFrames(deltaTime);
+
         if (this.enemy === undefined) {
             this.frameY = this.direct === 1 ? 5 : 0;
             this.speedX = 0;
@@ -51,13 +53,6 @@ export class Nebessime extends Unit {
             }
         }
 
-        if (this.frameX >= this.maxFrame) this.frameX = 0;
-        if (this.timer > this.interval) {
-            this.frameX++;
-            this.timer = 0;
-        } else {
-            this.timer += deltaTime;
-        }
     }
 
     draw(context) {
@@ -81,6 +76,16 @@ export class Nebessime extends Unit {
         const aimX = dx / distance * -1;
         const aimY = dy / distance * -1;
         return [aimX, aimY, dx, dy];
+    }
+
+    handleFrames(deltaTime) {
+        if (this.frameX >= this.maxFrame) this.frameX = 0;
+        if (this.timer > this.interval) {
+            this.frameX++;
+            this.timer = 0;
+        } else {
+            this.timer += deltaTime;
+        }
     }
 
     restart() {
