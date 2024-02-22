@@ -26,8 +26,6 @@ export class Nebessime extends Unit {
         this.fps = 20;
         this.timer = 0;
         this.interval = 1000/this.fps;
-        this.radius = 100;
-        this.angle = 0;
         this.enemy;
     }
 
