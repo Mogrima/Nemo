@@ -22,16 +22,13 @@ export class Nebessime extends Unit {
         this.maxFrame = 5;
         this.direct = 1;
 
-        this.fps = 20;
-        this.timer = 0;
-        this.interval = 1000/this.fps;
         this.enemy;
     }
 
     update(deltaTime) {
         super.update();
 
-        this.handleFrames(deltaTime);
+        this.handleFrames();
 
         if (this.enemy === undefined) {
             this.frameY = this.direct === 1 ? 5 : 0;
@@ -78,13 +75,13 @@ export class Nebessime extends Unit {
         return [aimX, aimY, dx, dy];
     }
 
-    handleFrames(deltaTime) {
-        if (this.frameX >= this.maxFrame) this.frameX = 0;
-        if (this.timer > this.interval) {
-            this.frameX++;
-            this.timer = 0;
-        } else {
-            this.timer += deltaTime;
+    handleFrames() {
+        if (this.game.spriteUpdate) {
+            if (this.frameX < this.maxFrame) {
+                this.frameX++
+            } else {
+                this.frameX = 0;
+            }
         }
     }
 
