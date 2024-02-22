@@ -20,8 +20,7 @@ export class Nebessime extends Unit {
         this.frameX = 0;
         this.frameY = 2;
         this.maxFrame = 5;
-        // смещение спрайта, чтобы не было видно куска другого кадра
-        this.shiftX = 3;
+        this.direct = 1;
 
         this.fps = 20;
         this.timer = 0;
@@ -33,7 +32,7 @@ export class Nebessime extends Unit {
         super.update();
 
         if (this.enemy === undefined) {
-            this.frameY = 0;
+            this.frameY = this.direct === 1 ? 5 : 0;
             this.speedX = 0;
             this.speedY = 0;
             this.enemy = this.targetEnemy();
@@ -43,8 +42,10 @@ export class Nebessime extends Unit {
                 this.speedX = aim[0];
                 this.speedY = aim[1];
                 if (this.enemy.collisionX - this.collisionX < 0) {
+                    this.direct = 0;
                     this.frameY = 1;
                 } else {
+                    this.direct = 1;
                     this.frameY = 4;
                 }
             }
@@ -88,6 +89,7 @@ export class Nebessime extends Unit {
         this.collisionY = this.game.height - this.height - 43;
         this.spriteX = this.collisionX;
         this.spriteY = this.collisionY;
+        this.direct = 1;
         this.frameX = 0;
         this.frameY = 2;
         this.numberOfCorpuscle = 20;
