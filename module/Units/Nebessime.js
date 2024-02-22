@@ -50,6 +50,21 @@ export class Nebessime extends Unit {
                     this.frameY = 4;
                 }
             }
+
+            if (this.game.checkCollision(this.enemy, this)) {
+                this.frameY = this.direct === 1 ? 6 : 2;
+                this.speedX = 0;
+                this.speedY = 0;
+                this.enemy.speedX = 0;
+                if (this.game.spriteUpdate) {
+                    this.frameX++;
+                    if (this.frameX > this.maxFrame) {
+                        this.enemy.reset();
+                        this.game.sound.collision();
+                        this.enemy = undefined;
+                    }
+                }
+            }
         }
 
     }

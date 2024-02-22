@@ -74,16 +74,6 @@ export class Enemy {
 
                 this.game.health--;
             }
-
-            if (this.game.checkCollision(this.game.player2, this)) {
-                for (let i = 0; i < this.score; i++) {
-                    this.game.particles.add(new Particle(this.game, this.collisionX + this.width * 0.5,
-                        this.collisionY + this.height * 0.5));
-                }
-                this.reset();
-                this.game.sound.collision();
-                this.game.player2.enemy = undefined;
-            }
             
             // для всех активных пуль (ammo) также проверим условие столкновения
             // пули с врагом.
