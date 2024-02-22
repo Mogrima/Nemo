@@ -4,28 +4,23 @@ import { Hunting, Attack, Idle } from './State.js';
 export class Nebessime extends Unit {
     constructor(game) {
         super(game);
+        this.image = document.getElementById('player2');
         this.spriteWidth = 64;
         this.spriteHeight = 67;
         this.width = 50;
         this.height = 50;
-
-        this.collisionX = (game.width / 2 - (this.width / 2)) + 100;
-        this.collisionY = game.height - this.height - 43;
-
         this.maxXRight = this.width + 10;
         this.maxXLeft = this.width - 10;
         this.maxTop = 232;
+        this.states = [new Idle(game, this), new Hunting(game, this), new Attack(game, this)];
 
-        // image and animation player
-        this.image = document.getElementById('player2');
+        this.collisionX = (game.width / 2 - (this.width / 2)) + 100;
+        this.collisionY = game.height - this.height - 43;
         this.frameX = 0;
         this.frameY = 2;
         this.maxFrame = 5;
         this.direct = 1;
-
         this.enemy;
-
-        this.states = [new Idle(game, this), new Hunting(game, this), new Attack(game, this)];
         this.currentState;
         this.setState(0);
     }
