@@ -35,11 +35,21 @@ export class Nebessime extends Unit {
         super.update();
 
         if (this.enemy === undefined) {
+            this.frameY = 0;
+            this.speedX = 0;
+            this.speedY = 0;
             this.enemy = this.targetEnemy();
         } else {
-            const aim = this.calcAim(this, this.enemy);
-            this.speedX = aim[0];
-            this.speedY = aim[1];
+            if (this.enemy.collisionX < this.game.width && this.enemy.collisionX > 0) {
+                const aim = this.calcAim(this, this.enemy);
+                this.speedX = aim[0];
+                this.speedY = aim[1];
+                if (this.enemy.collisionX - this.collisionX < 0) {
+                    this.frameY = 1;
+                } else {
+                    this.frameY = 3;
+                }
+            }
         }
 
         if (this.frameX >= this.maxFrame) this.frameX = 0;
