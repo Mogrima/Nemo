@@ -1,3 +1,5 @@
+import { Farefly } from "../Farefly.js";
+
 class State {
     constructor(game, unit) {
         this.game = game;
@@ -58,6 +60,35 @@ export class Attack extends State {
                 this.unit.enemy.reset();
                 this.game.sound.collision();
                 this.unit.enemy = undefined;
+            }
+        }
+    }
+    
+}
+
+export class Destroy extends State {
+    start() {
+        this.unit.maxFrame = 6;
+        this.unit.frameY = 3;
+        this.unit.speedX = 0;
+        this.unit.speedY = 0;
+        this.unit.enemy.speedX = 0;
+    }
+
+    update() {
+        this.unit.handleFrames();
+        if (this.game.spriteUpdate) {
+            this.unit.frameX++;
+            if (this.unit.frameX > this.unit.maxFrame) {
+                this.unit.enemy.reset();
+                this.game.sound.collision();
+                this.unit.enemy = undefined;
+                this.unit.remove();
+                for (let i = 0; this.unit.numberOfCorpuscle > 0; i++) {
+                    this.unit.numberOfCorpuscle--;
+                    this.game.corpuscles.add(new Farefly(this.game, this.unit.collisionX,
+                        this.unit.collisionY + this.unit.height, '#8b00ff'));
+                }
             }
         }
     }
