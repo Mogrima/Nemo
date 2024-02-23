@@ -86,4 +86,8 @@ export class Unit {
             }
         }
     }
+
+    remove() {
+        this.game.units.delete(this);
+    }
 }

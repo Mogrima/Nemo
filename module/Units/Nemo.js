@@ -82,8 +82,4 @@ export class Nemo extends Unit {
         this.splashes = [];
     }
 
-    remove() {
-        this.game.units.delete(this);
-    }
-
 }

@@ -95,8 +95,4 @@ export class Nebessime extends Unit {
         this.enemy = undefined;
     }
 
-    remove() {
-        this.game.units.delete(this);
-    }
-
 }
