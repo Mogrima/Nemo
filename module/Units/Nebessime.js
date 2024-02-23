@@ -1,5 +1,5 @@
 import { Unit } from './Unit.js';
-import { Hunting, Attack, Idle } from './State.js';
+import { Hunting, Attack, Idle, Destroy } from './State.js';
 
 export class Nebessime extends Unit {
     constructor(game) {
@@ -12,7 +12,10 @@ export class Nebessime extends Unit {
         this.maxXRight = this.width + 10;
         this.maxXLeft = this.width - 10;
         this.maxTop = 232;
-        this.states = [new Idle(game, this), new Hunting(game, this), new Attack(game, this)];
+        this.states = [new Idle(game, this),
+                        new Hunting(game, this),
+                        new Attack(game, this),
+                        new Destroy(game, this)];
 
         this.collisionX;
         this.collisionY;
@@ -81,7 +84,6 @@ export class Nebessime extends Unit {
 
     restart() {
         this.setState(0);
-        // this.markedForDeletion = false;
         this.collisionX = (this.game.width / 2 - (this.width / 2)) + 100;
         this.collisionY = this.game.height - this.height - 43;
         this.spriteX = this.collisionX;
@@ -89,8 +91,12 @@ export class Nebessime extends Unit {
         this.direct = 1;
         this.frameX = 0;
         this.frameY = 2;
-        // this.numberOfCorpuscle = 20;
+        this.numberOfCorpuscle = 20;
         this.enemy = undefined;
+    }
+
+    remove() {
+        this.game.units.delete(this);
     }
 
 }
