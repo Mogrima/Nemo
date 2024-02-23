@@ -14,15 +14,14 @@ export class Nebessime extends Unit {
         this.maxTop = 232;
         this.states = [new Idle(game, this), new Hunting(game, this), new Attack(game, this)];
 
-        this.collisionX = (game.width / 2 - (this.width / 2)) + 100;
-        this.collisionY = game.height - this.height - 43;
-        this.frameX = 0;
-        this.frameY = 2;
-        this.maxFrame = 5;
-        this.direct = 1;
+        this.collisionX;
+        this.collisionY;
+        this.frameX;
+        this.frameY;
+        this.maxFrame;
+        this.direct;
         this.enemy;
         this.currentState;
-        this.setState(0);
     }
 
     update(deltaTime) {
@@ -82,7 +81,7 @@ export class Nebessime extends Unit {
 
     restart() {
         this.setState(0);
-        this.markedForDeletion = false;
+        // this.markedForDeletion = false;
         this.collisionX = (this.game.width / 2 - (this.width / 2)) + 100;
         this.collisionY = this.game.height - this.height - 43;
         this.spriteX = this.collisionX;
@@ -90,7 +89,7 @@ export class Nebessime extends Unit {
         this.direct = 1;
         this.frameX = 0;
         this.frameY = 2;
-        this.numberOfCorpuscle = 20;
+        // this.numberOfCorpuscle = 20;
         this.enemy = undefined;
     }
 
