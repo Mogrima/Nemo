@@ -74,7 +74,7 @@ export class Enemy {
 
                 this.game.health--;
             }
-            
+
             // для всех активных пуль (ammo) также проверим условие столкновения
             // пули с врагом.
             this.game.ammoPool.forEach(ammo => {

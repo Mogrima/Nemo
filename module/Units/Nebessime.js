@@ -13,9 +13,9 @@ export class Nebessime extends Unit {
         this.maxXLeft = this.width - 10;
         this.maxTop = 232;
         this.states = [new Idle(game, this),
-                        new Hunting(game, this),
-                        new Attack(game, this),
-                        new Destroy(game, this)];
+            new Hunting(game, this),
+            new Attack(game, this),
+            new Destroy(game, this)];
 
         this.collisionX;
         this.collisionY;
@@ -75,7 +75,7 @@ export class Nebessime extends Unit {
     handleFrames() {
         if (this.game.spriteUpdate) {
             if (this.frameX < this.maxFrame) {
-                this.frameX++
+                this.frameX++;
             } else {
                 this.frameX = 0;
             }

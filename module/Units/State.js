@@ -1,4 +1,4 @@
-import { Farefly } from "../Farefly.js";
+import { Farefly } from '../Farefly.js';
 
 class State {
     constructor(game, unit) {
@@ -32,7 +32,7 @@ export class Hunting extends State {
         const aim = this.unit.calcAim(this.unit, this.unit.enemy);
         this.unit.speedX = aim[0];
         this.unit.speedY = aim[1];
-        
+
         if (this.unit.enemy.collisionX - this.unit.collisionX < 0) {
             this.unit.direct = 0;
             this.unit.frameY = 1;
@@ -41,7 +41,7 @@ export class Hunting extends State {
             this.unit.frameY = 4;
         }
     }
-    
+
 }
 
 export class Attack extends State {
@@ -63,7 +63,7 @@ export class Attack extends State {
             }
         }
     }
-    
+
 }
 
 export class Destroy extends State {
@@ -92,5 +92,5 @@ export class Destroy extends State {
             }
         }
     }
-    
+
 }
