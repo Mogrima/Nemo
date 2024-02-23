@@ -60,6 +60,10 @@ export class Game {
         this.fpsCount = 0;
         this.timerFpsDisplay = 0;
 
+        this.spriteUpdate = false;
+        this.spriteTimer = 0;
+        this.spriteInterval = 150;
+
         this.debug = true;
         this.toggleMessage = false;
 
@@ -67,6 +71,7 @@ export class Game {
 
     update(deltaTime, context) {
         this.trackGameOver(deltaTime);
+        this.handleSpriteTimer(deltaTime);
         this.input.update();
         this.canvasObjects = [...this.canvasBackground.forest.objects];
         this.gameObjects = [...this.units,
@@ -104,6 +109,7 @@ export class Game {
         this.score = 0;
         this.win = false;
         this.health = 20;
+        this.player2.restart();
         this.units.add(this.player).add(this.player2);
         this.projectile = 20;
         this.projectileTimer = 0;
@@ -223,6 +229,16 @@ export class Game {
             this.timerFpsDisplay = 0;
         } else {
             this.timerFpsDisplay += deltaTime;
+        }
+    }
+
+    handleSpriteTimer(deltaTime) {
+        if (this.spriteTimer < this.spriteInterval) {
+            this.spriteTimer += deltaTime;
+            this.spriteUpdate = false;
+        } else {
+            this.spriteUpdate = true;
+            this.spriteTimer = 0;
         }
     }
 

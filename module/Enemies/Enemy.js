@@ -40,12 +40,18 @@ export class Enemy {
                 this.collisionX += this.speedX;
                 // Помечаем врага как удаленного, если он полностью пересечет левую границу игрового поля
                 if (this.collisionX + this.width < 0) {
+                    if (this === this.game.player2.enemy) {
+                        this.game.player2.setState(0);
+                    }
                     this.reset();
                 }
 
             } else {
                 this.collisionX -= this.speedX;
                 if (this.collisionX - this.width > this.game.width) {
+                    if (this === this.game.player2.enemy) {
+                        this.game.player2.setState(0);
+                    }
                     this.reset();
                 }
             }
@@ -60,11 +66,15 @@ export class Enemy {
                     this.game.particles.add(new Particle(this.game, this.collisionX + this.width * 0.5,
                         this.collisionY + this.height * 0.5));
                 }
+                if (this === this.game.player2.enemy) {
+                    this.game.player2.setState(0);
+                }
                 this.reset();
                 this.game.sound.collision();
 
                 this.game.health--;
             }
+
             // для всех активных пуль (ammo) также проверим условие столкновения
             // пули с врагом.
             this.game.ammoPool.forEach(ammo => {
@@ -82,6 +92,9 @@ export class Enemy {
                     this.game.sound.deathEnemy2();
                 } else {
                     this.game.sound.deathEnemy();
+                }
+                if (this === this.game.player2.enemy) {
+                    this.game.player2.setState(0);
                 }
                 this.reset(); // удаляем врага
                 for (let i = 0; i < this.score; i++) {

@@ -29,6 +29,24 @@ export class Nemo extends Unit {
 
     update() {
         super.update();
+
+        if (this.game.keys.has('ArrowLeft')) {
+            this.speedX = -this.maxSpeed;
+            this.speedY = 0;
+        } else if (this.game.keys.has('ArrowRight')) {
+            this.speedX = this.maxSpeed;
+            this.speedY = 0;
+        } else if (this.game.keys.has('ArrowUp')) {
+            this.speedY = -this.maxSpeed;
+            this.speedX = 0;
+        } else if (this.game.keys.has('ArrowDown')) {
+            this.speedY = this.maxSpeed;
+            this.speedX = 0;
+        } else {
+            this.speedX = 0;
+            this.speedY = 0;
+        }
+
         if (this.game.health < 1) {
             this.remove();
             for (let i = 0; this.numberOfCorpuscle > 0; i++) {
@@ -44,6 +62,14 @@ export class Nemo extends Unit {
         }
     }
 
+    draw(context) {
+        super.draw(context);
+        context.drawImage(this.image,
+            this.frameX * this.spriteWidth + this.shiftX, this.frameY * this.spriteHeight + this.shiftY,
+            this.spriteWidth, this.spriteHeight,
+            this.spriteX, this.spriteY, this.width, this.height);
+    }
+
 
     restart() {
         this.collisionX = this.game.width / 2 - (this.width / 2);
@@ -54,10 +80,6 @@ export class Nemo extends Unit {
         this.frameY = 1;
         this.numberOfCorpuscle = 20;
         this.splashes = [];
-    }
-
-    remove() {
-        this.game.units.delete(this);
     }
 
 }

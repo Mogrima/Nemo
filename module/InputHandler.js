@@ -44,10 +44,10 @@ export class InputHandler {
                 this.game.keys.delete(e.key);
 
                 if ((this.game.direction.has('ArrowLeft'))) {
-                    this.game.player2.frameY = 0;
+                    // this.game.player2.frameY = 0;
 
                 } else {
-                    this.game.player2.frameY = 2;
+                    // this.game.player2.frameY = 2;
                 }
             }
             this.game.toggleMessage = false;
@@ -60,24 +60,20 @@ export class InputHandler {
         if (this.game.keys.has('ArrowLeft')) {
             this.game.player.frameY = 7;
             this.game.player.maxFrame = 8;
-            this.game.player2.frameY = 1;
             this.game.direction.clear();
             this.game.direction.add('ArrowLeft');
         } else if (this.game.keys.has('ArrowRight')) {
             this.game.player.frameY = 1;
             this.game.player.maxFrame = 8;
-            this.game.player2.frameY = 3;
             this.game.direction.clear();
             this.game.direction.add('ArrowRight');
         } else if (this.game.keys.has('ArrowUp')) {
             this.game.player.frameY = 4;
             this.game.player.maxFrame = 8;
-            this.game.player2.frameY = 1;
 
         } else if (this.game.keys.has('ArrowDown')) {
             this.game.player.frameY = 0;
             this.game.player.maxFrame = 8;
-            this.game.player2.frameY = 3;
         }
     }
 }
