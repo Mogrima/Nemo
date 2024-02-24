@@ -64,7 +64,7 @@ export class Game {
         this.spriteTimer = 0;
         this.spriteInterval = 150;
 
-        this.debug = true;
+        this.debug = false;
         this.toggleMessage = false;
 
     }
