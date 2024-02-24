@@ -1,4 +1,4 @@
-import { Particle } from '../Particle.js';
+import { Particle } from '../Explosion.js';
 
 export class Enemy {
     constructor(game) {
