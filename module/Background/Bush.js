@@ -1,14 +1,14 @@
 export class Bush {
-    constructor(fieldWidth, fieldHeight) {
+    constructor(fieldWidth, topBoundary) {
         this.fieldWidth = fieldWidth;
-        this.fieldHeight = fieldHeight;
+        this.topBoundary = topBoundary;
         this.image = document.getElementById('bushes');
         this.spriteWidth = 80;
         this.spriteHeight = 95;
         this.width = this.spriteWidth;
         this.height = this.spriteHeight;
         this.x = Math.random() * this.fieldWidth;
-        this.y = (Math.random() * (350 - this.fieldHeight) + this.fieldHeight) - this.spriteHeight;
+        this.y = (Math.random() * (350 - this.topBoundary) + this.topBoundary) - this.spriteHeight;
         this.collisionX = this.x;
         this.collisionY = this.y;
         this.frameX = Math.floor(Math.random() * 4);

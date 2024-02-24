@@ -1,7 +1,7 @@
 export class Tree {
-    constructor(fieldWidth, fieldHeight) {
+    constructor(fieldWidth, topBoundary) {
         this.fieldWidth = fieldWidth;
-        this.fieldHeight = fieldHeight;
+        this.topBoundary = topBoundary;
         this.id = Math.floor(Math.random() * (5 + 1) + 2);
         this.image = document.getElementById('tree' + this.id);
         this.spriteWidth = this.image.width;
@@ -9,7 +9,7 @@ export class Tree {
         this.width = this.spriteWidth;
         this.height = this.spriteHeight;
         this.x = Math.random() * this.fieldWidth;
-        this.y = (Math.random() * (350 - this.fieldHeight) + this.fieldHeight) - this.image.height;
+        this.y = (Math.random() * (350 - this.topBoundary) + this.topBoundary) - this.image.height;
         this.collisionX = this.x;
         this.collisionY = this.y;
         this.spriteX = this.x;
