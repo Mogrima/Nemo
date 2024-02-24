@@ -17,6 +17,8 @@ export class CanvasBackground {
         this.imagePlansBackground = document.getElementById('plansBackground');
 
         this.imageCity = document.getElementById('city');
+        this.imageCityWidth = 414;
+        this.imageCityHeight = 48;
 
     }
     init() {
@@ -27,7 +29,9 @@ export class CanvasBackground {
     draw(context) {
         context.save();
         this.sky.draw(context);
-        context.drawImage(this.imageCity, this.canvas.height, 175);
+        context.drawImage(this.imageCity,
+            this.canvasWidth * 0.5 - this.imageCityWidth * 0.5,
+            this.gameFieldYstart - this.imageCityHeight);
 
         // game field
         context.fillStyle = this.gameFieldColor;
