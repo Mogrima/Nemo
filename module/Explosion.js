@@ -1,4 +1,4 @@
-export class Particle {
+export class Explosion {
     constructor(game, x, y) {
         this.game = game;
         this.collisionX = x;
@@ -62,6 +62,6 @@ export class Particle {
     }
 
     remove() {
-        this.game.particles.delete(this);
+        this.game.explosions.delete(this);
     }
 }

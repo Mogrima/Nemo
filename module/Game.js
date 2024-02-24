@@ -46,7 +46,7 @@ export class Game {
         this.splashPool = [];
         this.enemies = new Set();
         this.enemiesPool = [];
-        this.particles = new Set();
+        this.explosions = new Set();
         this.corpuscles = new Set();
         this.props = new Set();
         this.gameObjects = [];
@@ -77,7 +77,7 @@ export class Game {
         this.canvasObjects = [...this.canvasBackground.forest.objects];
         this.gameObjects = [...this.units,
             ...this.props, ...this.canvasObjects,
-            ...this.enemies, ...this.particles,
+            ...this.enemies, ...this.explosions,
             ...this.corpuscles];
 
         this.gameObjects.forEach(object => {
@@ -265,7 +265,7 @@ export class Game {
         this.enemies.clear();
         this.enemiesPool = [];
         this.direction.clear();
-        this.particles.clear();
+        this.explosions.clear();
         this.corpuscles.clear();
         this.props.clear();
         this.canvasBackground.forest.restart();

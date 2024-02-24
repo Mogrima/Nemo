@@ -1,4 +1,4 @@
-import { Particle } from '../Explosion.js';
+import { Explosion } from '../Explosion.js';
 
 export class Enemy {
     constructor(game) {
@@ -63,7 +63,7 @@ export class Enemy {
                 && !this.game.player.markedForDeletion && !this.game.gameOver) {
                 // если столкновение произошло, помечаем врага как удаленного
                 for (let i = 0; i < this.score; i++) {
-                    this.game.particles.add(new Particle(this.game, this.collisionX + this.width * 0.5,
+                    this.game.explosions.add(new Explosion(this.game, this.collisionX + this.width * 0.5,
                         this.collisionY + this.height * 0.5));
                 }
                 if (this === this.game.player2.enemy) {
@@ -81,7 +81,7 @@ export class Enemy {
                 if (!ammo.free && this.game.checkCollision(this, ammo)) {
                     this.lives--; // уменьшаем жизни врага на единицу
                     // если столкновение произошло, помечаем снаряд как удаленный
-                    this.game.particles.add(new Particle(this.game, this.collisionX + this.width * 0.5,
+                    this.game.explosions.add(new Explosion(this.game, this.collisionX + this.width * 0.5,
                         this.collisionY + this.height * 0.5));
                     ammo.reset();
                 }
@@ -98,7 +98,7 @@ export class Enemy {
                 }
                 this.reset(); // удаляем врага
                 for (let i = 0; i < this.score; i++) {
-                    this.game.particles.add(new Particle(this.game, this.collisionX + this.width * 0.5,
+                    this.game.explosions.add(new Explosion(this.game, this.collisionX + this.width * 0.5,
                         this.collisionY + this.height * 0.5));
                 }
                 // увеличиваем количество очков главного игрока
