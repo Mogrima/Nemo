@@ -14,10 +14,11 @@ import { SoundController } from './SoundController.js';
 export class Game {
     constructor(canvas, context) {
         this.canvas = canvas;
+        this.context = context;
         this.width = canvas.width;
         this.height = canvas.height;
 
-        this.canvasBackground = new CanvasBackground(this.canvas, context);
+        this.canvasBackground = new CanvasBackground(this);
         this.ui = new UI(this);
         this.player = new Nemo(this);
         this.player2 = new Nebessime(this);
