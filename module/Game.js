@@ -70,7 +70,7 @@ export class Game {
 
     }
 
-    update(deltaTime, context) {
+    update(deltaTime) {
         this.trackGameOver(deltaTime);
         this.handleSpriteTimer(deltaTime);
         this.input.update();
@@ -81,7 +81,7 @@ export class Game {
             ...this.corpuscles];
 
         this.gameObjects.forEach(object => {
-            object.update(deltaTime, context);
+            object.update(deltaTime, this.context);
         });
 
         this.fpsDraw(deltaTime);
@@ -277,15 +277,15 @@ export class Game {
         this.init();
     }
 
-    draw(context) {
-        this.canvasBackground.draw(context);
+    draw() {
+        this.canvasBackground.draw(this.context);
         this.gameObjects.sort((a, b) =>{
             return (a.collisionY + a.height) - (b.collisionY + b.height);
 
         });
         this.gameObjects.forEach(object => {
-            object.draw(context);
+            object.draw(this.context);
         });
-        this.ui.draw(context);
+        this.ui.draw(this.context);
     }
 }
