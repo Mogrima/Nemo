@@ -2,7 +2,7 @@ import { Sky } from './Sky.js';
 import { Forest } from './Forest.js';
 
 export class CanvasBackground {
-    constructor(canvas) {
+    constructor(canvas, context) {
         this.canvas = canvas;
         this.canvasWidth = this.canvas.width;
         this.canvasHeight = this.canvas.height;

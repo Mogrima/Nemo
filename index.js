@@ -8,7 +8,7 @@ window.addEventListener('load', function () {
     canvas.width = 1500;
     canvas.height = 600;
 
-    const game = new Game(canvas);
+    const game = new Game(canvas, ctx);
     game.init();
     let lastTime = 0;
 

@@ -12,12 +12,12 @@ import { Tentacles } from './Props/Tentacles.js';
 import { SoundController } from './SoundController.js';
 
 export class Game {
-    constructor(canvas) {
+    constructor(canvas, context) {
         this.canvas = canvas;
         this.width = canvas.width;
         this.height = canvas.height;
 
-        this.canvasBackground = new CanvasBackground(this.canvas);
+        this.canvasBackground = new CanvasBackground(this.canvas, context);
         this.ui = new UI(this);
         this.player = new Nemo(this);
         this.player2 = new Nebessime(this);
