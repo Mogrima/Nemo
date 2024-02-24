@@ -47,7 +47,7 @@ export class Game {
         this.enemies = new Set();
         this.enemiesPool = [];
         this.explosions = new Set();
-        this.corpuscles = new Set();
+        this.particles = new Set();
         this.props = new Set();
         this.gameObjects = [];
 
@@ -78,7 +78,7 @@ export class Game {
         this.gameObjects = [...this.units,
             ...this.props, ...this.canvasObjects,
             ...this.enemies, ...this.explosions,
-            ...this.corpuscles];
+            ...this.particles];
 
         this.gameObjects.forEach(object => {
             object.update(deltaTime, this.context);
@@ -266,7 +266,7 @@ export class Game {
         this.enemiesPool = [];
         this.direction.clear();
         this.explosions.clear();
-        this.corpuscles.clear();
+        this.particles.clear();
         this.props.clear();
         this.canvasBackground.forest.restart();
         this.canvasBackground.sky.restart();

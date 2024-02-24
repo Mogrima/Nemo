@@ -91,7 +91,7 @@ export class Nebessime extends Unit {
         this.direct = 1;
         this.frameX = 0;
         this.frameY = 2;
-        this.numberOfCorpuscle = 20;
+        this.numberOfParticles = 20;
         this.enemy = undefined;
     }
 

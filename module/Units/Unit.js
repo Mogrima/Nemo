@@ -19,7 +19,7 @@ export class Unit {
         this.gravity = 0.5;
         this.jump = true;
 
-        this.numberOfCorpuscle = 20;
+        this.numberOfParticles = 20;
 
     }
     update() {

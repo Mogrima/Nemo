@@ -49,9 +49,9 @@ export class Nemo extends Unit {
 
         if (this.game.health < 1) {
             this.remove();
-            for (let i = 0; this.numberOfCorpuscle > 0; i++) {
-                this.numberOfCorpuscle--;
-                this.game.corpuscles.add(new Farefly(this.game, this.collisionX,
+            for (let i = 0; this.numberOfParticles > 0; i++) {
+                this.numberOfParticles--;
+                this.game.particles.add(new Farefly(this.game, this.collisionX,
                     this.collisionY + this.height, '#8b00ff'));
             }
         }
@@ -84,7 +84,7 @@ export class Nemo extends Unit {
         this.spriteY = this.collisionY;
         this.frameX = 0;
         this.frameY = 1;
-        this.numberOfCorpuscle = 20;
+        this.numberOfParticles = 20;
         this.splashes = [];
     }
 

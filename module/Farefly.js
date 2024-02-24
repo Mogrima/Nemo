@@ -1,6 +1,6 @@
-import { Corpuscle } from './Corpuscle.js';
+import { Particle } from './Particle.js';
 
-export class Farefly extends Corpuscle {
+export class Farefly extends Particle {
     constructor(game, x, y, color) {
         super(game);
         this.collisionX = x;

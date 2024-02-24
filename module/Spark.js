@@ -1,6 +1,6 @@
-import { Corpuscle } from './Corpuscle.js';
+import { Particle } from './Particle.js';
 
-export class Spark extends Corpuscle {
+export class Spark extends Particle {
     update() {
         this.angle += this.va * 0.5;
         // получится кругового движение частицы

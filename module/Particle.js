@@ -1,4 +1,4 @@
-export class Corpuscle {
+export class Particle {
     constructor(game, x, y, color) {
         this.game = game;
         this.collisionX = x;
@@ -26,6 +26,6 @@ export class Corpuscle {
     }
 
     remove() {
-        this.game.corpuscles.delete(this);
+        this.game.particles.delete(this);
     }
 }

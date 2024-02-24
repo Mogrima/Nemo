@@ -84,9 +84,9 @@ export class Destroy extends State {
                 this.game.sound.collision();
                 this.unit.enemy = undefined;
                 this.unit.remove();
-                for (let i = 0; this.unit.numberOfCorpuscle > 0; i++) {
-                    this.unit.numberOfCorpuscle--;
-                    this.game.corpuscles.add(new Farefly(this.game, this.unit.collisionX,
+                for (let i = 0; this.unit.numberOfParticles > 0; i++) {
+                    this.unit.numberOfParticles--;
+                    this.game.particles.add(new Farefly(this.game, this.unit.collisionX,
                         this.unit.collisionY + this.unit.height, '#8b00ff'));
                 }
             }
