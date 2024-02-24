@@ -120,7 +120,6 @@ export class Game {
         this.createAmmoProjectiles();
         this.createSplashProjectiles();
         this.sound.mainTheme();
-        this.checkTentaclesEscape()
     }
 
     addEnemy() {
@@ -191,7 +190,7 @@ export class Game {
             }
             attempts++;
         }
-
+        this.checkTentaclesEscape();
     }
 
     checkCollision(rect1, rect2) {
@@ -203,9 +202,12 @@ export class Game {
     }
 
     checkTentaclesEscape() {
+        console.clear();
         this.props.forEach(prop => {
-            prop.featureName;
-            console.log(prop.featureName)
+            if (prop.featureName == 'escape') {
+                console.log(true);
+                return;
+            }
         })
     }
 
