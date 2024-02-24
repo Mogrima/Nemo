@@ -4,6 +4,7 @@ import { Forest } from './Forest.js';
 export class CanvasBackground {
     constructor(canvas, context) {
         this.canvas = canvas;
+        this.context = context;
         this.canvasWidth = this.canvas.width;
         this.canvasHeight = this.canvas.height;
 
@@ -15,6 +16,7 @@ export class CanvasBackground {
         this.imageCity = document.getElementById('city');
         this.imageCityWidth = 414;
         this.imageCityHeight = 48;
+        this.patternGrass = this.context.createPattern(this.imagePlansBackground, 'repeat');
         
         this.sky = new Sky(canvas);
         this.forest = new Forest(this.canvasWidth, this.gameFieldYstart);
@@ -33,11 +35,8 @@ export class CanvasBackground {
             this.gameFieldYstart - this.imageCityHeight);
 
         // game field
-        context.fillStyle = this.gameFieldColor;
-
-        context.fillRect(0, this.gameFieldYstart, this.canvasWidth, this.gameFieldHeight);
-        context.drawImage(this.imagePlansBackground, 0, this.gameFieldYstart - 180);
-        // this.forest.draw(context);
+        context.fillStyle = this.patternGrass;
+        context.fillRect(0, this.gameFieldYstart - 80, this.canvasWidth, this.canvasHeight);
 
         context.restore();
     }
