@@ -42,13 +42,6 @@ export class InputHandler {
         window.addEventListener('keyup', e => {
             if (this.game.keys.has(e.key)) {
                 this.game.keys.delete(e.key);
-
-                if ((this.game.direction.has('ArrowLeft'))) {
-                    // this.game.player2.frameY = 0;
-
-                } else {
-                    // this.game.player2.frameY = 2;
-                }
             }
             this.game.toggleMessage = false;
         });
