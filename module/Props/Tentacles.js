@@ -4,9 +4,10 @@ export class Tentacles {
     constructor(game) {
         this.game = game;
         this.image = document.getElementById('tentacles');
+        this.maxTopBoundary = this.game.topMargin - this.game.height * 0.8;
+        this.minTopBoundary = this.game.height * 0.82;
         this.collisionX = Math.random() * this.game.width;
-        this.collisionY = (Math.random() * (this.game.topMargin - this.game.height * 0.82) +
-            this.game.height * 0.82);
+        this.collisionY = (Math.random() * this.maxTopBoundary + this.minTopBoundary);
         this.spriteWidth = 50;
         this.spriteHeight = 87;
         this.width = 25;
