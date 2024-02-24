@@ -2,10 +2,9 @@ import { Tree } from './Tree.js';
 import { Bush } from './Bush.js';
 
 export class Forest {
-    constructor(canvas) {
-        this.canvas = canvas;
-        this.canvasWidth = this.canvas.width;
-        this.canvasHeight = this.canvas.height;
+    constructor(width, height) {
+        this.canvasWidth = width;
+        this.canvasHeight = height;
         this.maxTrees = 30;
         this.trees = [];
         this.maxBushes = 30;
