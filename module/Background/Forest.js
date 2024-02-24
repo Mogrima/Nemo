@@ -1,5 +1,6 @@
 import { Tree } from './Tree.js';
 import { Bush } from './Bush.js';
+import { BushObstacle } from './BushObstacle.js';
 
 export class Forest {
     constructor(canvas, topBoundary) {
@@ -10,6 +11,7 @@ export class Forest {
         this.trees = [];
         this.maxBushes = 30;
         this.bushes = [];
+        this.bushesObstacle = [];
 
     }
     init() {
@@ -20,9 +22,9 @@ export class Forest {
             this.bushes.push(new Bush(this.canvasWidth, this.topBoundary));
         }
         for (let i = 0; i < this.maxBushes; i++) {
-            this.bushes.push(new Bush(this.canvasWidth, this.canvasHeight));
+            this.bushesObstacle.push(new BushObstacle(this.canvasWidth, this.topBoundary, this.canvasHeight));
         }
-        this.objects = [...this.trees, ...this.bushes];
+        this.objects = [...this.trees, ...this.bushes, ...this.bushesObstacle];
     }
 
     draw(context) {
@@ -31,5 +33,6 @@ export class Forest {
     restart() {
         this.trees = [];
         this.bushes = [];
+        this.bushesObstacle = [];
     }
 }
