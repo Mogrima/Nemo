@@ -120,6 +120,7 @@ export class Game {
         this.createAmmoProjectiles();
         this.createSplashProjectiles();
         this.sound.mainTheme();
+        this.checkTentaclesEscape()
     }
 
     addEnemy() {
@@ -199,6 +200,13 @@ export class Game {
             rect2.collisionX < rect1.collisionX + rect1.width &&
             rect1.collisionY < rect2.collisionY + rect2.height &&
             rect2.collisionY < rect1.collisionY + rect1.height);
+    }
+
+    checkTentaclesEscape() {
+        this.props.forEach(prop => {
+            prop.featureName;
+            console.log(prop.featureName)
+        })
     }
 
     isWin() {
