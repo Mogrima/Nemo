@@ -12,7 +12,7 @@ export class CanvasBackground {
 
         // game field
         this.gameFieldHeight = this.canvasHeight * 0.5;
-        this.gameFieldYstart = this.canvasHeight * 0.5 + 100;
+        this.gameFieldYstart = this.canvasHeight * 0.4;
         this.gameFieldColor = '#228b22';
         this.imagePlansBackground = document.getElementById('plansBackground');
 
