@@ -20,7 +20,7 @@ export class CanvasBackground {
         this.patternGrass = this.context.createPattern(this.imagePlansBackground, 'repeat');
         
         this.sky = new Sky(canvas);
-        this.forest = new Forest(this.canvasWidth, this.gameFieldYstart);
+        this.forest = new Forest(this.canvas, this.gameFieldYstart);
 
     }
     init() {
