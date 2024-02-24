@@ -64,6 +64,12 @@ export class Nemo extends Unit {
 
     draw(context) {
         super.draw(context);
+        if (this.game.debug) {
+            context.save();
+            context.strokeStyle = 'red';
+            context.strokeRect(0, this.maxTop + this.height, this.game.width, this.game.height - this.height);
+            context.restore();
+        }
         context.drawImage(this.image,
             this.frameX * this.spriteWidth + this.shiftX, this.frameY * this.spriteHeight + this.shiftY,
             this.spriteWidth, this.spriteHeight,
