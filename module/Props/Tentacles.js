@@ -21,6 +21,14 @@ export class Tentacles {
         this.interval = 1000 / this.fps;
         this.lives = 3;
 
+        this.getFeature;
+        this.feature;
+        this.featureName;
+
+        this.text;
+    }
+
+    start() {
         this.getFeature = this.game.prop.getFeature();
         this.feature = this.getFeature[0];
         this.featureName = this.getFeature[1];
