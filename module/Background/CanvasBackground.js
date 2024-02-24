@@ -32,7 +32,7 @@ export class CanvasBackground {
         this.sky.draw(context);
         context.drawImage(this.imageCity,
             this.canvasWidth * 0.5 - this.imageCityWidth * 0.5,
-            this.gameFieldYstart - this.imageCityHeight);
+            this.gameFieldYstart - this.imageCityHeight - 80);
 
         // game field
         context.fillStyle = this.patternGrass;
