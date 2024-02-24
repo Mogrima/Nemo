@@ -104,6 +104,8 @@ export class Tentacles {
             context.fillText(this.lives, this.spriteX, this.spriteY - 20);
             context.fillText(this.featureName, this.spriteX, this.spriteY);
             context.strokeRect(this.collisionX, this.collisionY, this.width, this.height);
+            context.strokeStyle = 'blue';
+            context.strokeRect(0, this.minTopBoundary, this.game.width,  this.maxTopBoundary);
             context.restore();
         }
         context.drawImage(this.image,
