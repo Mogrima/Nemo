@@ -1,7 +1,7 @@
 export class InputHandler {
     constructor(game) {
         this.game = game;
-        this.debagKeys = ['d', 'D', 'в', 'В'];
+        this.debagKeys = ['='];
         this.splashKeys = ['c', 'C', 'с', 'С'];
         this.closeMessageKeys = ['x', 'X', 'ч', 'Ч', 'Escape'];
         this.restartKeys = ['r', 'R', 'к', 'К'];
