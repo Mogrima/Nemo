@@ -3,7 +3,7 @@ export class Bush {
         this.fieldWidth = fieldWidth;
         this.topBoundary = topBoundary;
         this.image = document.getElementById('bushes');
-        this.spriteWidth = 80;
+        this.spriteWidth = 90;
         this.spriteHeight = 95;
         this.width = this.spriteWidth;
         this.height = this.spriteHeight;
