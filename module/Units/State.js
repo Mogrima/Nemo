@@ -46,6 +46,7 @@ export class Hunting extends State {
 
 export class Attack extends State {
     start() {
+        this.unit.maxFrame = 3;
         this.unit.frameY = this.unit.direct === 1 ? 6 : 2;
         this.unit.speedX = 0;
         this.unit.speedY = 0;
