@@ -11,7 +11,6 @@ export class CanvasBackground {
 
         // game field
         this.gameFieldYstart = this.canvasHeight * 0.4;
-        this.gameFieldColor = '#228b22';
         this.imagePlansBackground = document.getElementById('plansBackground');
  
         this.imageCity = document.getElementById('city');
