@@ -53,14 +53,19 @@ export class Attack extends State {
         this.unit.enemy.speedX = 0;
     }
 
-    update() {
-        this.unit.handleFrames();
+    update(deltaTime) {
         if (this.game.spriteUpdate) {
-            this.unit.frameX++;
-            if (this.unit.frameX > this.unit.maxFrame) {
+            if (this.unit.attackTimer < this.unit.attackInterval) {
+                this.unit.frameX++;
+                if (this.unit.frameX > this.unit.maxFrame) {
+                    this.unit.frameX = 0;
+                }
+                this.unit.attackTimer += deltaTime;
+            } else {
                 this.unit.enemy.reset();
                 this.game.sound.collision();
                 this.unit.enemy = undefined;
+                this.unit.attackTimer = 0;
             }
         }
     }

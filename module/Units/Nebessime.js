@@ -31,7 +31,7 @@ export class Nebessime extends Unit {
 
     update(deltaTime) {
         super.update();
-        this.currentState.update();
+        this.currentState.update(deltaTime);
         if (this.enemy === undefined) {
             this.setState(0);
         } else {
