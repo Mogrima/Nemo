@@ -25,6 +25,8 @@ export class Nebessime extends Unit {
         this.direct;
         this.enemy;
         this.currentState;
+        this.attackInterval;
+        this.attackTimer;
     }
 
     update(deltaTime) {
@@ -93,6 +95,8 @@ export class Nebessime extends Unit {
         this.frameY = 2;
         this.numberOfParticles = 20;
         this.enemy = undefined;
+        this.attackInterval = 250;
+        this.attackTimer = 0;
     }
 
 }
