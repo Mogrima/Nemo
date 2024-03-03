@@ -12,7 +12,7 @@ export class Enemy {
         this.frameX = 0;
         this.frameY = 0;
         this.free = true;
-        this.margin = 300;
+        this.margin = 0;
 
 
         this.direct = () => {
