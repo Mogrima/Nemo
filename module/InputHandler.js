@@ -6,11 +6,31 @@ export class InputHandler {
         this.closeMessageKeys = ['x', 'X', 'ч', 'Ч', 'Escape'];
         this.restartKeys = ['r', 'R', 'к', 'К'];
         window.addEventListener('keydown', e => {
+            
+            switch(e.key) {
+                case 'ArrowRight':
+                    this.game.keys.add('ArrowRight'); break;
+                case 'ArrowUp':
+                    this.game.keys.add('ArrowUp'); break;
+                case 'ArrowDown':
+                    this.game.keys.add('ArrowDown'); break;
+                case 'ArrowLeft':
+                    this.game.keys.add('ArrowLeft'); break;
+                //
+                case 'd':
+                    this.game.keys.add('ArrowRight'); break;
+                case 'w':
+                    this.game.keys.add('ArrowUp'); break;
+                case 's':
+                    this.game.keys.add('ArrowDown'); break;
+                case 'a':
+                    this.game.keys.add('ArrowLeft'); break;
+                }
+
             if (((e.key === 'ArrowRight') ||
                 (e.key === 'ArrowUp') ||
                 (e.key === 'ArrowDown') ||
                 (e.key === 'ArrowLeft'))) {
-                this.game.keys.add(e.key);
             } else if (e.key === ' ') {
 
                 if ((this.game.direction.has('ArrowLeft'))) {
@@ -40,10 +60,27 @@ export class InputHandler {
 
         });
         window.addEventListener('keyup', e => {
-            if (this.game.keys.has(e.key)) {
-                this.game.keys.delete(e.key);
-            }
             this.game.toggleMessage = false;
+
+            switch(e.key) {
+                case 'ArrowRight':
+                    this.game.keys.delete('ArrowRight'); break;
+                case 'ArrowUp':
+                    this.game.keys.delete('ArrowUp'); break;
+                case 'ArrowDown':
+                    this.game.keys.delete('ArrowDown'); break;
+                case 'ArrowLeft':
+                    this.game.keys.delete('ArrowLeft'); break;
+
+                case 'd':
+                    this.game.keys.delete('ArrowRight'); break;
+                case 'w':
+                    this.game.keys.delete('ArrowUp'); break;
+                case 's':
+                    this.game.keys.delete('ArrowDown'); break;
+                case 'a':
+                    this.game.keys.delete('ArrowLeft'); break;
+                }
         });
 
     }
