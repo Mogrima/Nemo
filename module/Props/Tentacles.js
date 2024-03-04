@@ -4,14 +4,14 @@ export class Tentacles {
     constructor(game) {
         this.game = game;
         this.image = document.getElementById('tentacles');
-        this.maxTopBoundary = this.game.topMargin - this.game.height * 0.8;
-        this.minTopBoundary = this.game.height * 0.82;
-        this.collisionX = Math.random() * this.game.width;
-        this.collisionY = (Math.random() * this.maxTopBoundary + this.minTopBoundary);
         this.spriteWidth = 50;
         this.spriteHeight = 87;
         this.width = 25;
         this.height = this.spriteHeight;
+        this.topBoundary = this.game.height * 0.4 + 50 - this.height;
+        this.fieldHeight = this.game.height * 0.5;
+        this.collisionX = Math.random() * this.game.width;
+        this.collisionY = Math.random() * this.fieldHeight + (this.topBoundary);
         this.frameX = 0;
         this.frameY = 0;
         this.maxFrame = 20;
@@ -105,7 +105,7 @@ export class Tentacles {
             context.fillText(this.featureName, this.spriteX, this.spriteY);
             context.strokeRect(this.collisionX, this.collisionY, this.width, this.height);
             context.strokeStyle = 'blue';
-            context.strokeRect(0, this.minTopBoundary, this.game.width,  this.maxTopBoundary);
+            context.strokeRect(0,this.topBoundary, this.game.width, this.fieldHeight + this.height);
             context.restore();
         }
         context.drawImage(this.image,
