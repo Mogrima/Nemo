@@ -8,6 +8,8 @@ export class Enemy {
         this.spriteX;
         this.spriteY;
         this.speedX = 0;
+        this.fieldHeight;
+        this.topBoundary;
 
         this.frameX = 0;
         this.frameY = 0;
@@ -123,6 +125,8 @@ export class Enemy {
                 context.font = '20px Helvetica';
                 context.fillText(this.lives, this.spriteX, this.spriteY - 5);
             }
+            // context.strokeStyle = 'blue';
+            // context.strokeRect(0, this.topBoundary, this.game.width, this.fieldHeight + this.height);
         }
     }
 
@@ -135,8 +139,9 @@ export class Enemy {
         this.free = false;
         this.frameX = 0;
         this.direct();
-        this.collisionY = (Math.random() * (this.game.topMargin - this.game.height * 0.82) +
-                            this.game.height * 0.82);
+        this.fieldHeight = this.game.height * 0.5;
+        this.topBoundary = this.game.height * 0.4 + 50 - this.height;
+        this.collisionY = Math.random() * this.fieldHeight + (this.topBoundary);
         this.speedX = Math.random() * -1.5 - 0.5;
         this.lives = this.maxLives;
     }
