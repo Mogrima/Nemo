@@ -7,9 +7,9 @@ export class Forest {
         this.canvasWidth = canvas.width;
         this.canvasHeight = canvas.height;
         this.topBoundary = topBoundary;
-        this.maxTrees = 30;
+        this.maxTrees = 60;
         this.trees = [];
-        this.maxBushes = 30;
+        this.maxBushes = 60;
         this.bushes = [];
         this.bushesObstacle = [];
 
