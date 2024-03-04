@@ -14,7 +14,7 @@ export class Nemo extends Unit {
 
         this.maxXRight = this.width + 10;
         this.maxXLeft = 0;
-        this.maxTop = 242;
+        this.maxTop = this.game.height * 0.4;
 
         // image and animation player
         this.image = document.getElementById('player');
@@ -67,7 +67,7 @@ export class Nemo extends Unit {
         if (this.game.debug) {
             context.save();
             context.strokeStyle = 'red';
-            context.strokeRect(0, this.maxTop + this.height, this.game.width, this.game.height - this.height);
+            context.strokeRect(0, this.maxTop, this.game.width, this.game.height - this.height);
             context.restore();
         }
         context.drawImage(this.image,
