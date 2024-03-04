@@ -10,7 +10,7 @@ export class Tree {
         this.width = this.spriteWidth;
         this.height = this.spriteHeight;
         this.x = Math.random() * this.fieldWidth;
-        this.y = (Math.random() * (350 - this.topBoundary) + this.topBoundary) - this.image.height;
+        this.y = Math.random() * this.fieldHeight + (this.topBoundary - this.image.height);
         this.collisionX = this.x;
         this.collisionY = this.y;
         this.spriteX = this.x;
