@@ -1,6 +1,7 @@
 export class Tree {
     constructor(fieldWidth, topBoundary) {
         this.fieldWidth = fieldWidth;
+        this.fieldHeight = 80;
         this.topBoundary = topBoundary;
         this.id = Math.floor(Math.random() * (5 + 1) + 2);
         this.image = document.getElementById('tree' + this.id);
