@@ -6,8 +6,8 @@ export class InputHandler {
         this.closeMessageKeys = ['x', 'X', 'ч', 'Ч', 'Escape'];
         this.restartKeys = ['r', 'R', 'к', 'К'];
         window.addEventListener('keydown', e => {
-            
-            switch(e.key) {
+
+            switch (e.key) {
                 case 'ArrowRight':
                     this.game.keys.add('ArrowRight'); break;
                 case 'ArrowUp':
@@ -25,13 +25,8 @@ export class InputHandler {
                     this.game.keys.add('ArrowDown'); break;
                 case 'a':
                     this.game.keys.add('ArrowLeft'); break;
-                }
-
-            if (((e.key === 'ArrowRight') ||
-                (e.key === 'ArrowUp') ||
-                (e.key === 'ArrowDown') ||
-                (e.key === 'ArrowLeft'))) {
-            } else if (e.key === ' ') {
+            }
+            if (e.key === ' ') {
 
                 if ((this.game.direction.has('ArrowLeft'))) {
                     this.game.player.shootTop('left');
@@ -62,7 +57,7 @@ export class InputHandler {
         window.addEventListener('keyup', e => {
             this.game.toggleMessage = false;
 
-            switch(e.key) {
+            switch (e.key) {
                 case 'ArrowRight':
                     this.game.keys.delete('ArrowRight'); break;
                 case 'ArrowUp':
@@ -80,7 +75,7 @@ export class InputHandler {
                     this.game.keys.delete('ArrowDown'); break;
                 case 'a':
                     this.game.keys.delete('ArrowLeft'); break;
-                }
+            }
         });
 
     }

@@ -19,7 +19,8 @@ export class Bush {
     draw(context) {
         // context.save();
         // context.strokeStyle = 'red';
-        // context.strokeRect(0, this.topBoundary - this.spriteHeight, window.innerWidth, this.fieldHeight + this.spriteHeight);
+        // context.strokeRect(0, this.topBoundary - this.spriteHeight,
+        // window.innerWidth, this.fieldHeight + this.spriteHeight);
         // context.restore();
 
         context.drawImage(this.image,

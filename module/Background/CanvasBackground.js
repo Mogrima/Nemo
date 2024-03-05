@@ -12,13 +12,13 @@ export class CanvasBackground {
         // game field
         this.gameFieldYstart = this.canvasHeight * 0.4;
         this.imagePlansBackground = document.getElementById('plansBackground');
- 
+
         this.imageCity = document.getElementById('city');
         this.imageCityWidth = 414;
         this.imageCityHeight = 48;
         this.patternGrass = this.context.createPattern(this.imagePlansBackground, 'repeat');
-        
-        this.sky = new Sky(canvas);
+
+        this.sky = new Sky(this.canvas);
         this.forest = new Forest(this.canvas, this.gameFieldYstart);
 
     }

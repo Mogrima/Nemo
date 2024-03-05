@@ -206,11 +206,11 @@ export class Game {
     checkTentaclesEscape() {
         console.clear();
         this.props.forEach(prop => {
-            if (prop.featureName == 'escape') {
+            if (prop.featureName === 'escape') {
                 console.log(true);
                 return;
             }
-        })
+        });
     }
 
     isWin() {

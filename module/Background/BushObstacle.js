@@ -1,4 +1,4 @@
-import { Bush } from "./Bush.js";
+import { Bush } from './Bush.js';
 
 export class BushObstacle extends Bush {
     constructor(fieldWidth, topBoundary, fieldHeight) {
@@ -17,5 +17,5 @@ export class BushObstacle extends Bush {
     //     context.strokeRect(0, this.topBoundary, window.innerWidth, this.fieldHeight + this.height);
     //     context.restore();
     // }
-    
+
 }
