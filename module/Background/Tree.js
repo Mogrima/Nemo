@@ -3,7 +3,7 @@ export class Tree {
         this.fieldWidth = fieldWidth;
         this.fieldHeight = 80;
         this.topBoundary = topBoundary;
-        this.id = Math.floor(Math.random() * 7 + 1);
+        this.id = Math.floor(Math.random() * 10 + 1);
         this.image = document.getElementById('tree' + this.id);
         this.spriteWidth = this.image.width;
         this.spriteHeight = this.image.height;
