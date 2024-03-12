@@ -8,7 +8,7 @@ export class Nebessime extends Unit {
         this.spriteWidth = 64;
         this.spriteHeight = 67;
         this.width = 50;
-        this.height = 50;
+        this.height = 40;
         this.maxXRight = this.width + 10;
         this.maxXLeft = this.width - 10;
         this.maxTop = 232;
@@ -51,7 +51,7 @@ export class Nebessime extends Unit {
         context.drawImage(this.image,
             this.frameX * this.spriteWidth, this.frameY * this.spriteHeight,
             this.spriteWidth, this.spriteHeight,
-            this.spriteX - this.width * 0.5, this.spriteY - this.height,
+            this.spriteX - this.width * 0.5, this.spriteY - this.height - 20,
             this.spriteWidth * 1.5, this.spriteHeight * 1.5);
     }
 
