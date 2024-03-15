@@ -32,7 +32,6 @@ export class Enemy {
                 else if (this.type === 'shadow') this.frameY = 1;
             }
         };
-        this.direct();
 
     }
 
