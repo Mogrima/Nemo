@@ -51,6 +51,7 @@ export class Attack extends State {
         this.unit.speedX = 0;
         this.unit.speedY = 0;
         this.unit.enemy.speedX = 0;
+        this.unit.enemy.speedY = 0;
     }
 
     update(deltaTime) {
