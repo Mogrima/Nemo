@@ -19,7 +19,7 @@ export class Monster2 extends Enemy {
 
         this.fps = 20;
         this.timer = 0;
-        this.interval = 1000/this.fps;
+        this.interval = 1000 / this.fps;
 
 
         if (this.directX === 'right') this.frameY = 0;
@@ -38,15 +38,15 @@ export class Monster2 extends Enemy {
                 this.reset();
             }
 
-            } else {
-                this.collisionX -= this.speedX;
-                if (this.collisionX - this.width > this.game.width) {
-                    if (this === this.game.player2.enemy) {
-                        this.game.player2.setState(0);
-                    }
-                    this.reset();
+        } else {
+            this.collisionX -= this.speedX;
+            if (this.collisionX - this.width > this.game.width) {
+                if (this === this.game.player2.enemy) {
+                    this.game.player2.setState(0);
                 }
+                this.reset();
             }
+        }
         if (this.collisionX > 100 &&
             this.collisionX < this.game.width - 100) {
             if (this.timer > this.interval) {
