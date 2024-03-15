@@ -8,6 +8,7 @@ export class Enemy {
         this.spriteX;
         this.spriteY;
         this.speedX = 0;
+        this.speedY;
         this.fieldHeight;
         this.topBoundary;
 
@@ -143,6 +144,7 @@ export class Enemy {
         this.topBoundary = this.game.height * 0.4 + 50 - this.height;
         this.collisionY = Math.random() * this.fieldHeight + (this.topBoundary);
         this.speedX = Math.random() * -1.5 - 0.5;
+        this.speedY = 0;
         this.lives = this.maxLives;
     }
 }

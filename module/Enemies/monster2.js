@@ -15,6 +15,7 @@ export class Monster2 extends Enemy {
         this.maxLives = this.lives;
         this.score = this.lives;
         this.type = 'shadow';
+        this.speedY = 0;
 
         this.fps = 20;
         this.timer = 0;
