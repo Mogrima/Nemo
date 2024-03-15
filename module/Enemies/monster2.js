@@ -27,6 +27,26 @@ export class Monster2 extends Enemy {
 
     update(deltaTime) {
         super.update();
+        if (this.directX === 'right') {
+            // Обновляем x-координату врага (уменьшаем ее на величину speedX)
+            this.collisionX += this.speedX;
+            // Помечаем врага как удаленного, если он полностью пересечет левую границу игрового поля
+            if (this.collisionX + this.width < 0) {
+                if (this === this.game.player2.enemy) {
+                    this.game.player2.setState(0);
+                }
+                this.reset();
+            }
+
+            } else {
+                this.collisionX -= this.speedX;
+                if (this.collisionX - this.width > this.game.width) {
+                    if (this === this.game.player2.enemy) {
+                        this.game.player2.setState(0);
+                    }
+                    this.reset();
+                }
+            }
         if (this.collisionX > 100 &&
             this.collisionX < this.game.width - 100) {
             if (this.timer > this.interval) {

@@ -38,29 +38,8 @@ export class Enemy {
 
     update() {
         if (!this.free) {
-            if (this.directX === 'right') {
-                // Обновляем x-координату врага (уменьшаем ее на величину speedX)
-                this.collisionX += this.speedX;
-                // Помечаем врага как удаленного, если он полностью пересечет левую границу игрового поля
-                if (this.collisionX + this.width < 0) {
-                    if (this === this.game.player2.enemy) {
-                        this.game.player2.setState(0);
-                    }
-                    this.reset();
-                }
-
-            } else {
-                this.collisionX -= this.speedX;
-                if (this.collisionX - this.width > this.game.width) {
-                    if (this === this.game.player2.enemy) {
-                        this.game.player2.setState(0);
-                    }
-                    this.reset();
-                }
-            }
             this.spriteX = this.collisionX;
             this.spriteY = this.collisionY;
-
             // Проверим, не столкнолся ли враг с главным игроком (player)
             if (this.game.checkCollision(this.game.player, this)
                 && !this.game.player.markedForDeletion && !this.game.gameOver) {
