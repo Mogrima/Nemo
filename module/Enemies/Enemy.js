@@ -15,19 +15,18 @@ export class Enemy {
         this.frameX;
         this.frameY;
         this.free = true;
-        this.margin = 0;
 
 
         this.direct = () => {
             const randomize = Math.random();
             if (randomize < 0.5) {
                 this.directX = 'right';
-                this.collisionX = this.game.width + this.margin;
+                this.collisionX = this.game.width;
                 if (this.type === 'gorgona') this.frameY = 4;
                 else if (this.type === 'shadow') this.frameY = 0;
             } else {
                 this.directX = 'left';
-                this.collisionX = -this.margin;
+                this.collisionX = -this.width;
                 if (this.type === 'gorgona') this.frameY = 1;
                 else if (this.type === 'shadow') this.frameY = 1;
             }
