@@ -3,17 +3,17 @@ import { Explosion } from '../Explosion.js';
 export class Enemy {
     constructor(game) {
         this.game = game;
-        this.collisionX = 0;
-        this.collisionY = 0;
+        this.collisionX;
+        this.collisionY;
         this.spriteX;
         this.spriteY;
-        this.speedX = 0;
+        this.speedX;
         this.speedY;
         this.fieldHeight;
         this.topBoundary;
 
-        this.frameX = 0;
-        this.frameY = 0;
+        this.frameX;
+        this.frameY;
         this.free = true;
         this.margin = 0;
 
