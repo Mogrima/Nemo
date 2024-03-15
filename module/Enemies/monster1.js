@@ -21,6 +21,13 @@ export class Monster1 extends Enemy {
 
     update() {
         super.update();
+        this.collisionX += this.speedX;
+        this.collisionY += this.speedY;
+
+        const aim = this.game.calcAim(this, this.game.player);
+        this.speedX = aim[0];
+        this.speedY = aim[1];
+
         if (this.frameX < this.maxFrame) {
             this.frameX++;
         } else {
