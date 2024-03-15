@@ -29,7 +29,7 @@ export class Hunting extends State {
 
     update() {
         this.unit.handleFrames();
-        const aim = this.unit.calcAim(this.unit, this.unit.enemy);
+        const aim = this.game.calcAim(this.unit, this.unit.enemy);
         this.unit.speedX = aim[0];
         this.unit.speedY = aim[1];
 
