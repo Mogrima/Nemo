@@ -9,7 +9,6 @@ export class Monster2 extends Enemy {
         this.height = this.spriteHeight * 1.5;
 
         this.image = document.getElementById('enemy2');
-        this.frameY = 0;
         this.maxFrame = 17;
         this.lives = 5;
         this.maxLives = this.lives;
@@ -20,9 +19,6 @@ export class Monster2 extends Enemy {
         this.fps = 20;
         this.timer = 0;
         this.interval = 1000 / this.fps;
-
-
-        if (this.directX === 'right') this.frameY = 0;
     }
 
     update(deltaTime) {
