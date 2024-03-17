@@ -25,3 +25,31 @@ export class Hunting extends State {
     }
 
 }
+
+export class LinerMove extends State {
+    start() {
+    }
+
+    update() {
+        if (this.unit.directX === 'right') {
+            // Обновляем x-координату врага (уменьшаем ее на величину speedX)
+            this.unit.collisionX += this.unit.speedX;
+            // Помечаем врага как удаленного, если он полностью пересечет левую границу игрового поля
+            if (this.unit.collisionX + this.unit.width < 0) {
+                if (this.unit === this.game.player2.enemy) {
+                    this.game.player2.setState(0);
+                }
+                this.unit.reset();
+            }
+
+        } else {
+            this.unit.collisionX -= this.unit.speedX;
+            if (this.unit.collisionX - this.unit.width > this.game.width) {
+                if (this.unit === this.game.player2.enemy) {
+                    this.game.player2.setState(0);
+                }
+                this.unit.reset();
+            }
+        }
+    }
+}
