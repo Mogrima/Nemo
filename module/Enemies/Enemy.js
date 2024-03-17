@@ -1,5 +1,5 @@
 import { Explosion } from '../Explosion.js';
-import { Hunting } from './State.js';
+import { Hunting, LinerMove } from './State.js';
 
 export class Enemy {
     constructor(game) {
@@ -13,7 +13,8 @@ export class Enemy {
         this.fieldHeight;
         this.topBoundary;
         this.currentState;
-        this.states = [new Hunting(game, this)];
+        this.states = [new Hunting(game, this),
+                    new LinerMove(game, this)];
 
         this.frameX;
         this.frameY;
