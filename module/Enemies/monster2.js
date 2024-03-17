@@ -57,4 +57,9 @@ export class Monster2 extends Enemy {
             }
         }
     }
+
+    start() {
+        super.start();
+        this.setState(1);
+    }
 }
