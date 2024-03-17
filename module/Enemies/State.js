@@ -28,6 +28,8 @@ export class Hunting extends State {
 
 export class LinerMove extends State {
     start() {
+        this.unit.speedY = 0;
+        this.unit.speedX = Math.random() * -1 - 0.5;
     }
 
     update() {
