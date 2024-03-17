@@ -19,8 +19,6 @@ export class Monster1 extends Enemy {
     update() {
         super.update();
         this.currentState.update();
-        this.collisionX += this.speedX;
-        this.collisionY += this.speedY;
 
         if (this.frameX < this.maxFrame) {
             this.frameX++;
