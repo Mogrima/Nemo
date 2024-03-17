@@ -49,6 +49,7 @@ export class Nemo extends Unit {
 
         if (this.game.health < 1) {
             this.remove();
+            this.killed = true;
             for (let i = 0; this.numberOfParticles > 0; i++) {
                 this.numberOfParticles--;
                 this.game.particles.add(new Farefly(this.game, this.collisionX,
@@ -86,6 +87,7 @@ export class Nemo extends Unit {
         this.frameY = 1;
         this.numberOfParticles = 20;
         this.splashes = [];
+        this.killed = false;
     }
 
 }
