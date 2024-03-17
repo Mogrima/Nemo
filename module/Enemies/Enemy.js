@@ -1,4 +1,5 @@
 import { Explosion } from '../Explosion.js';
+import { Hunting } from './State.js';
 
 export class Enemy {
     constructor(game) {
@@ -11,6 +12,8 @@ export class Enemy {
         this.speedY;
         this.fieldHeight;
         this.topBoundary;
+        this.currentState;
+        this.states = [new Hunting(game, this)];
 
         this.frameX;
         this.frameY;
@@ -123,5 +126,10 @@ export class Enemy {
         this.speedX = Math.random() * -1.5 - 0.5;
         this.speedY = 0;
         this.lives = this.maxLives;
+    }
+
+    setState(state) {
+        this.currentState = this.states[state];
+        this.currentState.start();
     }
 }
