@@ -43,7 +43,7 @@ export class Enemy {
             this.spriteY = this.collisionY;
             // Проверим, не столкнолся ли враг с главным игроком (player)
             if (this.game.checkCollision(this.game.player, this)
-                && !this.game.player.markedForDeletion && !this.game.gameOver) {
+                && !this.game.gameOver) {
                 // если столкновение произошло, помечаем врага как удаленного
                 for (let i = 0; i < this.score; i++) {
                     this.game.explosions.add(new Explosion(this.game, this.collisionX + this.width * 0.5,
