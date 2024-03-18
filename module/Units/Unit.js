@@ -58,7 +58,7 @@ export class Unit {
 
     shootTop(directX) {
         const ammo = this.game.getAmmoProjectile();
-        if (this.game.projectile > 0) {
+        if (this.game.projectile > 0 && !this.killed) {
             if (ammo) {
                 let x = this.collisionX;
                 const y = this.collisionY + 30;
@@ -74,7 +74,7 @@ export class Unit {
 
     shootSplash(directX) {
         const splash = this.game.getSplashProjectile();
-        if (this.game.projectile > 0) {
+        if (this.game.projectile > 0 && !this.killed) {
             if (splash) {
                 let x = this.collisionX;
                 const y = this.collisionY + 30;
