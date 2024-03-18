@@ -33,6 +33,14 @@ export class LinerMove extends State {
             this.unit.speedY = 0;
             this.unit.speedX = Math.random() * -1 - 0.5;
 
+            if (this.unit.directX === 'right') {
+                if (this.unit.type === 'gorgona') this.unit.frameY = 4;
+                else if (this.unit.type === 'shadow') this.unit.frameY = 0;
+            } else {
+                if (this.unit.type === 'gorgona') this.unit.frameY = 1;
+                else if (this.unit.type === 'shadow') this.unit.frameY = 1;
+            }
+
             this.executed = true;
             }
     }

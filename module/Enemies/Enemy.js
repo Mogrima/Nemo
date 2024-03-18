@@ -26,13 +26,9 @@ export class Enemy {
             if (randomize < 0.5) {
                 this.directX = 'right';
                 this.collisionX = this.game.width;
-                if (this.type === 'gorgona') this.frameY = 4;
-                else if (this.type === 'shadow') this.frameY = 0;
             } else {
                 this.directX = 'left';
                 this.collisionX = -this.width;
-                if (this.type === 'gorgona') this.frameY = 1;
-                else if (this.type === 'shadow') this.frameY = 1;
             }
         };
 
