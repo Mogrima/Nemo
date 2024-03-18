@@ -2,6 +2,7 @@ class State {
     constructor(game, unit) {
         this.game = game;
         this.unit = unit;
+        this.executed = false;
     }
 }
 
@@ -28,8 +29,12 @@ export class Hunting extends State {
 
 export class LinerMove extends State {
     start() {
-        this.unit.speedY = 0;
-        this.unit.speedX = Math.random() * -1 - 0.5;
+        if (!this.executed) {
+            this.unit.speedY = 0;
+            this.unit.speedX = Math.random() * -1 - 0.5;
+
+            this.executed = true;
+            }
     }
 
     update() {
