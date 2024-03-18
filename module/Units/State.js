@@ -29,7 +29,7 @@ export class Hunting extends State {
 
     update() {
         this.unit.handleFrames();
-        const aim = this.unit.calcAim(this.unit, this.unit.enemy);
+        const aim = this.game.calcAim(this.unit, this.unit.enemy);
         this.unit.speedX = aim[0];
         this.unit.speedY = aim[1];
 
@@ -51,6 +51,7 @@ export class Attack extends State {
         this.unit.speedX = 0;
         this.unit.speedY = 0;
         this.unit.enemy.speedX = 0;
+        this.unit.enemy.speedY = 0;
     }
 
     update(deltaTime) {

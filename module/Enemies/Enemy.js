@@ -1,68 +1,46 @@
 import { Explosion } from '../Explosion.js';
+import { Hunting, LinerMove } from './State.js';
 
 export class Enemy {
     constructor(game) {
         this.game = game;
-        this.collisionX = 0;
-        this.collisionY = 0;
+        this.collisionX;
+        this.collisionY;
         this.spriteX;
         this.spriteY;
-        this.speedX = 0;
+        this.speedX;
+        this.speedY;
         this.fieldHeight;
         this.topBoundary;
+        this.currentState;
+        this.states = [new Hunting(game, this),
+                    new LinerMove(game, this)];
 
-        this.frameX = 0;
-        this.frameY = 0;
+        this.frameX;
+        this.frameY;
         this.free = true;
-        this.margin = 0;
 
 
         this.direct = () => {
             const randomize = Math.random();
             if (randomize < 0.5) {
                 this.directX = 'right';
-                this.collisionX = this.game.width + this.margin;
-                if (this.type === 'gorgona') this.frameY = 4;
-                else if (this.type === 'shadow') this.frameY = 0;
+                this.collisionX = this.game.width;
             } else {
                 this.directX = 'left';
-                this.collisionX = -this.margin;
-                if (this.type === 'gorgona') this.frameY = 1;
-                else if (this.type === 'shadow') this.frameY = 1;
+                this.collisionX = -this.width;
             }
         };
-        this.direct();
 
     }
 
     update() {
         if (!this.free) {
-            if (this.directX === 'right') {
-                // Обновляем x-координату врага (уменьшаем ее на величину speedX)
-                this.collisionX += this.speedX;
-                // Помечаем врага как удаленного, если он полностью пересечет левую границу игрового поля
-                if (this.collisionX + this.width < 0) {
-                    if (this === this.game.player2.enemy) {
-                        this.game.player2.setState(0);
-                    }
-                    this.reset();
-                }
-
-            } else {
-                this.collisionX -= this.speedX;
-                if (this.collisionX - this.width > this.game.width) {
-                    if (this === this.game.player2.enemy) {
-                        this.game.player2.setState(0);
-                    }
-                    this.reset();
-                }
-            }
             this.spriteX = this.collisionX;
             this.spriteY = this.collisionY;
-
             // Проверим, не столкнолся ли враг с главным игроком (player)
             if (this.game.checkCollision(this.game.player, this)
-                && !this.game.player.markedForDeletion && !this.game.gameOver) {
+                && !this.game.gameOver) {
                 // если столкновение произошло, помечаем врага как удаленного
                 for (let i = 0; i < this.score; i++) {
                     this.game.explosions.add(new Explosion(this.game, this.collisionX + this.width * 0.5,
@@ -143,6 +121,12 @@ export class Enemy {
         this.topBoundary = this.game.height * 0.4 + 50 - this.height;
         this.collisionY = Math.random() * this.fieldHeight + (this.topBoundary);
         this.speedX = Math.random() * -1.5 - 0.5;
+        this.speedY = 0;
         this.lives = this.maxLives;
+    }
+
+    setState(state) {
+        this.currentState = this.states[state];
+        this.currentState.start();
     }
 }

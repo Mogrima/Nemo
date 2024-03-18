@@ -9,23 +9,22 @@ export class Monster2 extends Enemy {
         this.height = this.spriteHeight * 1.5;
 
         this.image = document.getElementById('enemy2');
-        this.frameY = 0;
         this.maxFrame = 17;
         this.lives = 5;
         this.maxLives = this.lives;
         this.score = this.lives;
         this.type = 'shadow';
+        this.speedY = 0;
 
         this.fps = 20;
         this.timer = 0;
-        this.interval = 1000/this.fps;
-
-
-        if (this.directX === 'right') this.frameY = 0;
+        this.interval = 1000 / this.fps;
     }
 
     update(deltaTime) {
         super.update();
+        this.currentState.update();
+        
         if (this.collisionX > 100 &&
             this.collisionX < this.game.width - 100) {
             if (this.timer > this.interval) {
@@ -39,5 +38,10 @@ export class Monster2 extends Enemy {
                 this.timer += deltaTime;
             }
         }
+    }
+
+    start() {
+        super.start();
+        this.setState(1);
     }
 }

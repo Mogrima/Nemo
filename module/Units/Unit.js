@@ -14,6 +14,7 @@ export class Unit {
         this.projectilesObject = [];
 
         this.warning = false;
+        this.killed = false;
 
         this.speedJump = 0;
         this.gravity = 0.5;

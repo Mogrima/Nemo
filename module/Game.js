@@ -203,6 +203,15 @@ export class Game {
             rect2.collisionY < rect1.collisionY + rect1.height);
     }
 
+    calcAim(a, b) {
+        const dx = a.collisionX - b.collisionX;
+        const dy = a.collisionY - b.collisionY;
+        const distance = Math.hypot(dx, dy);
+        const aimX = dx / distance * -1;
+        const aimY = dy / distance * -1;
+        return [aimX, aimY, dx, dy];
+    }
+
     checkTentaclesEscape() {
         console.clear();
         this.props.forEach(prop => {
