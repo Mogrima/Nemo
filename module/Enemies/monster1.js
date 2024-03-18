@@ -18,7 +18,7 @@ export class Monster1 extends Enemy {
 
     update() {
         super.update();
-        if (this.game.player.killed) {
+        if (this.game.player.killed || this.game.gameOver) {
             this.setState(1);
         }
         this.currentState.update();
