@@ -42,7 +42,7 @@ export class LinerMove extends State {
             }
 
             this.executed = true;
-            }
+        }
     }
 
     update() {

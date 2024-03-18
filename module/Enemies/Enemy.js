@@ -14,7 +14,7 @@ export class Enemy {
         this.topBoundary;
         this.currentState;
         this.states = [new Hunting(game, this),
-                    new LinerMove(game, this)];
+            new LinerMove(game, this)];
 
         this.frameX;
         this.frameY;

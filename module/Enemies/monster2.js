@@ -24,7 +24,7 @@ export class Monster2 extends Enemy {
     update(deltaTime) {
         super.update();
         this.currentState.update();
-        
+
         if (this.collisionX > 100 &&
             this.collisionX < this.game.width - 100) {
             if (this.timer > this.interval) {
