@@ -7,9 +7,10 @@ window.addEventListener('load', function () {
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    const startDisplay = this.document.getElementById('startDisplay');
+    const startButton = this.document.getElementById('startButton');
 
     const game = new Game(canvas, ctx);
-    game.init();
     let lastTime = 0;
 
     // animation loop
@@ -23,6 +24,13 @@ window.addEventListener('load', function () {
         // console.log(deltaTime);
     }
 
-    animate(0);
+    function startGame() {
+        startDisplay.style.display = 'none';
+        lastTime = performance.now();
+        game.init();
+        animate(0);
+    }
+
+    startButton.addEventListener('click', startGame);
 
 });
