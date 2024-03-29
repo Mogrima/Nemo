@@ -151,3 +151,10 @@ body {
     border: 1px solid #ef24c7;
     text-shadow: 2px 2px 3px #ef24c7;
 }
+
+@media screen and (max-width: 768px) {
+    .section {
+        width: 100%;
+        max-width: 100%;
+    }
+}
