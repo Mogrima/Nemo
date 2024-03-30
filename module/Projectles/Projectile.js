@@ -3,8 +3,8 @@ export class Projectile {
         this.game = game;
         this.spriteWidth = 16;
         this.spriteHeight = 16;
-        this.width = this.spriteWidth + 10;
-        this.height = this.spriteHeight + 10;
+        this.width = (this.spriteWidth + 10) * this.game.ratio;
+        this.height = (this.spriteHeight + 10) * this.game.ratio;
 
         this.collisionX = 0;
         this.collisionY = 0;
