@@ -1,9 +1,9 @@
 import { Bush } from './Bush.js';
 
 export class BushObstacle extends Bush {
-    constructor(game, topBoundary, fieldHeight) {
+    constructor(game, topBoundary) {
         super(game, topBoundary);
-        this.canvasHeight = fieldHeight;
+        this.canvasHeight = this.game.canvas.height;
         this.topBoundary = topBoundary + 100 - this.spriteHeight;
         this.fieldHeight = this.canvasHeight * 0.5 - 50;
         this.y = Math.random() * this.fieldHeight + (this.topBoundary);

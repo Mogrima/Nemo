@@ -23,7 +23,7 @@ export class Forest {
             this.bushes.push(new Bush(this.game, this.topBoundary));
         }
         for (let i = 0; i < this.maxBushes; i++) {
-            this.bushesObstacle.push(new BushObstacle(this.game, this.topBoundary, this.canvasHeight));
+            this.bushesObstacle.push(new BushObstacle(this.game, this.topBoundary));
         }
         this.objects = [...this.trees, ...this.bushes, ...this.bushesObstacle];
     }
