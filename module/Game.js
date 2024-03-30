@@ -296,5 +296,6 @@ export class Game {
             object.draw(this.context);
         });
         this.ui.draw(this.context);
+        this.canvasBackground.drawOverlay(this.context);
     }
 }

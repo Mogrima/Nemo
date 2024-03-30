@@ -21,6 +21,16 @@ export class CanvasBackground {
         this.sky = new Sky(this.canvas);
         this.forest = new Forest(this.canvas, this.gameFieldYstart);
 
+        // Overlay
+        this.overlay1 = document.getElementById('overlay1');
+        this.overlayWidth1 = 200;
+        this.overlayHeight1 = 121;
+        this.overlay2 = document.getElementById('overlay2');
+        this.overlayWidth2 = 180;
+        this.overlayHeight2 = 146;
+        this.overlay3 = document.getElementById('overlay3');
+        this.overlayWidth3 = 170;
+        this.overlayHeight3 = 135;
     }
     init() {
         this.sky.init();
@@ -39,5 +49,19 @@ export class CanvasBackground {
         context.fillRect(0, this.gameFieldYstart - 80, this.canvasWidth, this.canvasHeight);
 
         context.restore();
+    }
+
+    drawOverlay(context) {
+        context.drawImage(this.overlay1,
+            0, this.game.height - this.overlayHeight1,
+            this.overlayWidth1, this.overlayHeight1);
+        context.drawImage(this.overlay2,
+            this.game.width * 0.5 - this.overlayWidth2 * 0.5,
+            this.game.height - this.overlayHeight2,
+            this.overlayWidth2, this.overlayHeight2);
+        context.drawImage(this.overlay3,
+            this.game.width - this.overlayWidth3,
+            this.game.height - this.overlayHeight3,
+            this.overlayWidth3, this.overlayHeight3);
     }
 }
