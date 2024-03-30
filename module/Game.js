@@ -17,6 +17,8 @@ export class Game {
         this.context = context;
         this.width = canvas.width;
         this.height = canvas.height;
+        this.baseWidth = 1536;
+        this.ratio = (this.width / this.baseWidth).toFixed(2);
 
         this.canvasBackground = new CanvasBackground(this);
         this.ui = new UI(this);
