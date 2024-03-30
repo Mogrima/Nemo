@@ -23,6 +23,6 @@ export class Tree {
     }
 
     draw(context) {
-        context.drawImage(this.image, this.spriteX, this.spriteY);
+        context.drawImage(this.image, this.spriteX, this.spriteY, this.width, this.height);
     }
 }
