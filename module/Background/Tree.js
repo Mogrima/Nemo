@@ -8,10 +8,10 @@ export class Tree {
         this.image = document.getElementById('tree' + this.id);
         this.spriteWidth = this.image.width;
         this.spriteHeight = this.image.height;
-        this.width = this.spriteWidth;
-        this.height = this.spriteHeight;
+        this.width = this.spriteWidth * this.game.ratio;
+        this.height = this.spriteHeight * this.game.ratio;
         this.x = Math.random() * this.fieldWidth;
-        this.y = Math.random() * this.fieldHeight + (this.topBoundary - this.image.height);
+        this.y = Math.random() * this.fieldHeight + (this.topBoundary - this.height);
         this.collisionX = this.x;
         this.collisionY = this.y;
         this.spriteX = this.x;
