@@ -61,9 +61,9 @@ export class Unit {
         if (this.game.projectile > 0 && !this.killed) {
             if (ammo) {
                 let x = this.collisionX;
-                const y = this.collisionY + 30;
+                const y = this.collisionY + (30 * this.game.ratio);
                 if (directX === 'right') {
-                    x = x + this.width - 25;
+                    x = x + this.width - (25 * this.game.ratio);
                 }
                 ammo.start(x, y, directX);
                 this.game.sound.hit();
@@ -77,9 +77,9 @@ export class Unit {
         if (this.game.projectile > 0 && !this.killed) {
             if (splash) {
                 let x = this.collisionX;
-                const y = this.collisionY + 30;
+                const y = this.collisionY + (30 * this.game.ratio);
                 if (directX === 'right') {
-                    x = x + this.width - 25;
+                    x = x + this.width - (25 * this.game.ratio);
                 }
                 splash.start(x, y, directX);
                 this.game.sound.anotherHit();
