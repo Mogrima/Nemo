@@ -17,13 +17,13 @@ export class Forest {
     }
     init() {
         for (let i = 0; i < this.maxTrees; i++) {
-            this.trees.push(new Tree(this.canvasWidth, this.topBoundary));
+            this.trees.push(new Tree(this.game, this.topBoundary));
         }
         for (let i = 0; i < this.maxBushes; i++) {
-            this.bushes.push(new Bush(this.canvasWidth, this.topBoundary));
+            this.bushes.push(new Bush(this.game, this.topBoundary));
         }
         for (let i = 0; i < this.maxBushes; i++) {
-            this.bushesObstacle.push(new BushObstacle(this.canvasWidth, this.topBoundary, this.canvasHeight));
+            this.bushesObstacle.push(new BushObstacle(this.game, this.topBoundary, this.canvasHeight));
         }
         this.objects = [...this.trees, ...this.bushes, ...this.bushesObstacle];
     }

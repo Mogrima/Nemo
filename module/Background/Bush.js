@@ -1,6 +1,7 @@
 export class Bush {
-    constructor(fieldWidth, topBoundary) {
-        this.fieldWidth = fieldWidth;
+    constructor(game, topBoundary) {
+        this.game = game;
+        this.fieldWidth = this.game.canvas.width;
         this.fieldHeight = 80;
         this.topBoundary = topBoundary;
         this.image = document.getElementById('bushes');
