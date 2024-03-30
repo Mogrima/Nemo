@@ -19,7 +19,7 @@ export class CanvasBackground {
         this.patternGrass = this.context.createPattern(this.imagePlansBackground, 'repeat');
 
         this.sky = new Sky(this.canvas);
-        this.forest = new Forest(this.canvas, this.gameFieldYstart);
+        this.forest = new Forest(this.game, this.gameFieldYstart);
 
         // Overlay
         this.overlay1 = document.getElementById('overlay1');
