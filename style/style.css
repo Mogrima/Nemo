@@ -154,4 +154,9 @@ body {
     .list__item {
         position: static;
     }
+
+    .list__item img {
+        width: 30px;
+        height: 30px;
+    }
 }
